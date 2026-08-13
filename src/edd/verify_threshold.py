@@ -12,8 +12,6 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-import torch
-
 from dataset import MVTecCategory
 from export import MODELS, load
 from patchcore import PatchFeatures, device, extract, score

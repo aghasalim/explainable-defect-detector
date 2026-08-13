@@ -17,3 +17,17 @@ dev = [
     "pytest>=9.1.1",
     "ruff>=0.16.2",
 ]
+
+[tool.ruff]
+line-length = 100
+src = ["src/edd", "."]
+
+[tool.ruff.lint]
+# Correctness rules only. Import-order and string-concat style rules were
+# fighting the editor's formatter and produced churn without catching bugs.
+select = ["E4", "E7", "E9", "F", "B", "UP"]
+ignore = ["E741"]
+
+[tool.ruff.lint.per-file-ignores]
+# app.py must extend sys.path before importing project modules
+"app.py" = ["E402"]

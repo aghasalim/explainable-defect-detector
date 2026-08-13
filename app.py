@@ -13,18 +13,18 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-import matplotlib.cm as cm
 import numpy as np
 import streamlit as st
 import torch
+from matplotlib import cm
 from PIL import Image
 
 ROOT = Path(__file__).parent
 sys.path.insert(0, str(ROOT / "src" / "edd"))
 
-from dataset import build_transform          # noqa: E402
-from export import MODELS, predict           # noqa: E402
-from patchcore import PatchFeatures          # noqa: E402
+from dataset import build_transform
+from export import MODELS, predict
+from patchcore import PatchFeatures
 
 st.set_page_config(page_title="Explainable Defect Detector", page_icon="🔍", layout="wide")
 

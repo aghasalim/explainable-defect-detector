@@ -15,7 +15,6 @@ import time
 from pathlib import Path
 
 import numpy as np
-
 from baseline import evaluate
 from explain import localisation_metrics
 from patchcore import fit_score
@@ -38,7 +37,7 @@ def one(category: str, frac: float, crop: bool) -> dict:
     pi, pp = PAPER[category]
     out = {
         "category": category, "coreset_frac": frac, "center_crop": crop,
-        "n_test": int(len(labels)), "n_anomalous": int(a.sum()),
+        "n_test": len(labels), "n_anomalous": int(a.sum()),
         "image_auroc": det["image_auroc"], "average_precision": det["average_precision"],
         "accuracy_at_best_f1": det["accuracy_at_best_f1"],
         "majority_class_accuracy": det["majority_class_accuracy"],
@@ -54,8 +53,8 @@ def one(category: str, frac: float, crop: bool) -> dict:
 
 def table(rows: list[dict]) -> str:
     o = ["# Full MVTec AD benchmark\n",
-         "PatchCore, 1% coreset, paper preprocessing, frozen WideResNet50-2. "
-         "`paper` columns are Roth et al., CVPR 2022.\n",
+         ("PatchCore, 1% coreset, paper preprocessing, frozen WideResNet50-2. "
+          "`paper` columns are Roth et al., CVPR 2022.\n"),
          "## Detection (image level)\n",
          "| category | image AUROC | paper | gap | AP | acc @F1 | majority acc |",
          "|" + "---|" * 7]
@@ -70,10 +69,10 @@ def table(rows: list[dict]) -> str:
     o.append(f"| **mean** | **{mi:.4f}** | {mp:.3f} | {mi - mp:+.4f} | | | |")
 
     o += ["\n## Localisation (pixel level, anomalous images only)\n",
-          "Every column is paired with a random-map control on the same images. Without it, "
-          "a high pixel AUROC is unfalsifiable.\n",
-          "| category | pixel AUROC | ctrl | AUPRO | ctrl | peak-in-mask | ctrl "
-          "| top-1% prec | ctrl | defect px |",
+          ("Every column is paired with a random-map control on the same images. Without "
+           "it, a high pixel AUROC is unfalsifiable.\n"),
+          ("| category | pixel AUROC | ctrl | AUPRO | ctrl | peak-in-mask | ctrl "
+           "| top-1% prec | ctrl | defect px |"),
           "|" + "---|" * 10]
     for r in rows:
         o.append(
@@ -82,8 +81,6 @@ def table(rows: list[dict]) -> str:
             f"| **{r['peak_in_mask']:.4f}** | {r['control_peak_in_mask']:.3f} "
             f"| {r['top1pct_precision']:.4f} | {r['control_top1pct_precision']:.3f} "
             f"| {r['defect_pixel_fraction']:.4f} |")
-    for k in ("pixel_auroc", "aupro", "peak_in_mask", "top1pct_precision"):
-        pass
     o.append(
         f"| **mean** | {np.mean([r['pixel_auroc'] for r in rows]):.4f} | | "
         f"**{np.mean([r['aupro'] for r in rows]):.4f}** | | "

@@ -35,12 +35,11 @@ from pathlib import Path
 import numpy as np
 import torch
 import torch.nn.functional as F
+from baseline import evaluate
+from dataset import MVTecCategory
 from sklearn.metrics import roc_auc_score
 from torch.utils.data import DataLoader
 from torchvision.models import Wide_ResNet50_2_Weights, wide_resnet50_2
-
-from baseline import evaluate
-from dataset import MVTecCategory
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -205,7 +204,7 @@ def run(category: str, frac: float = 0.01, size: int = 224, sampling: str = "cor
     (ROOT / "reports" / f"{tag}_{category}.json").write_text(json.dumps(
         {"metrics": m, "scores": [
             {"path": str(Path(p).relative_to(ROOT)), "label": int(l), "score": float(s)}
-            for p, l, s in zip(paths, labels, img_scores)]}, indent=1))
+            for p, l, s in zip(paths, labels, img_scores, strict=True)]}, indent=1))
     np.save(ROOT / "reports" / f"{tag}_{category}_maps.npy", maps.numpy().astype(np.float16))
 
     w = max(len(x) for x in m)
