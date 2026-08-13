@@ -90,8 +90,12 @@ def main() -> None:
     cats = a.categories or sorted(f.stem for f in MODELS.glob("*.pt"))
 
     OUT.mkdir(parents=True, exist_ok=True)
-    for f in OUT.glob("*.png"):
-        f.unlink()
+    # Clear only the categories being regenerated. Wiping the whole directory
+    # would silently delete the other categories' samples whenever this is run
+    # for a single one - which is exactly what happened the first time.
+    for c in cats:
+        for f in OUT.glob(f"{c}__*.png"):
+            f.unlink()
 
     out = []
     for c in cats:
