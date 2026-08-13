@@ -1,17 +1,12 @@
-# Runtime deps for the deployed demo (Streamlit Community Cloud / Docker).
+# Runtime deps for the hosted demo (Streamlit Community Cloud / Docker / HF Spaces).
 #
-# The +cpu pin plus the PyTorch index is deliberate: on Linux, plain
-# `torch==2.13.0` from PyPI is the CUDA build (~2 GB of wheels for GPU support
-# that no free host provides). The +cpu local version exists only on the
-# PyTorch index, so this forces the small CPU build on any Python 3.11-3.13.
-#
-# scikit-learn/SciPy are NOT here on purpose - they are only needed to compute
-# evaluation metrics, not to serve a prediction. See requirements-dev.txt.
+# The +cpu local version is pinned deliberately. On linux-amd64 the default PyPI
+# `torch` is the CUDA build (~800 MB of nvidia-* wheels), which exhausts the
+# free-tier resource limit for a demo that never touches a GPU.
 --extra-index-url https://download.pytorch.org/whl/cpu
-
 torch==2.13.0+cpu
 torchvision==0.28.0+cpu
-streamlit==1.61.1
-numpy==2.5.2
-pillow==12.3.0
-matplotlib==3.11.1
+streamlit>=1.40
+numpy>=2.0
+pillow>=10
+matplotlib>=3.8
