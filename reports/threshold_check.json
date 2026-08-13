@@ -1,0 +1,29 @@
+[
+ {
+  "category": "bottle",
+  "threshold": 2.0184617042541504,
+  "target_fpr": 0.01,
+  "realised_fpr_on_test": 0.0,
+  "recall_on_test": 1.0,
+  "n_normal": 20,
+  "n_anomalous": 63
+ },
+ {
+  "category": "pill",
+  "threshold": 2.1144204139709473,
+  "target_fpr": 0.01,
+  "realised_fpr_on_test": 0.07692307692307693,
+  "recall_on_test": 0.8156028368794326,
+  "n_normal": 26,
+  "n_anomalous": 141
+ },
+ {
+  "category": "screw",
+  "threshold": 1.9958784580230713,
+  "target_fpr": 0.01,
+  "realised_fpr_on_test": 0.0,
+  "recall_on_test": 0.5378151260504201,
+  "n_normal": 41,
+  "n_anomalous": 119
+ }
+]

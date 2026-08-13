@@ -1,0 +1,832 @@
+{
+ "metrics": {
+  "image_auroc": 0.9411764705882353,
+  "average_precision": 0.9803749834484853,
+  "best_f1": 0.9460580912863071,
+  "precision_at_best_f1": 0.9344262295081968,
+  "recall_at_best_f1": 0.957983193277311,
+  "threshold": 1.7916321754455566,
+  "accuracy_at_best_f1": 0.91875,
+  "majority_class_accuracy": 0.74375,
+  "n_normal": 41,
+  "n_anomalous": 119,
+  "pixel_auroc": 0.9571876780641722,
+  "category": "screw",
+  "backbone": "wide_resnet50_2",
+  "layers": "layer2+layer3",
+  "patch_dim": 1536,
+  "grid": [
+   28,
+   28
+  ],
+  "sampling": "coreset",
+  "coreset_frac": 0.01,
+  "bank_size": 2508,
+  "input_size": 224,
+  "center_crop": true,
+  "patches_before_sampling": 250880,
+  "seconds": 45.3
+ },
+ "scores": [
+  {
+   "path": "data/mvtec/screw/test/good/000.png",
+   "label": 0,
+   "score": 1.7555584907531738
+  },
+  {
+   "path": "data/mvtec/screw/test/good/001.png",
+   "label": 0,
+   "score": 1.7499417066574097
+  },
+  {
+   "path": "data/mvtec/screw/test/good/002.png",
+   "label": 0,
+   "score": 1.7104653120040894
+  },
+  {
+   "path": "data/mvtec/screw/test/good/003.png",
+   "label": 0,
+   "score": 1.7173856496810913
+  },
+  {
+   "path": "data/mvtec/screw/test/good/004.png",
+   "label": 0,
+   "score": 1.7349313497543335
+  },
+  {
+   "path": "data/mvtec/screw/test/good/005.png",
+   "label": 0,
+   "score": 1.9225919246673584
+  },
+  {
+   "path": "data/mvtec/screw/test/good/006.png",
+   "label": 0,
+   "score": 1.7506712675094604
+  },
+  {
+   "path": "data/mvtec/screw/test/good/007.png",
+   "label": 0,
+   "score": 1.7391895055770874
+  },
+  {
+   "path": "data/mvtec/screw/test/good/008.png",
+   "label": 0,
+   "score": 1.7510863542556763
+  },
+  {
+   "path": "data/mvtec/screw/test/good/009.png",
+   "label": 0,
+   "score": 1.778110384941101
+  },
+  {
+   "path": "data/mvtec/screw/test/good/010.png",
+   "label": 0,
+   "score": 1.8711049556732178
+  },
+  {
+   "path": "data/mvtec/screw/test/good/011.png",
+   "label": 0,
+   "score": 1.8247445821762085
+  },
+  {
+   "path": "data/mvtec/screw/test/good/012.png",
+   "label": 0,
+   "score": 1.711287498474121
+  },
+  {
+   "path": "data/mvtec/screw/test/good/013.png",
+   "label": 0,
+   "score": 1.7538257837295532
+  },
+  {
+   "path": "data/mvtec/screw/test/good/014.png",
+   "label": 0,
+   "score": 1.7732019424438477
+  },
+  {
+   "path": "data/mvtec/screw/test/good/015.png",
+   "label": 0,
+   "score": 1.8621548414230347
+  },
+  {
+   "path": "data/mvtec/screw/test/good/016.png",
+   "label": 0,
+   "score": 1.7390097379684448
+  },
+  {
+   "path": "data/mvtec/screw/test/good/017.png",
+   "label": 0,
+   "score": 1.767825722694397
+  },
+  {
+   "path": "data/mvtec/screw/test/good/018.png",
+   "label": 0,
+   "score": 1.789132833480835
+  },
+  {
+   "path": "data/mvtec/screw/test/good/019.png",
+   "label": 0,
+   "score": 1.8108818531036377
+  },
+  {
+   "path": "data/mvtec/screw/test/good/020.png",
+   "label": 0,
+   "score": 1.773293375968933
+  },
+  {
+   "path": "data/mvtec/screw/test/good/021.png",
+   "label": 0,
+   "score": 1.6351763010025024
+  },
+  {
+   "path": "data/mvtec/screw/test/good/022.png",
+   "label": 0,
+   "score": 1.855116605758667
+  },
+  {
+   "path": "data/mvtec/screw/test/good/023.png",
+   "label": 0,
+   "score": 1.7822562456130981
+  },
+  {
+   "path": "data/mvtec/screw/test/good/024.png",
+   "label": 0,
+   "score": 1.8560031652450562
+  },
+  {
+   "path": "data/mvtec/screw/test/good/025.png",
+   "label": 0,
+   "score": 1.7639492750167847
+  },
+  {
+   "path": "data/mvtec/screw/test/good/026.png",
+   "label": 0,
+   "score": 1.7206681966781616
+  },
+  {
+   "path": "data/mvtec/screw/test/good/027.png",
+   "label": 0,
+   "score": 1.691862940788269
+  },
+  {
+   "path": "data/mvtec/screw/test/good/028.png",
+   "label": 0,
+   "score": 1.6892917156219482
+  },
+  {
+   "path": "data/mvtec/screw/test/good/029.png",
+   "label": 0,
+   "score": 1.76771080493927
+  },
+  {
+   "path": "data/mvtec/screw/test/good/030.png",
+   "label": 0,
+   "score": 1.7408751249313354
+  },
+  {
+   "path": "data/mvtec/screw/test/good/031.png",
+   "label": 0,
+   "score": 1.791424036026001
+  },
+  {
+   "path": "data/mvtec/screw/test/good/032.png",
+   "label": 0,
+   "score": 1.7837260961532593
+  },
+  {
+   "path": "data/mvtec/screw/test/good/033.png",
+   "label": 0,
+   "score": 1.698449730873108
+  },
+  {
+   "path": "data/mvtec/screw/test/good/034.png",
+   "label": 0,
+   "score": 1.6871082782745361
+  },
+  {
+   "path": "data/mvtec/screw/test/good/035.png",
+   "label": 0,
+   "score": 1.8197767734527588
+  },
+  {
+   "path": "data/mvtec/screw/test/good/036.png",
+   "label": 0,
+   "score": 1.7229607105255127
+  },
+  {
+   "path": "data/mvtec/screw/test/good/037.png",
+   "label": 0,
+   "score": 1.721634030342102
+  },
+  {
+   "path": "data/mvtec/screw/test/good/038.png",
+   "label": 0,
+   "score": 1.7114858627319336
+  },
+  {
+   "path": "data/mvtec/screw/test/good/039.png",
+   "label": 0,
+   "score": 1.7631094455718994
+  },
+  {
+   "path": "data/mvtec/screw/test/good/040.png",
+   "label": 0,
+   "score": 1.736620306968689
+  },
+  {
+   "path": "data/mvtec/screw/test/manipulated_front/000.png",
+   "label": 1,
+   "score": 1.8487904071807861
+  },
+  {
+   "path": "data/mvtec/screw/test/manipulated_front/001.png",
+   "label": 1,
+   "score": 2.1049187183380127
+  },
+  {
+   "path": "data/mvtec/screw/test/manipulated_front/002.png",
+   "label": 1,
+   "score": 2.084564447402954
+  },
+  {
+   "path": "data/mvtec/screw/test/manipulated_front/003.png",
+   "label": 1,
+   "score": 1.981540322303772
+  },
+  {
+   "path": "data/mvtec/screw/test/manipulated_front/004.png",
+   "label": 1,
+   "score": 2.0173568725585938
+  },
+  {
+   "path": "data/mvtec/screw/test/manipulated_front/005.png",
+   "label": 1,
+   "score": 2.0593302249908447
+  },
+  {
+   "path": "data/mvtec/screw/test/manipulated_front/006.png",
+   "label": 1,
+   "score": 1.8639321327209473
+  },
+  {
+   "path": "data/mvtec/screw/test/manipulated_front/007.png",
+   "label": 1,
+   "score": 1.9913179874420166
+  },
+  {
+   "path": "data/mvtec/screw/test/manipulated_front/008.png",
+   "label": 1,
+   "score": 1.9932217597961426
+  },
+  {
+   "path": "data/mvtec/screw/test/manipulated_front/009.png",
+   "label": 1,
+   "score": 1.9798330068588257
+  },
+  {
+   "path": "data/mvtec/screw/test/manipulated_front/010.png",
+   "label": 1,
+   "score": 1.9983460903167725
+  },
+  {
+   "path": "data/mvtec/screw/test/manipulated_front/011.png",
+   "label": 1,
+   "score": 1.8135625123977661
+  },
+  {
+   "path": "data/mvtec/screw/test/manipulated_front/012.png",
+   "label": 1,
+   "score": 1.9184314012527466
+  },
+  {
+   "path": "data/mvtec/screw/test/manipulated_front/013.png",
+   "label": 1,
+   "score": 1.835481882095337
+  },
+  {
+   "path": "data/mvtec/screw/test/manipulated_front/014.png",
+   "label": 1,
+   "score": 1.965775489807129
+  },
+  {
+   "path": "data/mvtec/screw/test/manipulated_front/015.png",
+   "label": 1,
+   "score": 2.1360206604003906
+  },
+  {
+   "path": "data/mvtec/screw/test/manipulated_front/016.png",
+   "label": 1,
+   "score": 2.0457956790924072
+  },
+  {
+   "path": "data/mvtec/screw/test/manipulated_front/017.png",
+   "label": 1,
+   "score": 1.908027172088623
+  },
+  {
+   "path": "data/mvtec/screw/test/manipulated_front/018.png",
+   "label": 1,
+   "score": 1.9807027578353882
+  },
+  {
+   "path": "data/mvtec/screw/test/manipulated_front/019.png",
+   "label": 1,
+   "score": 1.893638014793396
+  },
+  {
+   "path": "data/mvtec/screw/test/manipulated_front/020.png",
+   "label": 1,
+   "score": 1.6809899806976318
+  },
+  {
+   "path": "data/mvtec/screw/test/manipulated_front/021.png",
+   "label": 1,
+   "score": 1.760871410369873
+  },
+  {
+   "path": "data/mvtec/screw/test/manipulated_front/022.png",
+   "label": 1,
+   "score": 1.9494907855987549
+  },
+  {
+   "path": "data/mvtec/screw/test/manipulated_front/023.png",
+   "label": 1,
+   "score": 1.8116768598556519
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_head/000.png",
+   "label": 1,
+   "score": 1.948021650314331
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_head/001.png",
+   "label": 1,
+   "score": 2.069406270980835
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_head/002.png",
+   "label": 1,
+   "score": 1.8258010149002075
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_head/003.png",
+   "label": 1,
+   "score": 1.9486368894577026
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_head/004.png",
+   "label": 1,
+   "score": 1.9037870168685913
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_head/005.png",
+   "label": 1,
+   "score": 1.920425534248352
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_head/006.png",
+   "label": 1,
+   "score": 1.832528829574585
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_head/007.png",
+   "label": 1,
+   "score": 2.1431198120117188
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_head/008.png",
+   "label": 1,
+   "score": 1.8907147645950317
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_head/009.png",
+   "label": 1,
+   "score": 1.8065218925476074
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_head/010.png",
+   "label": 1,
+   "score": 2.0275018215179443
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_head/011.png",
+   "label": 1,
+   "score": 2.4098215103149414
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_head/012.png",
+   "label": 1,
+   "score": 1.9739408493041992
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_head/013.png",
+   "label": 1,
+   "score": 2.0814013481140137
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_head/014.png",
+   "label": 1,
+   "score": 1.8012864589691162
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_head/015.png",
+   "label": 1,
+   "score": 2.1694726943969727
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_head/016.png",
+   "label": 1,
+   "score": 2.0609865188598633
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_head/017.png",
+   "label": 1,
+   "score": 1.9836347103118896
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_head/018.png",
+   "label": 1,
+   "score": 1.8090044260025024
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_head/019.png",
+   "label": 1,
+   "score": 2.269016742706299
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_head/020.png",
+   "label": 1,
+   "score": 1.9100878238677979
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_head/021.png",
+   "label": 1,
+   "score": 2.083603858947754
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_head/022.png",
+   "label": 1,
+   "score": 1.843945026397705
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_head/023.png",
+   "label": 1,
+   "score": 1.9769450426101685
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_neck/000.png",
+   "label": 1,
+   "score": 2.035965919494629
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_neck/001.png",
+   "label": 1,
+   "score": 2.702165126800537
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_neck/002.png",
+   "label": 1,
+   "score": 2.1555590629577637
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_neck/003.png",
+   "label": 1,
+   "score": 2.5512266159057617
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_neck/004.png",
+   "label": 1,
+   "score": 2.430514335632324
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_neck/005.png",
+   "label": 1,
+   "score": 1.9662153720855713
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_neck/006.png",
+   "label": 1,
+   "score": 2.239333391189575
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_neck/007.png",
+   "label": 1,
+   "score": 2.514897346496582
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_neck/008.png",
+   "label": 1,
+   "score": 2.5170750617980957
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_neck/009.png",
+   "label": 1,
+   "score": 2.7610857486724854
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_neck/010.png",
+   "label": 1,
+   "score": 2.25100040435791
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_neck/011.png",
+   "label": 1,
+   "score": 1.828938603401184
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_neck/012.png",
+   "label": 1,
+   "score": 2.325563430786133
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_neck/013.png",
+   "label": 1,
+   "score": 2.4695448875427246
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_neck/014.png",
+   "label": 1,
+   "score": 2.474741220474243
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_neck/015.png",
+   "label": 1,
+   "score": 2.4691219329833984
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_neck/016.png",
+   "label": 1,
+   "score": 2.6432957649230957
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_neck/017.png",
+   "label": 1,
+   "score": 2.3604798316955566
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_neck/018.png",
+   "label": 1,
+   "score": 2.2566049098968506
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_neck/019.png",
+   "label": 1,
+   "score": 2.551880121231079
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_neck/020.png",
+   "label": 1,
+   "score": 2.6320974826812744
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_neck/021.png",
+   "label": 1,
+   "score": 2.0128159523010254
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_neck/022.png",
+   "label": 1,
+   "score": 2.2355804443359375
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_neck/023.png",
+   "label": 1,
+   "score": 2.12131667137146
+  },
+  {
+   "path": "data/mvtec/screw/test/scratch_neck/024.png",
+   "label": 1,
+   "score": 2.5071864128112793
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_side/000.png",
+   "label": 1,
+   "score": 1.8395259380340576
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_side/001.png",
+   "label": 1,
+   "score": 1.7967349290847778
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_side/002.png",
+   "label": 1,
+   "score": 2.0382208824157715
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_side/003.png",
+   "label": 1,
+   "score": 1.8155827522277832
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_side/004.png",
+   "label": 1,
+   "score": 1.7370370626449585
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_side/005.png",
+   "label": 1,
+   "score": 2.1946191787719727
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_side/006.png",
+   "label": 1,
+   "score": 1.9532089233398438
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_side/007.png",
+   "label": 1,
+   "score": 2.002610445022583
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_side/008.png",
+   "label": 1,
+   "score": 1.9228607416152954
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_side/009.png",
+   "label": 1,
+   "score": 1.770760178565979
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_side/010.png",
+   "label": 1,
+   "score": 1.8308106660842896
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_side/011.png",
+   "label": 1,
+   "score": 1.906646728515625
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_side/012.png",
+   "label": 1,
+   "score": 1.718074917793274
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_side/013.png",
+   "label": 1,
+   "score": 1.8064590692520142
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_side/014.png",
+   "label": 1,
+   "score": 2.077239513397217
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_side/015.png",
+   "label": 1,
+   "score": 1.8378537893295288
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_side/016.png",
+   "label": 1,
+   "score": 1.9019546508789062
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_side/017.png",
+   "label": 1,
+   "score": 2.084690809249878
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_side/018.png",
+   "label": 1,
+   "score": 1.8347361087799072
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_side/019.png",
+   "label": 1,
+   "score": 1.797019124031067
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_side/020.png",
+   "label": 1,
+   "score": 1.7916321754455566
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_side/021.png",
+   "label": 1,
+   "score": 1.8114426136016846
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_side/022.png",
+   "label": 1,
+   "score": 1.914362907409668
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_top/000.png",
+   "label": 1,
+   "score": 2.104808807373047
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_top/001.png",
+   "label": 1,
+   "score": 2.11842942237854
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_top/002.png",
+   "label": 1,
+   "score": 2.112236738204956
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_top/003.png",
+   "label": 1,
+   "score": 1.830223560333252
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_top/004.png",
+   "label": 1,
+   "score": 1.997584342956543
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_top/005.png",
+   "label": 1,
+   "score": 2.4067862033843994
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_top/006.png",
+   "label": 1,
+   "score": 2.175499439239502
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_top/007.png",
+   "label": 1,
+   "score": 2.4956765174865723
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_top/008.png",
+   "label": 1,
+   "score": 1.9441252946853638
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_top/009.png",
+   "label": 1,
+   "score": 2.0019760131835938
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_top/010.png",
+   "label": 1,
+   "score": 2.0470893383026123
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_top/011.png",
+   "label": 1,
+   "score": 2.1222245693206787
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_top/012.png",
+   "label": 1,
+   "score": 1.8957284688949585
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_top/013.png",
+   "label": 1,
+   "score": 2.1386046409606934
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_top/014.png",
+   "label": 1,
+   "score": 1.9099020957946777
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_top/015.png",
+   "label": 1,
+   "score": 2.00542950630188
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_top/016.png",
+   "label": 1,
+   "score": 2.0966057777404785
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_top/017.png",
+   "label": 1,
+   "score": 1.9467111825942993
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_top/018.png",
+   "label": 1,
+   "score": 2.072375535964966
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_top/019.png",
+   "label": 1,
+   "score": 2.3382508754730225
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_top/020.png",
+   "label": 1,
+   "score": 2.302497386932373
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_top/021.png",
+   "label": 1,
+   "score": 2.1770505905151367
+  },
+  {
+   "path": "data/mvtec/screw/test/thread_top/022.png",
+   "label": 1,
+   "score": 1.8723446130752563
+  }
+ ]
+}

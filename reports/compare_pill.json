@@ -1,0 +1,23 @@
+{
+ "category": "pill",
+ "n_held_out": 86,
+ "n_anomalous_held_out": 73,
+ "n_fit": 81,
+ "epochs": 10,
+ "classifier": {
+  "image_auroc": 0.9525816649104321,
+  "average_precision": 0.9920655565082739,
+  "gradcam_pixel_auroc": 0.8266297742581089,
+  "gradcam_aupro": 0.6561009652784032,
+  "gradcam_peak_in_mask": 0.3561643835616438,
+  "gradcam_top1pct_precision": 0.354851939955705
+ },
+ "patchcore": {
+  "image_auroc": 0.9578503688092729,
+  "average_precision": 0.9924657870240445,
+  "map_pixel_auroc": 0.9695144732544123,
+  "map_aupro": 0.9003707163820783,
+  "map_peak_in_mask": 0.6712328767123288,
+  "map_top1pct_precision": 0.550241981789845
+ }
+}

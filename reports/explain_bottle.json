@@ -1,0 +1,17 @@
+{
+ "model": {
+  "pixel_auroc": 0.9769948792143868,
+  "aupro": 0.8828435427674957,
+  "peak_in_mask": 0.9841269841269841,
+  "top1pct_precision": 0.9397712511484968
+ },
+ "random_control": {
+  "pixel_auroc": 0.49867245697390394,
+  "aupro": 0.1383948945456019,
+  "peak_in_mask": 0.09523809523809523,
+  "top1pct_precision": 0.09596679656559898
+ },
+ "defect_pixel_fraction": 0.09905133928571429,
+ "category": "bottle",
+ "n_anomalous": 63
+}

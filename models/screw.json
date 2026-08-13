@@ -1,0 +1,20 @@
+{
+ "category": "screw",
+ "threshold": 1.9958784580230713,
+ "target_fpr": 0.01,
+ "size": 224,
+ "crop": true,
+ "grid": [
+  28,
+  28
+ ],
+ "bank_size": 2257,
+ "bank_dim": 1536,
+ "coreset_frac": 0.01,
+ "n_train_total": 320,
+ "n_bank_images": 288,
+ "n_calib": 32,
+ "calib_score_min": 1.6307365894317627,
+ "calib_score_max": 2.041564464569092,
+ "artefact_mb": 13.87
+}

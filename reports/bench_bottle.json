@@ -1,0 +1,23 @@
+{
+ "category": "bottle",
+ "coreset_frac": 0.01,
+ "center_crop": true,
+ "n_test": 83,
+ "n_anomalous": 63,
+ "image_auroc": 1.0,
+ "average_precision": 0.9999999999999998,
+ "accuracy_at_best_f1": 1.0,
+ "majority_class_accuracy": 0.7590361445783133,
+ "paper_image_auroc": 1.0,
+ "paper_pixel_auroc": 0.986,
+ "seconds": 20.8,
+ "pixel_auroc": 0.9769948792143868,
+ "aupro": 0.8828435427674957,
+ "peak_in_mask": 0.9841269841269841,
+ "top1pct_precision": 0.9397712511484968,
+ "control_pixel_auroc": 0.49867245697390394,
+ "control_aupro": 0.1383948945456019,
+ "control_peak_in_mask": 0.09523809523809523,
+ "control_top1pct_precision": 0.09596679656559898,
+ "defect_pixel_fraction": 0.09905133928571429
+}

@@ -1,0 +1,17 @@
+{
+ "model": {
+  "pixel_auroc": 0.9721989091697938,
+  "aupro": 0.8938682917237869,
+  "peak_in_mask": 0.6950354609929078,
+  "top1pct_precision": 0.5690321484690195
+ },
+ "random_control": {
+  "pixel_auroc": 0.4999204039243953,
+  "aupro": 0.1420092189482516,
+  "peak_in_mask": 0.028368794326241134,
+  "top1pct_precision": 0.052830509194377206
+ },
+ "defect_pixel_fraction": 0.05192163301490809,
+ "category": "pill",
+ "n_anomalous": 141
+}

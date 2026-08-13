@@ -1,0 +1,435 @@
+{
+ "metrics": {
+  "image_auroc": 0.9936507936507936,
+  "average_precision": 0.9978980706520231,
+  "best_f1": 0.9921259842519685,
+  "precision_at_best_f1": 0.984375,
+  "recall_at_best_f1": 1.0,
+  "threshold": 3.745309352874756,
+  "accuracy_at_best_f1": 0.9879518072289156,
+  "majority_class_accuracy": 0.7590361445783133,
+  "n_normal": 20,
+  "n_anomalous": 63,
+  "category": "bottle",
+  "k": 1,
+  "backbone": "resnet18",
+  "n_train_normal": 209
+ },
+ "scores": [
+  {
+   "path": "data/mvtec/bottle/test/broken_large/000.png",
+   "label": 1,
+   "score": 9.034902572631836
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_large/001.png",
+   "label": 1,
+   "score": 8.81128215789795
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_large/002.png",
+   "label": 1,
+   "score": 11.884744644165039
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_large/003.png",
+   "label": 1,
+   "score": 13.26334285736084
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_large/004.png",
+   "label": 1,
+   "score": 7.023838996887207
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_large/005.png",
+   "label": 1,
+   "score": 5.222676753997803
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_large/006.png",
+   "label": 1,
+   "score": 10.77254581451416
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_large/007.png",
+   "label": 1,
+   "score": 9.665421485900879
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_large/008.png",
+   "label": 1,
+   "score": 9.26311206817627
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_large/009.png",
+   "label": 1,
+   "score": 6.140458106994629
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_large/010.png",
+   "label": 1,
+   "score": 8.71115779876709
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_large/011.png",
+   "label": 1,
+   "score": 6.302549362182617
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_large/012.png",
+   "label": 1,
+   "score": 8.004905700683594
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_large/013.png",
+   "label": 1,
+   "score": 9.953393936157227
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_large/014.png",
+   "label": 1,
+   "score": 7.371424674987793
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_large/015.png",
+   "label": 1,
+   "score": 7.3531341552734375
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_large/016.png",
+   "label": 1,
+   "score": 10.840027809143066
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_large/017.png",
+   "label": 1,
+   "score": 9.930451393127441
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_large/018.png",
+   "label": 1,
+   "score": 11.650437355041504
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_large/019.png",
+   "label": 1,
+   "score": 10.475573539733887
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_small/000.png",
+   "label": 1,
+   "score": 3.745309352874756
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_small/001.png",
+   "label": 1,
+   "score": 5.701826095581055
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_small/002.png",
+   "label": 1,
+   "score": 6.2482380867004395
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_small/003.png",
+   "label": 1,
+   "score": 8.292893409729004
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_small/004.png",
+   "label": 1,
+   "score": 7.159769058227539
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_small/005.png",
+   "label": 1,
+   "score": 5.394443035125732
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_small/006.png",
+   "label": 1,
+   "score": 6.538143157958984
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_small/007.png",
+   "label": 1,
+   "score": 4.215861797332764
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_small/008.png",
+   "label": 1,
+   "score": 6.74219274520874
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_small/009.png",
+   "label": 1,
+   "score": 5.076094627380371
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_small/010.png",
+   "label": 1,
+   "score": 6.689152717590332
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_small/011.png",
+   "label": 1,
+   "score": 5.252091407775879
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_small/012.png",
+   "label": 1,
+   "score": 8.297527313232422
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_small/013.png",
+   "label": 1,
+   "score": 4.8820881843566895
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_small/014.png",
+   "label": 1,
+   "score": 4.530760288238525
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_small/015.png",
+   "label": 1,
+   "score": 5.904504776000977
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_small/016.png",
+   "label": 1,
+   "score": 4.472367286682129
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_small/017.png",
+   "label": 1,
+   "score": 6.110197067260742
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_small/018.png",
+   "label": 1,
+   "score": 7.035774230957031
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_small/019.png",
+   "label": 1,
+   "score": 6.988306045532227
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_small/020.png",
+   "label": 1,
+   "score": 5.8096842765808105
+  },
+  {
+   "path": "data/mvtec/bottle/test/broken_small/021.png",
+   "label": 1,
+   "score": 5.0020432472229
+  },
+  {
+   "path": "data/mvtec/bottle/test/contamination/000.png",
+   "label": 1,
+   "score": 9.435455322265625
+  },
+  {
+   "path": "data/mvtec/bottle/test/contamination/001.png",
+   "label": 1,
+   "score": 6.430918216705322
+  },
+  {
+   "path": "data/mvtec/bottle/test/contamination/002.png",
+   "label": 1,
+   "score": 5.68442440032959
+  },
+  {
+   "path": "data/mvtec/bottle/test/contamination/003.png",
+   "label": 1,
+   "score": 3.8512158393859863
+  },
+  {
+   "path": "data/mvtec/bottle/test/contamination/004.png",
+   "label": 1,
+   "score": 4.64619255065918
+  },
+  {
+   "path": "data/mvtec/bottle/test/contamination/005.png",
+   "label": 1,
+   "score": 11.496200561523438
+  },
+  {
+   "path": "data/mvtec/bottle/test/contamination/006.png",
+   "label": 1,
+   "score": 13.336714744567871
+  },
+  {
+   "path": "data/mvtec/bottle/test/contamination/007.png",
+   "label": 1,
+   "score": 13.035329818725586
+  },
+  {
+   "path": "data/mvtec/bottle/test/contamination/008.png",
+   "label": 1,
+   "score": 10.641678810119629
+  },
+  {
+   "path": "data/mvtec/bottle/test/contamination/009.png",
+   "label": 1,
+   "score": 7.600709438323975
+  },
+  {
+   "path": "data/mvtec/bottle/test/contamination/010.png",
+   "label": 1,
+   "score": 12.534964561462402
+  },
+  {
+   "path": "data/mvtec/bottle/test/contamination/011.png",
+   "label": 1,
+   "score": 9.346823692321777
+  },
+  {
+   "path": "data/mvtec/bottle/test/contamination/012.png",
+   "label": 1,
+   "score": 10.445045471191406
+  },
+  {
+   "path": "data/mvtec/bottle/test/contamination/013.png",
+   "label": 1,
+   "score": 12.367985725402832
+  },
+  {
+   "path": "data/mvtec/bottle/test/contamination/014.png",
+   "label": 1,
+   "score": 6.451282024383545
+  },
+  {
+   "path": "data/mvtec/bottle/test/contamination/015.png",
+   "label": 1,
+   "score": 9.278749465942383
+  },
+  {
+   "path": "data/mvtec/bottle/test/contamination/016.png",
+   "label": 1,
+   "score": 8.121499061584473
+  },
+  {
+   "path": "data/mvtec/bottle/test/contamination/017.png",
+   "label": 1,
+   "score": 11.590534210205078
+  },
+  {
+   "path": "data/mvtec/bottle/test/contamination/018.png",
+   "label": 1,
+   "score": 5.5608906745910645
+  },
+  {
+   "path": "data/mvtec/bottle/test/contamination/019.png",
+   "label": 1,
+   "score": 4.202831745147705
+  },
+  {
+   "path": "data/mvtec/bottle/test/contamination/020.png",
+   "label": 1,
+   "score": 10.013501167297363
+  },
+  {
+   "path": "data/mvtec/bottle/test/good/000.png",
+   "label": 0,
+   "score": 3.612337350845337
+  },
+  {
+   "path": "data/mvtec/bottle/test/good/001.png",
+   "label": 0,
+   "score": 3.213331699371338
+  },
+  {
+   "path": "data/mvtec/bottle/test/good/002.png",
+   "label": 0,
+   "score": 3.611468553543091
+  },
+  {
+   "path": "data/mvtec/bottle/test/good/003.png",
+   "label": 0,
+   "score": 3.0573973655700684
+  },
+  {
+   "path": "data/mvtec/bottle/test/good/004.png",
+   "label": 0,
+   "score": 3.49923038482666
+  },
+  {
+   "path": "data/mvtec/bottle/test/good/005.png",
+   "label": 0,
+   "score": 3.076184034347534
+  },
+  {
+   "path": "data/mvtec/bottle/test/good/006.png",
+   "label": 0,
+   "score": 4.954452991485596
+  },
+  {
+   "path": "data/mvtec/bottle/test/good/007.png",
+   "label": 0,
+   "score": 3.336543083190918
+  },
+  {
+   "path": "data/mvtec/bottle/test/good/008.png",
+   "label": 0,
+   "score": 3.4026334285736084
+  },
+  {
+   "path": "data/mvtec/bottle/test/good/009.png",
+   "label": 0,
+   "score": 3.014547109603882
+  },
+  {
+   "path": "data/mvtec/bottle/test/good/010.png",
+   "label": 0,
+   "score": 3.266951560974121
+  },
+  {
+   "path": "data/mvtec/bottle/test/good/011.png",
+   "label": 0,
+   "score": 2.9261884689331055
+  },
+  {
+   "path": "data/mvtec/bottle/test/good/012.png",
+   "label": 0,
+   "score": 3.2537198066711426
+  },
+  {
+   "path": "data/mvtec/bottle/test/good/013.png",
+   "label": 0,
+   "score": 3.020599603652954
+  },
+  {
+   "path": "data/mvtec/bottle/test/good/014.png",
+   "label": 0,
+   "score": 3.0057334899902344
+  },
+  {
+   "path": "data/mvtec/bottle/test/good/015.png",
+   "label": 0,
+   "score": 3.652675151824951
+  },
+  {
+   "path": "data/mvtec/bottle/test/good/016.png",
+   "label": 0,
+   "score": 3.3880927562713623
+  },
+  {
+   "path": "data/mvtec/bottle/test/good/017.png",
+   "label": 0,
+   "score": 3.142812490463257
+  },
+  {
+   "path": "data/mvtec/bottle/test/good/018.png",
+   "label": 0,
+   "score": 3.6347193717956543
+  },
+  {
+   "path": "data/mvtec/bottle/test/good/019.png",
+   "label": 0,
+   "score": 3.4327588081359863
+  }
+ ]
+}

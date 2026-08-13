@@ -1,0 +1,31 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - run: uv sync --frozen
+
+      # The self-checks are the real tests: each asserts that a metric fails
+      # loudly on a deliberately wrong input. They need no dataset, so CI stays
+      # fast and does not depend on a 5 GB download.
+      - name: metric self-checks
+        run: |
+          uv run python src/edd/baseline.py --self-check
+          uv run python src/edd/patchcore.py --self-check
+          uv run python src/edd/explain.py --self-check
+
+      - name: app imports cleanly
+        run: uv run python -c "import ast,sys; ast.parse(open('app.py').read())"
+
+      - name: lint
+        run: uv run ruff check src app.py

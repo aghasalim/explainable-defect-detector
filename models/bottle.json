@@ -1,0 +1,20 @@
+{
+ "category": "bottle",
+ "threshold": 2.0184617042541504,
+ "target_fpr": 0.01,
+ "size": 224,
+ "crop": true,
+ "grid": [
+  28,
+  28
+ ],
+ "bank_size": 1473,
+ "bank_dim": 1536,
+ "coreset_frac": 0.01,
+ "n_train_total": 209,
+ "n_bank_images": 188,
+ "n_calib": 21,
+ "calib_score_min": 1.5162094831466675,
+ "calib_score_max": 2.1015470027923584,
+ "artefact_mb": 9.05
+}
