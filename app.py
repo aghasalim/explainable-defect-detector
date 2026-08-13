@@ -35,11 +35,30 @@ def get_model():
     return PatchFeatures().to(dev), dev
 
 
+def _stamp(category: str) -> tuple[int, int]:
+    p = MODELS / f"{category}.pt"
+    st_ = p.stat()
+    return st_.st_size, int(st_.st_mtime)
+
+
 @st.cache_resource
-def get_artifact(category: str):
+def _load_artifact(category: str, _stamp_key: tuple[int, int]):
     a = torch.load(MODELS / f"{category}.pt", weights_only=False)
     a["bank"] = a["bank"].float()
     return a
+
+
+def get_artifact(category: str):
+    """Load an artefact, keyed on the file's size+mtime.
+
+    st.cache_resource keys on the function's code and arguments, not on the
+    file it happens to read. Re-exporting a model therefore left the deployed
+    app serving the previous memory bank and threshold indefinitely - it showed
+    the old calibration for hours after the new one was pushed, and only a
+    manual reboot cleared it. Feeding the file stamp in as an argument makes a
+    changed artefact a cache miss.
+    """
+    return _load_artifact(category, _stamp(category))
 
 
 def overlay(img: Image.Image, amap: np.ndarray, vmax: float, alpha: float = 0.5) -> Image.Image:
