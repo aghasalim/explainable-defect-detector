@@ -18,7 +18,7 @@ prediction comes with a heatmap showing which regions look unlike normal.
 Pick a sample or upload your own image of a bottle, screw, or pill.
 
 - **Method:** PatchCore (Roth et al., CVPR 2022), implemented from scratch.
-- **Detection:** 0.982 mean image AUROC across all 15 MVTec AD categories.
+- **Detection:** 0.9874 mean image AUROC across all 15 MVTec AD categories.
 - **The threshold** is calibrated on held-out *normal* images at a 1% false-alarm
   target — never on test data. The sidebar slider exposes the trade-off.
 
