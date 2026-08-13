@@ -1,0 +1,23 @@
+{
+ "category": "screw",
+ "coreset_frac": 0.01,
+ "center_crop": true,
+ "n_test": 160,
+ "n_anomalous": 119,
+ "image_auroc": 0.9411764705882353,
+ "average_precision": 0.9803749834484853,
+ "accuracy_at_best_f1": 0.91875,
+ "majority_class_accuracy": 0.74375,
+ "paper_image_auroc": 0.981,
+ "paper_pixel_auroc": 0.994,
+ "seconds": 71.6,
+ "pixel_auroc": 0.9686296303534487,
+ "aupro": 0.8230510109010292,
+ "peak_in_mask": 0.4957983193277311,
+ "top1pct_precision": 0.26528455693654707,
+ "control_pixel_auroc": 0.5034459246475091,
+ "control_aupro": 0.13324760917018602,
+ "control_peak_in_mask": 0.0,
+ "control_top1pct_precision": 0.004226840436773511,
+ "defect_pixel_fraction": 0.0043113785692848565
+}

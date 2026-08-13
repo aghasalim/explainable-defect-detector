@@ -1,0 +1,23 @@
+{
+ "category": "zipper",
+ "coreset_frac": 0.01,
+ "center_crop": true,
+ "n_test": 151,
+ "n_anomalous": 119,
+ "image_auroc": 0.9968487394957983,
+ "average_precision": 0.9991444397313416,
+ "accuracy_at_best_f1": 0.9867549668874173,
+ "majority_class_accuracy": 0.7880794701986755,
+ "paper_image_auroc": 0.985,
+ "paper_pixel_auroc": 0.989,
+ "seconds": 40.5,
+ "pixel_auroc": 0.9784070010633644,
+ "aupro": 0.8967115062516183,
+ "peak_in_mask": 0.9663865546218487,
+ "top1pct_precision": 0.8679112363508277,
+ "control_pixel_auroc": 0.5014520015550346,
+ "control_aupro": 0.14245051828258418,
+ "control_peak_in_mask": 0.04201680672268908,
+ "control_top1pct_precision": 0.03287542561934954,
+ "defect_pixel_fraction": 0.03280050859629566
+}
