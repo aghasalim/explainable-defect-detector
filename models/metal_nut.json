@@ -1,0 +1,21 @@
+{
+ "category": "metal_nut",
+ "threshold": 2.4074931144714355,
+ "target_fpr": 0.01,
+ "size": 224,
+ "crop": true,
+ "grid": [
+  28,
+  28
+ ],
+ "bank_size": 1552,
+ "bank_dim": 1536,
+ "coreset_frac": 0.01,
+ "n_train_total": 220,
+ "n_bank_images": 198,
+ "n_calib": 22,
+ "calib_score_min": 2.1441731452941895,
+ "calib_score_max": 2.412576675415039,
+ "artefact_mb": 4.77,
+ "bank_dtype": "float16"
+}

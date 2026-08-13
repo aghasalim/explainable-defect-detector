@@ -1,0 +1,21 @@
+{
+ "category": "cable",
+ "threshold": 2.6799707412719727,
+ "target_fpr": 0.01,
+ "size": 224,
+ "crop": true,
+ "grid": [
+  28,
+  28
+ ],
+ "bank_size": 1583,
+ "bank_dim": 1536,
+ "coreset_frac": 0.01,
+ "n_train_total": 224,
+ "n_bank_images": 202,
+ "n_calib": 22,
+ "calib_score_min": 2.3758223056793213,
+ "calib_score_max": 2.6949779987335205,
+ "artefact_mb": 4.87,
+ "bank_dtype": "float16"
+}

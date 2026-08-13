@@ -104,15 +104,37 @@ A benchmark reports AUROC, but a demo has to say OK or DEFECT. I take the thresh
 from held-out normal training images at their 99th percentile, aiming for a 1% false
 alarm rate, so the test set is never involved. On the real test split:
 
-| category | target FPR | actual FPR | recall |
+| category | calibration images | actual FPR (target 1%) | recall |
 |---|---|---|---|
-| bottle | 1% | 0.0% | 100.0% |
-| pill | 1% | 7.7% | 81.6% |
-| screw | 1% | 0.0% | 53.8% |
+| bottle | 21 | **0.0%** | 100.0% |
+| cable | 22 | **1.7%** | 92.4% |
+| capsule | 22 | 8.7% | 88.1% |
+| carpet | 28 | **42.9%** | 100.0% |
+| grid | 26 | 4.8% | 94.7% |
+| hazelnut | 39 | **0.0%** | 98.6% |
+| leather | 25 | 15.6% | 100.0% |
+| metal_nut | 22 | 9.1% | 98.9% |
+| pill | 27 | 7.7% | 81.6% |
+| screw | 32 | **0.0%** | **53.8%** |
+| tile | 23 | 3.0% | 97.6% |
+| toothbrush | 6 | 25.0% | 100.0% |
+| transistor | 21 | 8.3% | 100.0% |
+| wood | 25 | 5.3% | 95.0% |
+| zipper | 24 | 3.1% | 98.3% |
 
-20 to 40 calibration images is too few. `pill` misses its false alarm target by 7x and
-`screw` ends up so strict it catches only half the defects. Fixing this is on the list
-below.
+This is the weakest part of the project and I would rather say so than bury it. Only
+3 of 15 categories land at or under the 1% target. `carpet` flags **43% of good parts**,
+which would be thrown out of a factory on day one. `screw` goes the other way and only
+catches half the defects.
+
+The cause is sample size. I calibrate on 10% of the training images, which is 6 to 39
+images, and I am asking for a 99th percentile out of that. With 6 images (`toothbrush`)
+the 99th percentile is just the maximum, so it carries no information about the tail.
+It also assumes the calibration images cover the full range of normal variation, and for
+`carpet` they clearly do not.
+
+Worth noting these are the same models that average 0.9874 AUROC. The ranking is good;
+the threshold on top of it is not. That gap is the thing I did not expect to learn here.
 
 ## Bugs worth mentioning
 
@@ -141,9 +163,15 @@ uv run python src/edd/report.py            # writes reports/results.md
 Demo:
 
 ```bash
-uv run python src/edd/export.py bottle screw pill
+uv run python src/edd/export.py --all      # all 15, or name them: export.py bottle screw
+uv run python src/edd/samples.py           # picks demo images by actually scoring them
+uv run python src/edd/verify_threshold.py  # the table above
 uv run streamlit run app.py
 ```
+
+All 15 categories are exported and committed under `models/` (79 MB total). The memory
+banks are stored as float16, which halves them; I checked and it changes scores by at
+most 1.8e-4 and flips no verdict on 410 test images.
 
 Images are not committed. `fetch_mvtec.py` rebuilds them from the tracked index.
 

@@ -1,0 +1,21 @@
+{
+ "category": "transistor",
+ "threshold": 2.1184635162353516,
+ "target_fpr": 0.01,
+ "size": 224,
+ "crop": true,
+ "grid": [
+  28,
+  28
+ ],
+ "bank_size": 1505,
+ "bank_dim": 1536,
+ "coreset_frac": 0.01,
+ "n_train_total": 213,
+ "n_bank_images": 192,
+ "n_calib": 21,
+ "calib_score_min": 1.9247300624847412,
+ "calib_score_max": 2.122415542602539,
+ "artefact_mb": 4.63,
+ "bank_dtype": "float16"
+}

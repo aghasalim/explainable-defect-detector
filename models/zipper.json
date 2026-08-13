@@ -1,0 +1,21 @@
+{
+ "category": "zipper",
+ "threshold": 1.5897823572158813,
+ "target_fpr": 0.01,
+ "size": 224,
+ "crop": true,
+ "grid": [
+  28,
+  28
+ ],
+ "bank_size": 1693,
+ "bank_dim": 1536,
+ "coreset_frac": 0.01,
+ "n_train_total": 240,
+ "n_bank_images": 216,
+ "n_calib": 24,
+ "calib_score_min": 1.2126216888427734,
+ "calib_score_max": 1.618084192276001,
+ "artefact_mb": 5.2,
+ "bank_dtype": "float16"
+}

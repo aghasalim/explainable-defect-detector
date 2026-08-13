@@ -16,5 +16,6 @@
  "n_calib": 21,
  "calib_score_min": 1.5162094831466675,
  "calib_score_max": 2.1015470027923584,
- "artefact_mb": 9.05
+ "artefact_mb": 4.53,
+ "bank_dtype": "float16"
 }

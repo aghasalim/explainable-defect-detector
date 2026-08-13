@@ -1,0 +1,21 @@
+{
+ "category": "carpet",
+ "threshold": 1.6204336881637573,
+ "target_fpr": 0.01,
+ "size": 224,
+ "crop": true,
+ "grid": [
+  28,
+  28
+ ],
+ "bank_size": 1975,
+ "bank_dim": 1536,
+ "coreset_frac": 0.01,
+ "n_train_total": 280,
+ "n_bank_images": 252,
+ "n_calib": 28,
+ "calib_score_min": 1.4488540887832642,
+ "calib_score_max": 1.62236750125885,
+ "artefact_mb": 6.07,
+ "bank_dtype": "float16"
+}

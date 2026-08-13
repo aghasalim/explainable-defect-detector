@@ -1,0 +1,21 @@
+{
+ "category": "hazelnut",
+ "threshold": 2.6543328762054443,
+ "target_fpr": 0.01,
+ "size": 224,
+ "crop": true,
+ "grid": [
+  28,
+  28
+ ],
+ "bank_size": 2759,
+ "bank_dim": 1536,
+ "coreset_frac": 0.01,
+ "n_train_total": 391,
+ "n_bank_images": 352,
+ "n_calib": 39,
+ "calib_score_min": 2.218923330307007,
+ "calib_score_max": 2.677812099456787,
+ "artefact_mb": 8.48,
+ "bank_dtype": "float16"
+}

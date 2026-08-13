@@ -57,8 +57,11 @@ def build(category: str, frac: float = 0.01, size: int = 224, crop: bool = True,
     threshold = float(np.quantile(cal, 1.0 - target_fpr))
 
     MODELS.mkdir(exist_ok=True)
+    # float16 halves the artefact (151 MB -> 76 MB across 15 categories) and is
+    # measurably lossless here: max score change 1.8e-4 against thresholds near
+    # 2.0, and zero verdict flips over 410 test images. load() casts back up.
     art = {
-        "category": category, "bank": bank.cpu(), "threshold": threshold,
+        "category": category, "bank": bank.cpu().half(), "threshold": threshold,
         "target_fpr": target_fpr, "size": size, "crop": crop, "grid": tuple(grid),
         "bank_size": int(bank.shape[0]), "bank_dim": int(bank.shape[1]),
         "coreset_frac": frac, "n_train_total": int(n), "n_bank_images": len(bank_idx),
@@ -99,8 +102,18 @@ def predict(art: dict, x: torch.Tensor, model: PatchFeatures, dev: torch.device)
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser()
-    p.add_argument("category", nargs="?", default="bottle")
+    # several categories at once, or --all for the whole benchmark; the README
+    # documented the multi-category form before the script accepted it
+    p.add_argument("categories", nargs="*", default=["bottle"])
+    p.add_argument("--all", action="store_true", help="every downloaded category")
     p.add_argument("--frac", type=float, default=0.01)
     p.add_argument("--target-fpr", type=float, default=0.01)
     a = p.parse_args()
-    build(a.category, frac=a.frac, target_fpr=a.target_fpr)
+
+    cats = a.categories or ["bottle"]
+    if a.all:
+        cats = sorted(d.name for d in (ROOT / "data" / "mvtec").iterdir() if d.is_dir())
+
+    for i, c in enumerate(cats, 1):
+        print(f"=== [{i}/{len(cats)}] {c} ===")
+        build(c, frac=a.frac, target_fpr=a.target_fpr)
