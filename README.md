@@ -11,6 +11,13 @@ looking at them. A supervised classifier on `screw` reaches **0.959 AUROC** whil
 heatmap lands on the actual defect **0% of the time** — right answers, demonstrably wrong
 reasons. Details in [Explanations, verified](#explanations-verified-milestone-4).
 
+![PatchCore anomaly maps across categories](reports/hero.png)
+
+*Median-difficulty defect per category — not the best cases. Green is ground truth, the
+circle is the map's hottest pixel. `bottle`, `hazelnut` and `leather` are clean hits;
+`screw` is the failure mode this project measures rather than crops out: the map is diffuse
+and its peak sits nowhere near the tiny labelled defect at the tip.*
+
 ---
 
 ## Contents
