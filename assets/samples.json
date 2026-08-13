@@ -1,0 +1,85 @@
+[
+ {
+  "category": "bottle",
+  "threshold": 2.0184617042541504,
+  "n_defects": 63,
+  "n_missed": 0,
+  "recall_at_threshold": 1.0,
+  "samples": [
+   {
+    "name": "good",
+    "file": "bottle__good.png",
+    "score": 1.587,
+    "flagged": false,
+    "defect": "good"
+   },
+   {
+    "name": "contamination",
+    "file": "bottle__contamination.png",
+    "score": 4.158,
+    "flagged": true,
+    "defect": "contamination"
+   }
+  ]
+ },
+ {
+  "category": "pill",
+  "threshold": 2.1144204139709473,
+  "n_defects": 141,
+  "n_missed": 26,
+  "recall_at_threshold": 0.8156028368794326,
+  "samples": [
+   {
+    "name": "good",
+    "file": "pill__good.png",
+    "score": 1.903,
+    "flagged": false,
+    "defect": "good"
+   },
+   {
+    "name": "pill_type",
+    "file": "pill__pill_type.png",
+    "score": 3.148,
+    "flagged": true,
+    "defect": "pill_type"
+   },
+   {
+    "name": "crack_MISSED",
+    "file": "pill__crack_MISSED.png",
+    "score": 1.872,
+    "flagged": false,
+    "defect": "crack"
+   }
+  ]
+ },
+ {
+  "category": "screw",
+  "threshold": 1.9958784580230713,
+  "n_defects": 119,
+  "n_missed": 55,
+  "recall_at_threshold": 0.5378151260504201,
+  "samples": [
+   {
+    "name": "good",
+    "file": "screw__good.png",
+    "score": 1.777,
+    "flagged": false,
+    "defect": "good"
+   },
+   {
+    "name": "scratch_neck",
+    "file": "screw__scratch_neck.png",
+    "score": 2.632,
+    "flagged": true,
+    "defect": "scratch_neck"
+   },
+   {
+    "name": "thread_side_MISSED",
+    "file": "screw__thread_side_MISSED.png",
+    "score": 1.735,
+    "flagged": false,
+    "defect": "thread_side"
+   }
+  ]
+ }
+]

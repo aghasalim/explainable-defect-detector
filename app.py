@@ -91,6 +91,20 @@ choice = st.radio(
     horizontal=True,
 )
 
+# Samples are chosen by scoring the real test split with this exact artefact
+# (src/edd/samples.py), so a "_MISSED" sample is a genuine false negative at
+# the calibrated threshold rather than a broken demo. Saying so is the whole
+# point of the project.
+if choice.endswith("_MISSED"):
+    st.warning(
+        f"**This is a known miss.** At the calibrated threshold this defect scores *below* "
+        f"the line, so the detector reports OK — a false negative. On `{category}` that "
+        f"happens to a real fraction of defects (`screw` catches 53.8% at this operating "
+        f"point, `pill` 81.6%). Drag the **Decision threshold** slider down and watch it "
+        f"flip to DEFECT — and watch normal parts start tripping too. That trade-off is "
+        f"the actual engineering problem, and it is not visible in an AUROC score."
+    )
+
 img = None
 if choice == "Upload my own":
     up = st.file_uploader("Image", type=["png", "jpg", "jpeg"])
