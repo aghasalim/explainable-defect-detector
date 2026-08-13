@@ -12,6 +12,12 @@ random-map control.
 
 [![ci](https://github.com/aghasalim/explainable-defect-detector/actions/workflows/ci.yml/badge.svg)](https://github.com/aghasalim/explainable-defect-detector/actions/workflows/ci.yml)
 
+> **Status:** benchmark, explainability and app are complete and reproducible.
+> **The hosted demo is not deployed yet** — the Streamlit app runs locally
+> (`uv run streamlit run app.py`) and the Space is one command away
+> ([see below](#deploy-the-demo)), but there is no public link yet.
+> The Docker image is written but has not been built and run end to end.
+
 ---
 
 ## Why anomaly detection, not a defect classifier
@@ -225,8 +231,15 @@ tracked index into the canonical MVTec layout.
 
 ## Deploy the demo
 
-`./scripts/deploy_space.sh <your-hf-username>` pushes the app, model artefacts and
-Dockerfile to Hugging Face Spaces (requires `hf auth login` with a write token).
+Not yet deployed — no public link exists. To publish it:
+
+```bash
+pip install -U "huggingface_hub[cli]" && hf auth login
+./scripts/deploy_space.sh <your-hf-username>
+```
+
+That pushes the app, model artefacts and Dockerfile to Hugging Face Spaces. The
+link goes here once it is live.
 
 ## Roadmap
 
@@ -237,8 +250,10 @@ Dockerfile to Hugging Face Spaces (requires `hf auth login` with a write token).
 - [x] **4 — Explainability.** Pixel AUROC, AUPRO, peak-in-mask and top-1% precision,
       each against a random-map control; supervised + Grad-CAM comparison on a
       matched held-out split.
-- [x] **5 — Deployment.** Calibrated threshold, exported artefacts, Streamlit app,
-      Docker image, CI.
+- [x] **5 — Deployment.** Calibrated threshold, exported artefacts, Streamlit app
+      (runs locally), Dockerfile, CI.
+  - [ ] hosted demo on Hugging Face Spaces — **not deployed yet**
+  - [ ] Docker image built and run end to end
 - [x] **6 — Docs.** Full 15-category benchmark, architecture diagram, honest write-up.
 
 ## What I would try next
