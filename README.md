@@ -234,7 +234,7 @@ tracked index into the canonical MVTec layout.
 Not yet deployed — no public link exists. To publish it:
 
 ```bash
-pip install -U "huggingface_hub[cli]" && hf auth login
+pip install -U huggingface_hub && hf auth login
 ./scripts/deploy_space.sh <your-hf-username>
 ```
 
