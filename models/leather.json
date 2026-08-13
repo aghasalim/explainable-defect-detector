@@ -1,0 +1,21 @@
+{
+ "category": "leather",
+ "threshold": 1.567564845085144,
+ "target_fpr": 0.01,
+ "size": 224,
+ "crop": true,
+ "grid": [
+  28,
+  28
+ ],
+ "bank_size": 1732,
+ "bank_dim": 1536,
+ "coreset_frac": 0.01,
+ "n_train_total": 245,
+ "n_bank_images": 221,
+ "n_calib": 24,
+ "calib_score_min": 1.3328536748886108,
+ "calib_score_max": 1.5954437255859375,
+ "artefact_mb": 5.32,
+ "bank_dtype": "float16"
+}

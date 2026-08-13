@@ -1,0 +1,21 @@
+{
+ "category": "tile",
+ "threshold": 2.1190695762634277,
+ "target_fpr": 0.01,
+ "size": 224,
+ "crop": true,
+ "grid": [
+  28,
+  28
+ ],
+ "bank_size": 1622,
+ "bank_dim": 1536,
+ "coreset_frac": 0.01,
+ "n_train_total": 230,
+ "n_bank_images": 207,
+ "n_calib": 23,
+ "calib_score_min": 1.7990915775299072,
+ "calib_score_max": 2.1207025051116943,
+ "artefact_mb": 4.98,
+ "bank_dtype": "float16"
+}
