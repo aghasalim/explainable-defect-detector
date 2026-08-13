@@ -1,6 +1,6 @@
 {
  "category": "carpet",
- "threshold": 1.6204336881637573,
+ "threshold": 1.7884072065353394,
  "target_fpr": 0.01,
  "size": 224,
  "crop": true,
@@ -8,14 +8,19 @@
   28,
   28
  ],
- "bank_size": 1975,
+ "bank_size": 2195,
  "bank_dim": 1536,
  "coreset_frac": 0.01,
  "n_train_total": 280,
- "n_bank_images": 252,
- "n_calib": 28,
- "calib_score_min": 1.4488540887832642,
- "calib_score_max": 1.62236750125885,
- "artefact_mb": 6.07,
- "bank_dtype": "float16"
+ "n_bank_images": 280,
+ "k_folds": 5,
+ "n_calib": 280,
+ "calib_score_min": 1.4297001361846924,
+ "calib_score_max": 1.7884072065353394,
+ "artefact_mb": 6.75,
+ "threshold_method": "tolerance_bound",
+ "tolerance_rank": null,
+ "tolerance_confidence": 0.95,
+ "n_required_for_guarantee": 299,
+ "guarantee_met": false
 }

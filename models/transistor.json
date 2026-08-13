@@ -1,6 +1,6 @@
 {
  "category": "transistor",
- "threshold": 2.1184635162353516,
+ "threshold": 2.453969955444336,
  "target_fpr": 0.01,
  "size": 224,
  "crop": true,
@@ -8,14 +8,19 @@
   28,
   28
  ],
- "bank_size": 1505,
+ "bank_size": 1669,
  "bank_dim": 1536,
  "coreset_frac": 0.01,
  "n_train_total": 213,
- "n_bank_images": 192,
- "n_calib": 21,
- "calib_score_min": 1.9247300624847412,
- "calib_score_max": 2.122415542602539,
- "artefact_mb": 4.63,
- "bank_dtype": "float16"
+ "n_bank_images": 213,
+ "k_folds": 5,
+ "n_calib": 213,
+ "calib_score_min": 1.9066606760025024,
+ "calib_score_max": 2.453969955444336,
+ "artefact_mb": 5.13,
+ "threshold_method": "tolerance_bound",
+ "tolerance_rank": null,
+ "tolerance_confidence": 0.95,
+ "n_required_for_guarantee": 299,
+ "guarantee_met": false
 }

@@ -1,6 +1,6 @@
 {
  "category": "wood",
- "threshold": 2.2350990772247314,
+ "threshold": 2.331955909729004,
  "target_fpr": 0.01,
  "size": 224,
  "crop": true,
@@ -8,14 +8,19 @@
   28,
   28
  ],
- "bank_size": 1740,
+ "bank_size": 1936,
  "bank_dim": 1536,
  "coreset_frac": 0.01,
  "n_train_total": 247,
- "n_bank_images": 222,
- "n_calib": 25,
- "calib_score_min": 1.675498366355896,
- "calib_score_max": 2.3204057216644287,
- "artefact_mb": 5.35,
- "bank_dtype": "float16"
+ "n_bank_images": 247,
+ "k_folds": 5,
+ "n_calib": 247,
+ "calib_score_min": 1.6617932319641113,
+ "calib_score_max": 2.331955909729004,
+ "artefact_mb": 5.95,
+ "threshold_method": "tolerance_bound",
+ "tolerance_rank": null,
+ "tolerance_confidence": 0.95,
+ "n_required_for_guarantee": 299,
+ "guarantee_met": false
 }

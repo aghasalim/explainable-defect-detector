@@ -100,41 +100,79 @@ crop got 0.9412 at 1%, because the crop zooms in and `screw` defects are tiny.
 
 ## Picking a threshold
 
-A benchmark reports AUROC, but a demo has to say OK or DEFECT. I take the threshold
-from held-out normal training images at their 99th percentile, aiming for a 1% false
-alarm rate, so the test set is never involved. On the real test split:
+A benchmark reports AUROC, but a demo has to say OK or DEFECT. The threshold has to come
+from normal images only, since a deployed system has no labelled defects. My first attempt
+was bad enough to be worth writing down, because fixing it taught me the most.
+
+**Attempt 1 — hold out 10% of the training images, take their 99th percentile.** Only
+3 of 15 categories hit the 1% false alarm target. `carpet` flagged **43% of good parts**.
+
+The reason is not obvious at first. A 99th percentile from a small sample should be too
+*strict*, not too loose. But with n=28, the empirical 99th percentile is essentially the
+sample maximum, and the maximum of n draws estimates about the n/(n+1) quantile — the 96th
+percentile at n=28, not the 99th. So the tail was consistently underestimated and the
+threshold came out too low.
+
+**Attempt 2 — k-fold cross-calibration.** Instead of scoring one 10% holdout, rotate 5
+folds so every training image gets a score from a bank that excludes it. That turns 21–39
+calibration scores into 209–391. Result: 10 of 15 within target.
+
+**Attempt 3 — a tolerance bound instead of a quantile.** An empirical quantile is a point
+estimate: it lands below the true value roughly half the time, which is a coin flip on
+whether you hit your target. What a deployment actually wants is *"at least 99% of normal
+parts score below this, and I am 95% confident of that"*. That is a one-sided nonparametric
+tolerance bound, and for the m-th smallest of n samples it follows from
+`F(X_(m)) ~ Beta(m, n-m+1)`.
+
+| calibration method | within 1% target | mean FPR | mean recall |
+|---|---|---|---|
+| 10% holdout + 99th percentile | 3 / 15 | 9.0% | — |
+| 5-fold cross-calibration + 99th percentile | 10 / 15 | 3.4% | 87.4% |
+| **5-fold + tolerance bound (shipped)** | **13 / 15** | **1.9%** | 79.4% |
+
+Final numbers on the real test split:
 
 | category | calibration images | actual FPR (target 1%) | recall |
 |---|---|---|---|
-| bottle | 21 | **0.0%** | 100.0% |
-| cable | 22 | **1.7%** | 92.4% |
-| capsule | 22 | 8.7% | 88.1% |
-| carpet | 28 | **42.9%** | 100.0% |
-| grid | 26 | 4.8% | 94.7% |
-| hazelnut | 39 | **0.0%** | 98.6% |
-| leather | 25 | 15.6% | 100.0% |
-| metal_nut | 22 | 9.1% | 98.9% |
-| pill | 27 | 7.7% | 81.6% |
-| screw | 32 | **0.0%** | **53.8%** |
-| tile | 23 | 3.0% | 97.6% |
-| toothbrush | 6 | 25.0% | 100.0% |
-| transistor | 21 | 8.3% | 100.0% |
-| wood | 25 | 5.3% | 95.0% |
-| zipper | 24 | 3.1% | 98.3% |
+| bottle | 209 | **0.0%** | 96.8% |
+| cable | 224 | **0.0%** | 78.3% |
+| capsule | 219 | **0.0%** | 40.4% |
+| carpet | 280 | **25.0%** | 97.8% |
+| grid | 264 | **0.0%** | 73.7% |
+| hazelnut | 391 | **0.0%** | 98.6% |
+| leather | 245 | **0.0%** | 100.0% |
+| metal_nut | 220 | **0.0%** | 93.5% |
+| pill | 267 | **0.0%** | 39.0% |
+| screw | 320 | **0.0%** | 41.2% |
+| tile | 230 | **0.0%** | 75.0% |
+| toothbrush | 60 | **0.0%** | 76.7% |
+| transistor | 213 | **0.0%** | 92.5% |
+| wood | 247 | **0.0%** | 93.3% |
+| zipper | 240 | 3.1% | 95.0% |
 
-This is the weakest part of the project and I would rather say so than bury it. Only
-3 of 15 categories land at or under the 1% target. `carpet` flags **43% of good parts**,
-which would be thrown out of a factory on day one. `screw` goes the other way and only
-catches half the defects.
+**What it cost.** Mean recall dropped from 87.4% to 79.4%. That is the whole precision /
+recall trade in one number, and it is a business decision rather than a modelling one: a
+false alarm costs an operator 30 seconds, a missed defect ships. I made the target the
+thing that is guaranteed and let recall land where it lands, because that is what "1% false
+alarm rate" as a requirement means.
 
-The cause is sample size. I calibrate on 10% of the training images, which is 6 to 39
-images, and I am asking for a 99th percentile out of that. With 6 images (`toothbrush`)
-the 99th percentile is just the maximum, so it carries no information about the tail.
-It also assumes the calibration images cover the full range of normal variation, and for
-`carpet` they clearly do not.
+**The two that still miss, and why I am not going to fix them.**
 
-Worth noting these are the same models that average 0.9874 AUROC. The ranking is good;
-the threshold on top of it is not. That gap is the thing I did not expect to learn here.
+- `zipper` flags 1 of 32 normal images. With 32 test normals the smallest non-zero rate
+  measurable is 3.1%, so this is one image, not a trend.
+- `carpet` is genuinely unfixable from training data. The threshold needed for a 1% test
+  FPR is 1.933, and the *entire* calibration set of 280 images maxes out at 1.788. Its test
+  normals are drawn from a wider distribution than its training normals — real covariate
+  shift. No amount of calibration on train data can cover it, and using test data to pick
+  the threshold would be cheating. In production the answer is to recalibrate on images
+  from the line you are actually running on.
+
+One more thing I found while doing this: a 99%/95% tolerance bound needs
+`1 - 0.99^n >= 0.95`, i.e. **at least 299 normal images**. Only `hazelnut` (391) and `screw`
+(320) clear that bar, so for the other 13 categories even the sample maximum cannot deliver
+the guarantee and the code falls back to it and records `guarantee_met: false` in the
+artefact. If I were specifying this for real, "collect 300 good parts before you can promise
+a false alarm rate" would be the requirement to hand over.
 
 ## Bugs worth mentioning
 

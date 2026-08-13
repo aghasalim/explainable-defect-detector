@@ -1,6 +1,6 @@
 {
  "category": "cable",
- "threshold": 2.6799707412719727,
+ "threshold": 2.8156087398529053,
  "target_fpr": 0.01,
  "size": 224,
  "crop": true,
@@ -8,14 +8,19 @@
   28,
   28
  ],
- "bank_size": 1583,
+ "bank_size": 1756,
  "bank_dim": 1536,
  "coreset_frac": 0.01,
  "n_train_total": 224,
- "n_bank_images": 202,
- "n_calib": 22,
- "calib_score_min": 2.3758223056793213,
- "calib_score_max": 2.6949779987335205,
- "artefact_mb": 4.87,
- "bank_dtype": "float16"
+ "n_bank_images": 224,
+ "k_folds": 5,
+ "n_calib": 224,
+ "calib_score_min": 2.3257787227630615,
+ "calib_score_max": 2.8156087398529053,
+ "artefact_mb": 5.4,
+ "threshold_method": "tolerance_bound",
+ "tolerance_rank": null,
+ "tolerance_confidence": 0.95,
+ "n_required_for_guarantee": 299,
+ "guarantee_met": false
 }

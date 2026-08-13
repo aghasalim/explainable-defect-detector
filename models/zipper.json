@@ -1,6 +1,6 @@
 {
  "category": "zipper",
- "threshold": 1.5897823572158813,
+ "threshold": 1.7356244325637817,
  "target_fpr": 0.01,
  "size": 224,
  "crop": true,
@@ -8,14 +8,19 @@
   28,
   28
  ],
- "bank_size": 1693,
+ "bank_size": 1881,
  "bank_dim": 1536,
  "coreset_frac": 0.01,
  "n_train_total": 240,
- "n_bank_images": 216,
- "n_calib": 24,
- "calib_score_min": 1.2126216888427734,
- "calib_score_max": 1.618084192276001,
- "artefact_mb": 5.2,
- "bank_dtype": "float16"
+ "n_bank_images": 240,
+ "k_folds": 5,
+ "n_calib": 240,
+ "calib_score_min": 1.2088195085525513,
+ "calib_score_max": 1.7356244325637817,
+ "artefact_mb": 5.78,
+ "threshold_method": "tolerance_bound",
+ "tolerance_rank": null,
+ "tolerance_confidence": 0.95,
+ "n_required_for_guarantee": 299,
+ "guarantee_met": false
 }
