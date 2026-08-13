@@ -3,13 +3,20 @@
 Loads an exported memory bank (models/<category>.pt), scores an uploaded image
 against it, and shows the anomaly map beside the verdict.
 
-The threshold shown is the one calibrated on held-out NORMAL training images at
-a 1% false-alarm target - not tuned on the test set. The sidebar exposes it so
-the trade-off is visible rather than hidden behind a single word.
+The threshold shown is calibrated on NORMAL training images only - k-fold
+cross-calibration plus a one-sided tolerance bound at a 1% false-alarm target,
+never tuned on the test set. The sidebar exposes it so the trade-off is visible
+rather than hidden behind a single word.
+
+Everything user-facing here reads from the artefact or from assets/samples.json
+rather than being written into the copy. Two separate captions in this file
+went stale the moment the calibration changed, and each one kept confidently
+describing a method the app was no longer using.
 """
 
 from __future__ import annotations
 
+import json
 import sys
 from pathlib import Path
 
@@ -33,6 +40,18 @@ st.set_page_config(page_title="Explainable Defect Detector", page_icon="🔍", l
 def get_model():
     dev = torch.device("cpu")   # Spaces free tier is CPU-only
     return PatchFeatures().to(dev), dev
+
+
+@st.cache_data
+def _recall(category: str) -> dict | None:
+    """Per-category recall at the shipped threshold, from assets/samples.json."""
+    f = ROOT / "assets" / "samples.json"
+    if not f.exists():
+        return None
+    for row in json.loads(f.read_text()):
+        if row.get("category") == category:
+            return row
+    return None
 
 
 def _stamp(category: str) -> tuple[int, int]:
@@ -135,13 +154,21 @@ choice = st.radio(
 # the calibrated threshold rather than a broken demo. Saying so is the whole
 # point of the project.
 if choice.endswith("_MISSED"):
+    # Recall is read from assets/samples.json, which samples.py writes from the
+    # real test split. Hardcoding it here went stale the moment the calibration
+    # changed, and the app cheerfully quoted the old numbers.
+    rec = _recall(category)
+    detail = (
+        f"At this operating point it catches **{rec['recall_at_threshold']:.1%}** of "
+        f"`{category}` defects ({rec['n_missed']} of {rec['n_defects']} missed). "
+        if rec else ""
+    )
     st.warning(
         f"**This is a known miss.** At the calibrated threshold this defect scores *below* "
-        f"the line, so the detector reports OK — a false negative. On `{category}` that "
-        f"happens to a real fraction of defects (`screw` catches 53.8% at this operating "
-        f"point, `pill` 81.6%). Drag the **Decision threshold** slider down and watch it "
-        f"flip to DEFECT — and watch normal parts start tripping too. That trade-off is "
-        f"the actual engineering problem, and it is not visible in an AUROC score."
+        f"the line, so the detector reports OK — a false negative. {detail}"
+        f"Drag the **Decision threshold** slider down and watch it flip to DEFECT — and "
+        f"watch normal parts start tripping too. That trade-off is the actual engineering "
+        f"problem, and it is not visible in an AUROC score."
     )
 
 img = None
