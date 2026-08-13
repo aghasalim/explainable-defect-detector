@@ -3,8 +3,9 @@
 Anomaly detection for industrial visual inspection: flag defective items from a
 photo, and show **where** the defect is — trained on normal examples only.
 
-> **Status:** in progress. Milestones 1–2 complete (data pipeline, EDA, baseline).
-> Milestone 3 (PatchCore) in progress. Live demo not up yet.
+> **Status:** in progress. Milestones 1–3 complete (data pipeline, EDA, baseline,
+> PatchCore + ablations). Milestone 4 (explainability verification) next.
+> Live demo not up yet.
 > Numbers below are current and un-cherry-picked, including the bad ones.
 
 ## Why anomaly detection instead of a defect classifier
@@ -27,34 +28,67 @@ has. Measured on `bottle`:
 
 ## Results
 
-Image-level AUROC. `PatchCore (paper)` is Roth et al., CVPR 2022, as a reference
-point — the gap is shown rather than omitted.
+PatchCore, 1% coreset, paper preprocessing. Reference is Roth et al., CVPR 2022.
 
-| category | method | image AUROC | acc @F1 | majority acc | PatchCore (paper) | gap |
-|---|---|---|---|---|---|---|
-| bottle | kNN baseline | **0.9937** | 0.988 | 0.759 | 1.000 | −0.006 |
-| pill | kNN baseline | **0.7534** | 0.868 | 0.844 | 0.966 | −0.213 |
-| screw | kNN baseline | **0.7639** | 0.788 | 0.744 | 0.981 | −0.217 |
+| category | image AUROC | paper | gap | pixel AUROC | paper | gap | runtime |
+|---|---|---|---|---|---|---|---|
+| bottle | **1.0000** | 1.000 | +0.000 | **0.9825** | 0.986 | −0.004 | 22 s |
+| pill | **0.9569** | 0.966 | −0.009 | **0.9703** | 0.976 | −0.006 | 35 s |
+| screw | **0.9412** | 0.981 | −0.040 | **0.9572** | 0.994 | −0.037 | 45 s |
 
-**Read the `majority acc` column.** On `screw`, 78.8% accuracy sits against a
-74.4% majority-class baseline — about 4 points of real signal. Evaluating only on
-`bottle` would have produced a 0.9937 headline and hidden this entirely. Easy and
-hard categories are both reported for exactly that reason.
+Bottle and pill reproduce the paper within a point. `screw` remains 4 points short —
+reported, not hidden. The likeliest remaining cause is the omitted score reweighting
+(see *Deviations* below); no attempt was made to close the gap by tuning on the test set.
 
-### Why the baseline fails where it fails
+### Baseline → PatchCore
 
-The baseline pools each image into a single 512-d vector via global average
-pooling. A `screw` defect is a few-pixel scratch on a small object against a
-large dark background, so it is averaged away before any distance is computed.
-The same collapse is why this baseline **cannot localise** — there is no spatial
-map left to point at. Patch-level features address both.
+| category | kNN baseline | PatchCore | Δ |
+|---|---|---|---|
+| bottle | 0.9937 | **1.0000** | +0.006 |
+| pill | 0.7534 | **0.9569** | +0.204 |
+| screw | 0.7639 | **0.9412** | +0.177 |
+
+The baseline was near-useless exactly where it mattered (`screw`: 78.8% accuracy against
+a 74.4% majority-class baseline). Keeping the spatial grid instead of average-pooling it
+away recovers ~18–20 AUROC points and makes localisation possible at all.
+
+### Ablations
+
+Coreset selection is not a formality — at an identical bank size on `screw`:
+
+| sampling | bank | image AUROC |
+|---|---|---|
+| random 1% | 2,508 | 0.5518 |
+| **greedy k-center 1%** | 2,508 | **0.8737** |
+
+Random sampling collapses to near-chance. The image score is a *max* over patch
+distances, so it is hostage to coverage: random sampling misses rare-but-normal patches,
+those score as distant, and normal images get flagged. Note pixel AUROC barely moves
+(0.9607 vs 0.9642) — it is dominated by easy background and hides the failure entirely.
+Two metrics, opposite conclusions.
+
+Bank size has real but sharply diminishing returns (`screw`, resize preprocessing):
+
+| coreset | bank | image AUROC | runtime |
+|---|---|---|---|
+| 1% | 2,508 | 0.8737 | 44 s |
+| 5% | 12,544 | 0.9182 | 179 s |
+| 10% | 25,088 | 0.9289 | 343 s |
+
+**Preprocessing beat all of it.** `screw` with the paper's `Resize(256)+CenterCrop(224)`
+scores 0.9412 at 1% in 45 s — better than 10% coreset at 1/7 the compute. The crop zooms
+in on a centred object, and `screw` defects are tiny. This directly contradicts the
+resize-only choice justified on `bottle`: the right preprocessing is category-dependent,
+and the measurement that settled it for one object did not transfer.
 
 ## Decisions made on measurement, not convention
 
-- **Resize-only, no CenterCrop.** The stock ImageNet transform
-  (`Resize(256) → CenterCrop(224)`) discards the outer 12.5% of each image. On
-  `bottle` that clips defect area in 4/63 anomalous images, worst case losing
-  14.7% of a labelled defect. Zero cost to avoid, so avoided.
+- **Preprocessing, measured then revised.** The stock ImageNet transform
+  (`Resize(256) → CenterCrop(224)`) discards the outer 12.5% of each image. On `bottle`
+  that clips defect area in 4/63 anomalous images, worst case losing 14.7% of a labelled
+  defect — so resize-only looked strictly better. On `screw` the same crop is worth
+  **+6.8 AUROC** because it magnifies a tiny defect. Both are reported rather than
+  picking the winner per category, which would be tuning on the test set.
   (`src/edd/dataset.py`, run it to reproduce.)
 - **224×224 input.** The smallest defect in `bottle` covers 0.58% of pixels ≈ 289
   pixels at 224², still resolvable. Chosen from the mask statistics, not by default.
@@ -75,6 +109,19 @@ metrics while claiming pixel-level localisation.
 matching mask, failing the fetch otherwise. Verified: 63/63 (bottle), 119/119
 (screw), 141/141 (pill).
 
+## Deviations from the paper, stated plainly
+
+- **Image score is a plain max** over patch distances. PatchCore additionally reweights
+  that max by how isolated the matched bank point is. This is the most likely source of
+  the remaining `screw` gap.
+- **Greedy k-center runs in a 128-d Johnson–Lindenstrauss projection** (as the paper
+  does) for speed; the bank itself keeps full 1536-d vectors.
+- **No test-set tuning.** MVTec ships no validation split. The headline row is fixed to
+  the paper's protocol (1% coreset, paper preprocessing) for comparability; every other
+  configuration is reported as an ablation, not selected as a result.
+- **Pixel AUROC is not comparable across preprocessing rows** — under `crop` it is
+  computed over a different, zoomed pixel set.
+
 ## Reproduce
 
 ```bash
@@ -84,6 +131,10 @@ python src/edd/fetch_mvtec.py bottle       # download + validate one
 uv run python src/edd/eda.py bottle        # -> reports/eda_bottle.{md,png}
 uv run python src/edd/baseline.py --self-check
 uv run python src/edd/baseline.py bottle   # -> reports/baseline_bottle.json
+uv run python src/edd/patchcore.py --self-check
+uv run python src/edd/patchcore.py bottle --crop      # headline config
+uv run python src/edd/patchcore.py screw --sampling random   # ablation
+uv run python src/edd/patchcore.py screw --frac 0.10         # ablation
 uv run python src/edd/summarize.py         # -> reports/results.md
 ```
 
@@ -94,7 +145,8 @@ the tracked index into the canonical MVTec layout.
 
 - [x] **1 — Data.** Fetch + layout reconstruction + mask-pairing validation, EDA.
 - [x] **2 — Baseline.** Frozen ResNet18 embeddings + kNN distance, no training loop.
-- [ ] **3 — PatchCore.** Patch-level features, coreset subsampling, anomaly maps.
+- [x] **3 — PatchCore.** Patch-level features, greedy k-center coreset, anomaly maps,
+      sampling/bank-size/preprocessing ablations.
 - [ ] **4 — Explainability.** Anomaly maps scored against ground-truth masks with
       pixel AUROC — measured, not eyeballed.
 - [ ] **5 — Deployment.** Streamlit + Docker + Hugging Face Spaces.
