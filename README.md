@@ -10,8 +10,9 @@ reports 0.990.
 
 [![ci](https://github.com/aghasalim/explainable-defect-detector/actions/workflows/ci.yml/badge.svg)](https://github.com/aghasalim/explainable-defect-detector/actions/workflows/ci.yml)
 
-> **Status:** the demo is not public yet. It runs locally with
-> `uv run streamlit run app.py`. See [Deploying](#deploying).
+**[Try it live](https://explainable-defect-detector.streamlit.app/)** — pick one of the 15
+object types, try a sample or upload your own photo. Each category ships a defect the model
+catches and, where one exists, a defect it *misses*, labelled as such.
 
 ## The idea
 
@@ -215,10 +216,11 @@ Images are not committed. `fetch_mvtec.py` rebuilds them from the tracked index.
 
 ## Deploying
 
-Not public yet. The target is Streamlit Community Cloud: sign in at
-share.streamlit.io, point it at this repo, branch `main`, main file `app.py`.
-`requirements.txt` pins the CPU build of PyTorch, since the default Linux wheel is the
-2 GB CUDA one.
+Live on Streamlit Community Cloud at
+[explainable-defect-detector.streamlit.app](https://explainable-defect-detector.streamlit.app/),
+deployed from this repo, branch `main`, main file `app.py`, Python 3.12. It redeploys on
+every push. `requirements.txt` pins the CPU build of PyTorch, since the default Linux
+wheel is the 2 GB CUDA one and the free tier will not hold it.
 
 Hugging Face Spaces also works through `scripts/deploy_space.sh`, but HF now needs a
 PRO subscription for Docker Spaces, so the free tier rejects it with HTTP 402.
