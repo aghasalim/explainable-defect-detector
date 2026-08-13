@@ -1,0 +1,23 @@
+{
+ "category": "tile",
+ "coreset_frac": 0.01,
+ "center_crop": true,
+ "n_test": 117,
+ "n_anomalous": 84,
+ "image_auroc": 0.9917027417027418,
+ "average_precision": 0.9972227527374584,
+ "accuracy_at_best_f1": 0.9829059829059829,
+ "majority_class_accuracy": 0.717948717948718,
+ "paper_image_auroc": 0.987,
+ "paper_pixel_auroc": 0.959,
+ "seconds": 34.2,
+ "pixel_auroc": 0.9372039571185772,
+ "aupro": 0.7214281144466558,
+ "peak_in_mask": 0.9047619047619048,
+ "top1pct_precision": 0.8350204353198366,
+ "control_pixel_auroc": 0.4998932652072063,
+ "control_aupro": 0.13957899597486123,
+ "control_peak_in_mask": 0.10714285714285714,
+ "control_top1pct_precision": 0.11614865507081076,
+ "defect_pixel_fraction": 0.11533924395651117
+}

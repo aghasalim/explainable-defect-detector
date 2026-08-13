@@ -1,0 +1,23 @@
+{
+ "category": "wood",
+ "coreset_frac": 0.01,
+ "center_crop": true,
+ "n_test": 79,
+ "n_anomalous": 60,
+ "image_auroc": 0.9894736842105263,
+ "average_precision": 0.9970587839655637,
+ "accuracy_at_best_f1": 0.9746835443037974,
+ "majority_class_accuracy": 0.759493670886076,
+ "paper_image_auroc": 0.992,
+ "paper_pixel_auroc": 0.951,
+ "seconds": 45.8,
+ "pixel_auroc": 0.9229856486525506,
+ "aupro": 0.7722264431000874,
+ "peak_in_mask": 0.9,
+ "top1pct_precision": 0.7218230206254158,
+ "control_pixel_auroc": 0.5001992754566468,
+ "control_aupro": 0.1450645256578678,
+ "control_peak_in_mask": 0.03333333333333333,
+ "control_top1pct_precision": 0.05815036593479707,
+ "defect_pixel_fraction": 0.06004364636479592
+}

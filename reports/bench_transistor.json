@@ -1,0 +1,23 @@
+{
+ "category": "transistor",
+ "coreset_frac": 0.01,
+ "center_crop": true,
+ "n_test": 100,
+ "n_anomalous": 40,
+ "image_auroc": 1.0,
+ "average_precision": 1.0,
+ "accuracy_at_best_f1": 1.0,
+ "majority_class_accuracy": 0.6,
+ "paper_image_auroc": 1.0,
+ "paper_pixel_auroc": 0.964,
+ "seconds": 29.8,
+ "pixel_auroc": 0.9407385795236499,
+ "aupro": 0.8613415109140315,
+ "peak_in_mask": 0.95,
+ "top1pct_precision": 0.7172654690618762,
+ "control_pixel_auroc": 0.4998275069874856,
+ "control_aupro": 0.14105225857822115,
+ "control_peak_in_mask": 0.225,
+ "control_top1pct_precision": 0.15439121756487023,
+ "defect_pixel_fraction": 0.1552475286989796
+}
