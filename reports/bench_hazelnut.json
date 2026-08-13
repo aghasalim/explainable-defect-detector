@@ -1,0 +1,23 @@
+{
+ "category": "hazelnut",
+ "coreset_frac": 0.01,
+ "center_crop": true,
+ "n_test": 110,
+ "n_anomalous": 70,
+ "image_auroc": 1.0,
+ "average_precision": 0.9999999999999998,
+ "accuracy_at_best_f1": 1.0,
+ "majority_class_accuracy": 0.6363636363636364,
+ "paper_image_auroc": 1.0,
+ "paper_pixel_auroc": 0.987,
+ "seconds": 95.3,
+ "pixel_auroc": 0.9758073154161838,
+ "aupro": 0.8132471455662628,
+ "peak_in_mask": 0.8571428571428571,
+ "top1pct_precision": 0.726717992586256,
+ "control_pixel_auroc": 0.49945689346553473,
+ "control_aupro": 0.12702547976124604,
+ "control_peak_in_mask": 0.04285714285714286,
+ "control_top1pct_precision": 0.04411177644710578,
+ "defect_pixel_fraction": 0.04372181350218659
+}
