@@ -1,0 +1,23 @@
+{
+ "category": "bottle",
+ "n_held_out": 42,
+ "n_anomalous_held_out": 32,
+ "n_fit": 41,
+ "epochs": 10,
+ "classifier": {
+  "image_auroc": 1.0,
+  "average_precision": 1.0,
+  "gradcam_pixel_auroc": 0.8950489534652817,
+  "gradcam_aupro": 0.6847521231511207,
+  "gradcam_peak_in_mask": 0.6875,
+  "gradcam_top1pct_precision": 0.6746506986027945
+ },
+ "patchcore": {
+  "image_auroc": 1.0,
+  "average_precision": 1.0,
+  "map_pixel_auroc": 0.9816500313153664,
+  "map_aupro": 0.9021740080123142,
+  "map_peak_in_mask": 0.96875,
+  "map_top1pct_precision": 0.9088697604790419
+ }
+}

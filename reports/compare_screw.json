@@ -1,0 +1,23 @@
+{
+ "category": "screw",
+ "n_held_out": 82,
+ "n_anomalous_held_out": 61,
+ "n_fit": 78,
+ "epochs": 10,
+ "classifier": {
+  "image_auroc": 0.9586260733801717,
+  "average_precision": 0.9821755739995699,
+  "gradcam_pixel_auroc": 0.57762588436849,
+  "gradcam_aupro": 0.20489045370948808,
+  "gradcam_peak_in_mask": 0.0,
+  "gradcam_top1pct_precision": 0.010798075979189163
+ },
+ "patchcore": {
+  "image_auroc": 0.9375487900078064,
+  "average_precision": 0.9779374822873603,
+  "map_pixel_auroc": 0.9701228670997128,
+  "map_aupro": 0.8410426327333476,
+  "map_peak_in_mask": 0.4918032786885246,
+  "map_top1pct_precision": 0.2736821439089035
+ }
+}

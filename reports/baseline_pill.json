@@ -1,0 +1,855 @@
+{
+ "metrics": {
+  "image_auroc": 0.7534097108565194,
+  "average_precision": 0.9404288360105976,
+  "best_f1": 0.9261744966442953,
+  "precision_at_best_f1": 0.8789808917197452,
+  "recall_at_best_f1": 0.9787234042553191,
+  "threshold": 5.06800651550293,
+  "accuracy_at_best_f1": 0.8682634730538922,
+  "majority_class_accuracy": 0.844311377245509,
+  "n_normal": 26,
+  "n_anomalous": 141,
+  "category": "pill",
+  "k": 1,
+  "backbone": "resnet18",
+  "n_train_normal": 267
+ },
+ "scores": [
+  {
+   "path": "data/mvtec/pill/test/color/000.png",
+   "label": 1,
+   "score": 5.162084102630615
+  },
+  {
+   "path": "data/mvtec/pill/test/color/001.png",
+   "label": 1,
+   "score": 6.457927227020264
+  },
+  {
+   "path": "data/mvtec/pill/test/color/002.png",
+   "label": 1,
+   "score": 5.502419948577881
+  },
+  {
+   "path": "data/mvtec/pill/test/color/003.png",
+   "label": 1,
+   "score": 7.753534317016602
+  },
+  {
+   "path": "data/mvtec/pill/test/color/004.png",
+   "label": 1,
+   "score": 6.334988117218018
+  },
+  {
+   "path": "data/mvtec/pill/test/color/005.png",
+   "label": 1,
+   "score": 5.353837490081787
+  },
+  {
+   "path": "data/mvtec/pill/test/color/006.png",
+   "label": 1,
+   "score": 5.886067867279053
+  },
+  {
+   "path": "data/mvtec/pill/test/color/007.png",
+   "label": 1,
+   "score": 6.932678699493408
+  },
+  {
+   "path": "data/mvtec/pill/test/color/008.png",
+   "label": 1,
+   "score": 6.20098352432251
+  },
+  {
+   "path": "data/mvtec/pill/test/color/009.png",
+   "label": 1,
+   "score": 7.104804515838623
+  },
+  {
+   "path": "data/mvtec/pill/test/color/010.png",
+   "label": 1,
+   "score": 5.851863861083984
+  },
+  {
+   "path": "data/mvtec/pill/test/color/011.png",
+   "label": 1,
+   "score": 6.048041343688965
+  },
+  {
+   "path": "data/mvtec/pill/test/color/012.png",
+   "label": 1,
+   "score": 5.442023277282715
+  },
+  {
+   "path": "data/mvtec/pill/test/color/013.png",
+   "label": 1,
+   "score": 5.3070597648620605
+  },
+  {
+   "path": "data/mvtec/pill/test/color/014.png",
+   "label": 1,
+   "score": 5.382550239562988
+  },
+  {
+   "path": "data/mvtec/pill/test/color/015.png",
+   "label": 1,
+   "score": 4.848865985870361
+  },
+  {
+   "path": "data/mvtec/pill/test/color/016.png",
+   "label": 1,
+   "score": 5.260009288787842
+  },
+  {
+   "path": "data/mvtec/pill/test/color/017.png",
+   "label": 1,
+   "score": 6.535739421844482
+  },
+  {
+   "path": "data/mvtec/pill/test/color/018.png",
+   "label": 1,
+   "score": 5.443723678588867
+  },
+  {
+   "path": "data/mvtec/pill/test/color/019.png",
+   "label": 1,
+   "score": 6.10312557220459
+  },
+  {
+   "path": "data/mvtec/pill/test/color/020.png",
+   "label": 1,
+   "score": 5.87286376953125
+  },
+  {
+   "path": "data/mvtec/pill/test/color/021.png",
+   "label": 1,
+   "score": 5.820258140563965
+  },
+  {
+   "path": "data/mvtec/pill/test/color/022.png",
+   "label": 1,
+   "score": 6.624171733856201
+  },
+  {
+   "path": "data/mvtec/pill/test/color/023.png",
+   "label": 1,
+   "score": 5.427617073059082
+  },
+  {
+   "path": "data/mvtec/pill/test/color/024.png",
+   "label": 1,
+   "score": 5.366509914398193
+  },
+  {
+   "path": "data/mvtec/pill/test/combined/000.png",
+   "label": 1,
+   "score": 6.105368614196777
+  },
+  {
+   "path": "data/mvtec/pill/test/combined/001.png",
+   "label": 1,
+   "score": 6.023110866546631
+  },
+  {
+   "path": "data/mvtec/pill/test/combined/002.png",
+   "label": 1,
+   "score": 6.701532363891602
+  },
+  {
+   "path": "data/mvtec/pill/test/combined/003.png",
+   "label": 1,
+   "score": 6.213708877563477
+  },
+  {
+   "path": "data/mvtec/pill/test/combined/004.png",
+   "label": 1,
+   "score": 5.504388332366943
+  },
+  {
+   "path": "data/mvtec/pill/test/combined/005.png",
+   "label": 1,
+   "score": 5.421906471252441
+  },
+  {
+   "path": "data/mvtec/pill/test/combined/006.png",
+   "label": 1,
+   "score": 5.602320671081543
+  },
+  {
+   "path": "data/mvtec/pill/test/combined/007.png",
+   "label": 1,
+   "score": 5.385336875915527
+  },
+  {
+   "path": "data/mvtec/pill/test/combined/008.png",
+   "label": 1,
+   "score": 6.231767654418945
+  },
+  {
+   "path": "data/mvtec/pill/test/combined/009.png",
+   "label": 1,
+   "score": 7.340353488922119
+  },
+  {
+   "path": "data/mvtec/pill/test/combined/010.png",
+   "label": 1,
+   "score": 6.336814880371094
+  },
+  {
+   "path": "data/mvtec/pill/test/combined/011.png",
+   "label": 1,
+   "score": 5.884899616241455
+  },
+  {
+   "path": "data/mvtec/pill/test/combined/012.png",
+   "label": 1,
+   "score": 6.685351371765137
+  },
+  {
+   "path": "data/mvtec/pill/test/combined/013.png",
+   "label": 1,
+   "score": 7.516627788543701
+  },
+  {
+   "path": "data/mvtec/pill/test/combined/014.png",
+   "label": 1,
+   "score": 6.885793685913086
+  },
+  {
+   "path": "data/mvtec/pill/test/combined/015.png",
+   "label": 1,
+   "score": 8.39564037322998
+  },
+  {
+   "path": "data/mvtec/pill/test/combined/016.png",
+   "label": 1,
+   "score": 6.1697001457214355
+  },
+  {
+   "path": "data/mvtec/pill/test/contamination/000.png",
+   "label": 1,
+   "score": 6.151603698730469
+  },
+  {
+   "path": "data/mvtec/pill/test/contamination/001.png",
+   "label": 1,
+   "score": 5.387179374694824
+  },
+  {
+   "path": "data/mvtec/pill/test/contamination/002.png",
+   "label": 1,
+   "score": 5.572544574737549
+  },
+  {
+   "path": "data/mvtec/pill/test/contamination/003.png",
+   "label": 1,
+   "score": 7.2741193771362305
+  },
+  {
+   "path": "data/mvtec/pill/test/contamination/004.png",
+   "label": 1,
+   "score": 5.910345077514648
+  },
+  {
+   "path": "data/mvtec/pill/test/contamination/005.png",
+   "label": 1,
+   "score": 6.778096675872803
+  },
+  {
+   "path": "data/mvtec/pill/test/contamination/006.png",
+   "label": 1,
+   "score": 5.854549884796143
+  },
+  {
+   "path": "data/mvtec/pill/test/contamination/007.png",
+   "label": 1,
+   "score": 6.242250919342041
+  },
+  {
+   "path": "data/mvtec/pill/test/contamination/008.png",
+   "label": 1,
+   "score": 5.311318397521973
+  },
+  {
+   "path": "data/mvtec/pill/test/contamination/009.png",
+   "label": 1,
+   "score": 5.214656352996826
+  },
+  {
+   "path": "data/mvtec/pill/test/contamination/010.png",
+   "label": 1,
+   "score": 5.890258312225342
+  },
+  {
+   "path": "data/mvtec/pill/test/contamination/011.png",
+   "label": 1,
+   "score": 5.9900221824646
+  },
+  {
+   "path": "data/mvtec/pill/test/contamination/012.png",
+   "label": 1,
+   "score": 6.121188640594482
+  },
+  {
+   "path": "data/mvtec/pill/test/contamination/013.png",
+   "label": 1,
+   "score": 5.559878349304199
+  },
+  {
+   "path": "data/mvtec/pill/test/contamination/014.png",
+   "label": 1,
+   "score": 6.550202369689941
+  },
+  {
+   "path": "data/mvtec/pill/test/contamination/015.png",
+   "label": 1,
+   "score": 6.398193836212158
+  },
+  {
+   "path": "data/mvtec/pill/test/contamination/016.png",
+   "label": 1,
+   "score": 5.526337623596191
+  },
+  {
+   "path": "data/mvtec/pill/test/contamination/017.png",
+   "label": 1,
+   "score": 6.96626091003418
+  },
+  {
+   "path": "data/mvtec/pill/test/contamination/018.png",
+   "label": 1,
+   "score": 6.615901470184326
+  },
+  {
+   "path": "data/mvtec/pill/test/contamination/019.png",
+   "label": 1,
+   "score": 5.15506649017334
+  },
+  {
+   "path": "data/mvtec/pill/test/contamination/020.png",
+   "label": 1,
+   "score": 5.366291522979736
+  },
+  {
+   "path": "data/mvtec/pill/test/crack/000.png",
+   "label": 1,
+   "score": 5.965887546539307
+  },
+  {
+   "path": "data/mvtec/pill/test/crack/001.png",
+   "label": 1,
+   "score": 4.923048973083496
+  },
+  {
+   "path": "data/mvtec/pill/test/crack/002.png",
+   "label": 1,
+   "score": 5.219028472900391
+  },
+  {
+   "path": "data/mvtec/pill/test/crack/003.png",
+   "label": 1,
+   "score": 5.4618120193481445
+  },
+  {
+   "path": "data/mvtec/pill/test/crack/004.png",
+   "label": 1,
+   "score": 6.015810966491699
+  },
+  {
+   "path": "data/mvtec/pill/test/crack/005.png",
+   "label": 1,
+   "score": 6.455691337585449
+  },
+  {
+   "path": "data/mvtec/pill/test/crack/006.png",
+   "label": 1,
+   "score": 6.061099052429199
+  },
+  {
+   "path": "data/mvtec/pill/test/crack/007.png",
+   "label": 1,
+   "score": 6.120034694671631
+  },
+  {
+   "path": "data/mvtec/pill/test/crack/008.png",
+   "label": 1,
+   "score": 5.350943565368652
+  },
+  {
+   "path": "data/mvtec/pill/test/crack/009.png",
+   "label": 1,
+   "score": 5.982150077819824
+  },
+  {
+   "path": "data/mvtec/pill/test/crack/010.png",
+   "label": 1,
+   "score": 6.0368332862854
+  },
+  {
+   "path": "data/mvtec/pill/test/crack/011.png",
+   "label": 1,
+   "score": 8.680534362792969
+  },
+  {
+   "path": "data/mvtec/pill/test/crack/012.png",
+   "label": 1,
+   "score": 5.754828453063965
+  },
+  {
+   "path": "data/mvtec/pill/test/crack/013.png",
+   "label": 1,
+   "score": 5.288950443267822
+  },
+  {
+   "path": "data/mvtec/pill/test/crack/014.png",
+   "label": 1,
+   "score": 5.077269077301025
+  },
+  {
+   "path": "data/mvtec/pill/test/crack/015.png",
+   "label": 1,
+   "score": 6.920064926147461
+  },
+  {
+   "path": "data/mvtec/pill/test/crack/016.png",
+   "label": 1,
+   "score": 4.528437614440918
+  },
+  {
+   "path": "data/mvtec/pill/test/crack/017.png",
+   "label": 1,
+   "score": 5.274375915527344
+  },
+  {
+   "path": "data/mvtec/pill/test/crack/018.png",
+   "label": 1,
+   "score": 6.1826934814453125
+  },
+  {
+   "path": "data/mvtec/pill/test/crack/019.png",
+   "label": 1,
+   "score": 5.151357173919678
+  },
+  {
+   "path": "data/mvtec/pill/test/crack/020.png",
+   "label": 1,
+   "score": 6.757745265960693
+  },
+  {
+   "path": "data/mvtec/pill/test/crack/021.png",
+   "label": 1,
+   "score": 6.167883396148682
+  },
+  {
+   "path": "data/mvtec/pill/test/crack/022.png",
+   "label": 1,
+   "score": 7.464457035064697
+  },
+  {
+   "path": "data/mvtec/pill/test/crack/023.png",
+   "label": 1,
+   "score": 5.365346431732178
+  },
+  {
+   "path": "data/mvtec/pill/test/crack/024.png",
+   "label": 1,
+   "score": 5.06800651550293
+  },
+  {
+   "path": "data/mvtec/pill/test/crack/025.png",
+   "label": 1,
+   "score": 7.256814956665039
+  },
+  {
+   "path": "data/mvtec/pill/test/faulty_imprint/000.png",
+   "label": 1,
+   "score": 5.471983432769775
+  },
+  {
+   "path": "data/mvtec/pill/test/faulty_imprint/001.png",
+   "label": 1,
+   "score": 5.791462421417236
+  },
+  {
+   "path": "data/mvtec/pill/test/faulty_imprint/002.png",
+   "label": 1,
+   "score": 5.364068031311035
+  },
+  {
+   "path": "data/mvtec/pill/test/faulty_imprint/003.png",
+   "label": 1,
+   "score": 5.868971347808838
+  },
+  {
+   "path": "data/mvtec/pill/test/faulty_imprint/004.png",
+   "label": 1,
+   "score": 5.498413562774658
+  },
+  {
+   "path": "data/mvtec/pill/test/faulty_imprint/005.png",
+   "label": 1,
+   "score": 5.824159622192383
+  },
+  {
+   "path": "data/mvtec/pill/test/faulty_imprint/006.png",
+   "label": 1,
+   "score": 6.085817337036133
+  },
+  {
+   "path": "data/mvtec/pill/test/faulty_imprint/007.png",
+   "label": 1,
+   "score": 6.418313980102539
+  },
+  {
+   "path": "data/mvtec/pill/test/faulty_imprint/008.png",
+   "label": 1,
+   "score": 6.406175136566162
+  },
+  {
+   "path": "data/mvtec/pill/test/faulty_imprint/009.png",
+   "label": 1,
+   "score": 5.716946125030518
+  },
+  {
+   "path": "data/mvtec/pill/test/faulty_imprint/010.png",
+   "label": 1,
+   "score": 6.235781669616699
+  },
+  {
+   "path": "data/mvtec/pill/test/faulty_imprint/011.png",
+   "label": 1,
+   "score": 5.271846294403076
+  },
+  {
+   "path": "data/mvtec/pill/test/faulty_imprint/012.png",
+   "label": 1,
+   "score": 5.404004096984863
+  },
+  {
+   "path": "data/mvtec/pill/test/faulty_imprint/013.png",
+   "label": 1,
+   "score": 5.991894245147705
+  },
+  {
+   "path": "data/mvtec/pill/test/faulty_imprint/014.png",
+   "label": 1,
+   "score": 6.726658344268799
+  },
+  {
+   "path": "data/mvtec/pill/test/faulty_imprint/015.png",
+   "label": 1,
+   "score": 5.801590919494629
+  },
+  {
+   "path": "data/mvtec/pill/test/faulty_imprint/016.png",
+   "label": 1,
+   "score": 6.375615119934082
+  },
+  {
+   "path": "data/mvtec/pill/test/faulty_imprint/017.png",
+   "label": 1,
+   "score": 6.6030731201171875
+  },
+  {
+   "path": "data/mvtec/pill/test/faulty_imprint/018.png",
+   "label": 1,
+   "score": 6.872444152832031
+  },
+  {
+   "path": "data/mvtec/pill/test/good/000.png",
+   "label": 0,
+   "score": 5.978943347930908
+  },
+  {
+   "path": "data/mvtec/pill/test/good/001.png",
+   "label": 0,
+   "score": 4.739748954772949
+  },
+  {
+   "path": "data/mvtec/pill/test/good/002.png",
+   "label": 0,
+   "score": 5.390606880187988
+  },
+  {
+   "path": "data/mvtec/pill/test/good/003.png",
+   "label": 0,
+   "score": 4.716513156890869
+  },
+  {
+   "path": "data/mvtec/pill/test/good/004.png",
+   "label": 0,
+   "score": 4.987812042236328
+  },
+  {
+   "path": "data/mvtec/pill/test/good/005.png",
+   "label": 0,
+   "score": 5.207099914550781
+  },
+  {
+   "path": "data/mvtec/pill/test/good/006.png",
+   "label": 0,
+   "score": 5.049281597137451
+  },
+  {
+   "path": "data/mvtec/pill/test/good/007.png",
+   "label": 0,
+   "score": 6.064480304718018
+  },
+  {
+   "path": "data/mvtec/pill/test/good/008.png",
+   "label": 0,
+   "score": 5.424901962280273
+  },
+  {
+   "path": "data/mvtec/pill/test/good/009.png",
+   "label": 0,
+   "score": 5.321252822875977
+  },
+  {
+   "path": "data/mvtec/pill/test/good/010.png",
+   "label": 0,
+   "score": 5.852221965789795
+  },
+  {
+   "path": "data/mvtec/pill/test/good/011.png",
+   "label": 0,
+   "score": 5.935684680938721
+  },
+  {
+   "path": "data/mvtec/pill/test/good/012.png",
+   "label": 0,
+   "score": 5.979096412658691
+  },
+  {
+   "path": "data/mvtec/pill/test/good/013.png",
+   "label": 0,
+   "score": 5.406203269958496
+  },
+  {
+   "path": "data/mvtec/pill/test/good/014.png",
+   "label": 0,
+   "score": 6.177650451660156
+  },
+  {
+   "path": "data/mvtec/pill/test/good/015.png",
+   "label": 0,
+   "score": 5.666968822479248
+  },
+  {
+   "path": "data/mvtec/pill/test/good/016.png",
+   "label": 0,
+   "score": 5.517029285430908
+  },
+  {
+   "path": "data/mvtec/pill/test/good/017.png",
+   "label": 0,
+   "score": 4.811229228973389
+  },
+  {
+   "path": "data/mvtec/pill/test/good/018.png",
+   "label": 0,
+   "score": 5.279906749725342
+  },
+  {
+   "path": "data/mvtec/pill/test/good/019.png",
+   "label": 0,
+   "score": 6.151464462280273
+  },
+  {
+   "path": "data/mvtec/pill/test/good/020.png",
+   "label": 0,
+   "score": 4.666449069976807
+  },
+  {
+   "path": "data/mvtec/pill/test/good/021.png",
+   "label": 0,
+   "score": 5.3438544273376465
+  },
+  {
+   "path": "data/mvtec/pill/test/good/022.png",
+   "label": 0,
+   "score": 5.811399936676025
+  },
+  {
+   "path": "data/mvtec/pill/test/good/023.png",
+   "label": 0,
+   "score": 7.083312511444092
+  },
+  {
+   "path": "data/mvtec/pill/test/good/024.png",
+   "label": 0,
+   "score": 5.0521955490112305
+  },
+  {
+   "path": "data/mvtec/pill/test/good/025.png",
+   "label": 0,
+   "score": 5.103480815887451
+  },
+  {
+   "path": "data/mvtec/pill/test/pill_type/000.png",
+   "label": 1,
+   "score": 15.241049766540527
+  },
+  {
+   "path": "data/mvtec/pill/test/pill_type/001.png",
+   "label": 1,
+   "score": 15.492084503173828
+  },
+  {
+   "path": "data/mvtec/pill/test/pill_type/002.png",
+   "label": 1,
+   "score": 10.682197570800781
+  },
+  {
+   "path": "data/mvtec/pill/test/pill_type/003.png",
+   "label": 1,
+   "score": 9.792415618896484
+  },
+  {
+   "path": "data/mvtec/pill/test/pill_type/004.png",
+   "label": 1,
+   "score": 10.725074768066406
+  },
+  {
+   "path": "data/mvtec/pill/test/pill_type/005.png",
+   "label": 1,
+   "score": 14.301359176635742
+  },
+  {
+   "path": "data/mvtec/pill/test/pill_type/006.png",
+   "label": 1,
+   "score": 15.863848686218262
+  },
+  {
+   "path": "data/mvtec/pill/test/pill_type/007.png",
+   "label": 1,
+   "score": 10.715322494506836
+  },
+  {
+   "path": "data/mvtec/pill/test/pill_type/008.png",
+   "label": 1,
+   "score": 10.197342872619629
+  },
+  {
+   "path": "data/mvtec/pill/test/scratch/000.png",
+   "label": 1,
+   "score": 5.993339538574219
+  },
+  {
+   "path": "data/mvtec/pill/test/scratch/001.png",
+   "label": 1,
+   "score": 5.439706325531006
+  },
+  {
+   "path": "data/mvtec/pill/test/scratch/002.png",
+   "label": 1,
+   "score": 5.822513103485107
+  },
+  {
+   "path": "data/mvtec/pill/test/scratch/003.png",
+   "label": 1,
+   "score": 5.331089496612549
+  },
+  {
+   "path": "data/mvtec/pill/test/scratch/004.png",
+   "label": 1,
+   "score": 6.502903938293457
+  },
+  {
+   "path": "data/mvtec/pill/test/scratch/005.png",
+   "label": 1,
+   "score": 5.998358726501465
+  },
+  {
+   "path": "data/mvtec/pill/test/scratch/006.png",
+   "label": 1,
+   "score": 5.489204406738281
+  },
+  {
+   "path": "data/mvtec/pill/test/scratch/007.png",
+   "label": 1,
+   "score": 6.653199672698975
+  },
+  {
+   "path": "data/mvtec/pill/test/scratch/008.png",
+   "label": 1,
+   "score": 5.796380996704102
+  },
+  {
+   "path": "data/mvtec/pill/test/scratch/009.png",
+   "label": 1,
+   "score": 5.936602592468262
+  },
+  {
+   "path": "data/mvtec/pill/test/scratch/010.png",
+   "label": 1,
+   "score": 6.527471542358398
+  },
+  {
+   "path": "data/mvtec/pill/test/scratch/011.png",
+   "label": 1,
+   "score": 6.456973552703857
+  },
+  {
+   "path": "data/mvtec/pill/test/scratch/012.png",
+   "label": 1,
+   "score": 5.08437442779541
+  },
+  {
+   "path": "data/mvtec/pill/test/scratch/013.png",
+   "label": 1,
+   "score": 5.488534927368164
+  },
+  {
+   "path": "data/mvtec/pill/test/scratch/014.png",
+   "label": 1,
+   "score": 6.371974945068359
+  },
+  {
+   "path": "data/mvtec/pill/test/scratch/015.png",
+   "label": 1,
+   "score": 6.546823024749756
+  },
+  {
+   "path": "data/mvtec/pill/test/scratch/016.png",
+   "label": 1,
+   "score": 6.692529201507568
+  },
+  {
+   "path": "data/mvtec/pill/test/scratch/017.png",
+   "label": 1,
+   "score": 5.9410223960876465
+  },
+  {
+   "path": "data/mvtec/pill/test/scratch/018.png",
+   "label": 1,
+   "score": 6.724125862121582
+  },
+  {
+   "path": "data/mvtec/pill/test/scratch/019.png",
+   "label": 1,
+   "score": 6.102235317230225
+  },
+  {
+   "path": "data/mvtec/pill/test/scratch/020.png",
+   "label": 1,
+   "score": 6.134086608886719
+  },
+  {
+   "path": "data/mvtec/pill/test/scratch/021.png",
+   "label": 1,
+   "score": 5.523542881011963
+  },
+  {
+   "path": "data/mvtec/pill/test/scratch/022.png",
+   "label": 1,
+   "score": 6.057520866394043
+  },
+  {
+   "path": "data/mvtec/pill/test/scratch/023.png",
+   "label": 1,
+   "score": 6.866735458374023
+  }
+ ]
+}

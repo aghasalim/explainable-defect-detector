@@ -1,0 +1,21 @@
+{
+ "category": "cable",
+ "coreset_frac": 0.01,
+ "center_crop": true,
+ "image_auroc": 0.9983133433283358,
+ "average_precision": 0.9989938516639842,
+ "accuracy_at_best_f1": 0.9866666666666667,
+ "majority_class_accuracy": 0.6133333333333333,
+ "n_normal": 58,
+ "n_anomalous": 92,
+ "pixel_auroc": 0.9750255631361121,
+ "aupro": 0.8698020394529493,
+ "peak_in_mask": 0.9239130434782609,
+ "top1pct_precision": 0.8321400676907057,
+ "control_pixel_auroc": 0.4999322570973255,
+ "control_aupro": 0.14633842870206254,
+ "control_peak_in_mask": 0.07608695652173914,
+ "control_top1pct_precision": 0.061854551766033154,
+ "defect_pixel_fraction": 0.061130906166814554,
+ "seconds": 48.1
+}

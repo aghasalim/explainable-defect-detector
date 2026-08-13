@@ -1,0 +1,10 @@
+# Hugging Face Spaces (CPU). Torch CPU wheels keep the image small.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.13.0
+torchvision==0.28.0
+streamlit>=1.40
+numpy>=2.0
+pillow>=10
+matplotlib>=3.8
+scikit-learn>=1.5
+scipy>=1.13

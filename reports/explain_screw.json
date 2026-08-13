@@ -1,0 +1,17 @@
+{
+ "model": {
+  "pixel_auroc": 0.9686296303534487,
+  "aupro": 0.8230510109010292,
+  "peak_in_mask": 0.4957983193277311,
+  "top1pct_precision": 0.26528455693654707
+ },
+ "random_control": {
+  "pixel_auroc": 0.5034459246475091,
+  "aupro": 0.13324760917018602,
+  "peak_in_mask": 0.0,
+  "top1pct_precision": 0.004226840436773511
+ },
+ "defect_pixel_fraction": 0.0043113785692848565,
+ "category": "screw",
+ "n_anomalous": 119
+}

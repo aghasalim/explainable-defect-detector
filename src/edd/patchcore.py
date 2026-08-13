@@ -136,12 +136,22 @@ def to_maps(patch_scores: torch.Tensor, grid, size: int, sigma: float = 4.0) -> 
     c = torch.arange(r) - r // 2
     k = torch.exp(-(c**2) / (2 * sigma**2))
     k = (k / k.sum()).to(m.dtype)
-    m = F.conv2d(m, k.view(1, 1, 1, -1), padding=(0, r // 2))
-    return F.conv2d(m, k.view(1, 1, -1, 1), padding=(r // 2, 0))
+    # reflect-pad, not zero-pad: zero padding pulls the blurred map down near
+    # the border, systematically under-scoring defects at the image edge
+    m = F.pad(m, (r // 2,) * 2 + (0, 0), mode="reflect")
+    m = F.conv2d(m, k.view(1, 1, 1, -1))
+    m = F.pad(m, (0, 0) + (r // 2,) * 2, mode="reflect")
+    return F.conv2d(m, k.view(1, 1, -1, 1))
 
 
-def run(category: str, frac: float = 0.01, size: int = 224, sampling: str = "coreset",
-        crop: bool = False) -> dict:
+def fit_score(category: str, frac: float = 0.01, size: int = 224, sampling: str = "coreset",
+              crop: bool = False) -> dict:
+    """Build the memory bank from normal data and score the test split.
+
+    Returns everything downstream code needs (maps, masks, bank, scores) so
+    the explainability pass never has to reload a stale .npy and risk pairing
+    maps with the wrong masks.
+    """
     torch.manual_seed(0)
     dev = device()
     model = PatchFeatures().to(dev)
@@ -161,8 +171,19 @@ def run(category: str, frac: float = 0.01, size: int = 224, sampling: str = "cor
     bank = flat[keep]
 
     ps = score(bank, te, dev)
-    maps = to_maps(ps, grid, size)
-    img_scores = ps.max(dim=1).values.numpy()
+    return {
+        "maps": to_maps(ps, grid, size), "masks": masks, "labels": labels, "paths": paths,
+        "img_scores": ps.max(dim=1).values.numpy(), "bank": bank, "grid": grid,
+        "n_patches": int(flat.shape[0]), "patch_dim": int(flat.shape[1]),
+        "seconds": round(time.time() - t0, 1),
+    }
+
+
+def run(category: str, frac: float = 0.01, size: int = 224, sampling: str = "coreset",
+        crop: bool = False) -> dict:
+    r = fit_score(category, frac, size, sampling, crop)
+    maps, masks, labels = r["maps"], r["masks"], r["labels"]
+    paths, img_scores, bank, grid = r["paths"], r["img_scores"], r["bank"], r["grid"]
 
     m = evaluate(labels, img_scores)
     m["pixel_auroc"] = float(
@@ -170,10 +191,10 @@ def run(category: str, frac: float = 0.01, size: int = 224, sampling: str = "cor
     )
     m |= {
         "category": category, "backbone": "wide_resnet50_2", "layers": "layer2+layer3",
-        "patch_dim": int(flat.shape[1]), "grid": list(grid), "sampling": sampling,
+        "patch_dim": r["patch_dim"], "grid": list(grid), "sampling": sampling,
         "coreset_frac": frac, "bank_size": int(bank.shape[0]),
         "input_size": size, "center_crop": crop,
-        "patches_before_sampling": int(flat.shape[0]), "seconds": round(time.time() - t0, 1),
+        "patches_before_sampling": r["n_patches"], "seconds": r["seconds"],
     }
 
     tag = "patchcore" if sampling == "coreset" else f"patchcore-{sampling}"
