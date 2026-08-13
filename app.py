@@ -73,9 +73,29 @@ with st.sidebar:
     category = st.selectbox("Object type", available)
     art = get_artifact(category)
     st.metric("Calibrated threshold", f"{art['threshold']:.3f}")
+    # Describe whichever method actually produced this artefact, rather than
+    # hardcoding one - the calibration changed once already and the caption
+    # silently kept claiming the old method.
+    if art.get("threshold_method") == "tolerance_bound":
+        guaranteed = art.get("guarantee_met")
+        st.caption(
+            f"A **tolerance bound**, not a quantile: at least "
+            f"{1 - art['target_fpr']:.0%} of normal parts score below this"
+            + (f", with {art.get('tolerance_confidence', 0.95):.0%} confidence."
+               if guaranteed else
+               f". {art['n_calib']} calibration images is short of the "
+               f"{art.get('n_required_for_guarantee', 299)} needed for a formal "
+               f"{art.get('tolerance_confidence', 0.95):.0%} guarantee, so this falls back "
+               f"to their maximum.")
+        )
+    else:
+        st.caption(
+            f"Set at the {1 - art['target_fpr']:.0%} quantile of {art['n_calib']} "
+            f"**normal** images — never on test data."
+        )
     st.caption(
-        f"Set at the {1 - art['target_fpr']:.0%} quantile of {art['n_calib']} held-out "
-        f"**normal** images — never on test data."
+        f"Calibrated on {art['n_calib']} normal training images"
+        + (f" ({art['k_folds']}-fold cross-calibration)." if art.get("k_folds") else ".")
     )
     thr = st.slider("Decision threshold", 0.0, float(art["threshold"] * 2.5),
                     float(art["threshold"]), 0.01)
