@@ -35,9 +35,7 @@ from pathlib import Path
 import numpy as np
 import torch
 import torch.nn.functional as F
-from baseline import evaluate
 from dataset import MVTecCategory
-from sklearn.metrics import roc_auc_score
 from torch.utils.data import DataLoader
 from torchvision.models import Wide_ResNet50_2_Weights, wide_resnet50_2
 
@@ -180,6 +178,12 @@ def fit_score(category: str, frac: float = 0.01, size: int = 224, sampling: str 
 
 def run(category: str, frac: float = 0.01, size: int = 224, sampling: str = "coreset",
         crop: bool = False) -> dict:
+    # imported here, not at module scope: the deployed app imports this module
+    # for PatchFeatures alone, and should not have to ship scikit-learn/SciPy
+    # just to serve a prediction
+    from baseline import evaluate
+    from sklearn.metrics import roc_auc_score
+
     r = fit_score(category, frac, size, sampling, crop)
     maps, masks, labels = r["maps"], r["masks"], r["labels"]
     paths, img_scores, bank, grid = r["paths"], r["img_scores"], r["bank"], r["grid"]

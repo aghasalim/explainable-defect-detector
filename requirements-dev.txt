@@ -1,0 +1,5 @@
+# Everything needed to reproduce the benchmark and run the tests.
+-r requirements.txt
+scikit-learn==1.9.0
+scipy==1.18.0
+pytest==9.1.1

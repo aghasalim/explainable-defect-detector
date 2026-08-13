@@ -231,15 +231,21 @@ tracked index into the canonical MVTec layout.
 
 ## Deploy the demo
 
-Not yet deployed — no public link exists. To publish it:
+Not yet deployed — no public link exists yet.
 
-```bash
-pip install -U huggingface_hub && hf auth login
-./scripts/deploy_space.sh <your-hf-username>
-```
+**Streamlit Community Cloud** (free) is the target host. `requirements.txt` pins the
+`+cpu` PyTorch build via the PyTorch index, because plain `torch` on Linux is the
+~2 GB CUDA build that no free host can use. To publish:
 
-That pushes the app, model artefacts and Dockerfile to Hugging Face Spaces. The
-link goes here once it is live.
+1. Sign in at [share.streamlit.io](https://share.streamlit.io) with GitHub.
+2. New app → this repo → branch `main` → main file `app.py`.
+3. Deploy. First boot downloads the WideResNet50-2 weights (~275 MB) once, then
+   caches them.
+
+**Hugging Face Spaces** is also supported via `scripts/deploy_space.sh <hf-username>`
+and the Docker image, but note that HF now requires a **PRO subscription** for Docker
+and Gradio Spaces — only static Spaces are free, so the free tier will reject this app
+at repo-creation time with HTTP 402.
 
 ## Roadmap
 
