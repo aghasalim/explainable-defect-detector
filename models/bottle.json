@@ -1,6 +1,6 @@
 {
  "category": "bottle",
- "threshold": 2.0184617042541504,
+ "threshold": 2.2653260231018066,
  "target_fpr": 0.01,
  "size": 224,
  "crop": true,
@@ -8,14 +8,19 @@
   28,
   28
  ],
- "bank_size": 1473,
+ "bank_size": 1638,
  "bank_dim": 1536,
  "coreset_frac": 0.01,
  "n_train_total": 209,
- "n_bank_images": 188,
- "n_calib": 21,
- "calib_score_min": 1.5162094831466675,
- "calib_score_max": 2.1015470027923584,
- "artefact_mb": 4.53,
- "bank_dtype": "float16"
+ "n_bank_images": 209,
+ "k_folds": 5,
+ "n_calib": 209,
+ "calib_score_min": 1.4613820314407349,
+ "calib_score_max": 2.2653260231018066,
+ "artefact_mb": 5.04,
+ "threshold_method": "tolerance_bound",
+ "tolerance_rank": null,
+ "tolerance_confidence": 0.95,
+ "n_required_for_guarantee": 299,
+ "guarantee_met": false
 }

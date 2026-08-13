@@ -1,6 +1,6 @@
 {
  "category": "capsule",
- "threshold": 1.5990962982177734,
+ "threshold": 2.045536518096924,
  "target_fpr": 0.01,
  "size": 224,
  "crop": true,
@@ -8,14 +8,19 @@
   28,
   28
  ],
- "bank_size": 1544,
+ "bank_size": 1716,
  "bank_dim": 1536,
  "coreset_frac": 0.01,
  "n_train_total": 219,
- "n_bank_images": 197,
- "n_calib": 22,
- "calib_score_min": 1.261018991470337,
- "calib_score_max": 1.6079747676849365,
- "artefact_mb": 4.75,
- "bank_dtype": "float16"
+ "n_bank_images": 219,
+ "k_folds": 5,
+ "n_calib": 219,
+ "calib_score_min": 1.266875982284546,
+ "calib_score_max": 2.045536518096924,
+ "artefact_mb": 5.28,
+ "threshold_method": "tolerance_bound",
+ "tolerance_rank": null,
+ "tolerance_confidence": 0.95,
+ "n_required_for_guarantee": 299,
+ "guarantee_met": false
 }

@@ -1,6 +1,6 @@
 {
  "category": "hazelnut",
- "threshold": 2.6543328762054443,
+ "threshold": 2.7955565452575684,
  "target_fpr": 0.01,
  "size": 224,
  "crop": true,
@@ -8,14 +8,19 @@
   28,
   28
  ],
- "bank_size": 2759,
+ "bank_size": 3065,
  "bank_dim": 1536,
  "coreset_frac": 0.01,
  "n_train_total": 391,
- "n_bank_images": 352,
- "n_calib": 39,
- "calib_score_min": 2.218923330307007,
- "calib_score_max": 2.677812099456787,
- "artefact_mb": 8.48,
- "bank_dtype": "float16"
+ "n_bank_images": 391,
+ "k_folds": 5,
+ "n_calib": 391,
+ "calib_score_min": 2.1982672214508057,
+ "calib_score_max": 2.7955565452575684,
+ "artefact_mb": 9.42,
+ "threshold_method": "tolerance_bound",
+ "tolerance_rank": 391,
+ "tolerance_confidence": 0.95,
+ "n_required_for_guarantee": 299,
+ "guarantee_met": true
 }

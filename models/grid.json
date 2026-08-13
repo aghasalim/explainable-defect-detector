@@ -1,6 +1,6 @@
 {
  "category": "grid",
- "threshold": 1.9111309051513672,
+ "threshold": 2.138766050338745,
  "target_fpr": 0.01,
  "size": 224,
  "crop": true,
@@ -8,14 +8,19 @@
   28,
   28
  ],
- "bank_size": 1865,
+ "bank_size": 2069,
  "bank_dim": 1536,
  "coreset_frac": 0.01,
  "n_train_total": 264,
- "n_bank_images": 238,
- "n_calib": 26,
- "calib_score_min": 1.6327341794967651,
- "calib_score_max": 1.9266209602355957,
- "artefact_mb": 5.73,
- "bank_dtype": "float16"
+ "n_bank_images": 264,
+ "k_folds": 5,
+ "n_calib": 264,
+ "calib_score_min": 1.5619035959243774,
+ "calib_score_max": 2.138766050338745,
+ "artefact_mb": 6.36,
+ "threshold_method": "tolerance_bound",
+ "tolerance_rank": null,
+ "tolerance_confidence": 0.95,
+ "n_required_for_guarantee": 299,
+ "guarantee_met": false
 }

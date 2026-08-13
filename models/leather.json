@@ -1,6 +1,6 @@
 {
  "category": "leather",
- "threshold": 1.567564845085144,
+ "threshold": 1.661273717880249,
  "target_fpr": 0.01,
  "size": 224,
  "crop": true,
@@ -8,14 +8,19 @@
   28,
   28
  ],
- "bank_size": 1732,
+ "bank_size": 1920,
  "bank_dim": 1536,
  "coreset_frac": 0.01,
  "n_train_total": 245,
- "n_bank_images": 221,
- "n_calib": 24,
- "calib_score_min": 1.3328536748886108,
- "calib_score_max": 1.5954437255859375,
- "artefact_mb": 5.32,
- "bank_dtype": "float16"
+ "n_bank_images": 245,
+ "k_folds": 5,
+ "n_calib": 245,
+ "calib_score_min": 1.3111776113510132,
+ "calib_score_max": 1.661273717880249,
+ "artefact_mb": 5.9,
+ "threshold_method": "tolerance_bound",
+ "tolerance_rank": null,
+ "tolerance_confidence": 0.95,
+ "n_required_for_guarantee": 299,
+ "guarantee_met": false
 }

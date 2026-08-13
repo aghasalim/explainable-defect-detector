@@ -1,52 +1,59 @@
 [
  {
   "category": "bottle",
-  "threshold": 2.0184617042541504,
+  "threshold": 2.2653260231018066,
   "n_defects": 63,
-  "n_missed": 0,
-  "recall_at_threshold": 1.0,
+  "n_missed": 2,
+  "recall_at_threshold": 0.9682539682539683,
   "samples": [
    {
     "name": "good",
     "file": "bottle__good.png",
-    "score": 1.587,
+    "score": 1.601,
     "flagged": false,
     "defect": "good"
    },
    {
     "name": "contamination",
     "file": "bottle__contamination.png",
-    "score": 4.158,
+    "score": 4.192,
     "flagged": true,
+    "defect": "contamination"
+   },
+   {
+    "name": "contamination_MISSED",
+    "file": "bottle__contamination_MISSED.png",
+    "score": 2.06,
+    "flagged": false,
     "defect": "contamination"
    }
   ]
  },
  {
   "category": "cable",
-  "threshold": 2.6799707412719727,
+  "threshold": 2.8156087398529053,
   "n_defects": 92,
-  "n_missed": 7,
-  "recall_at_threshold": 0.9239130434782609,
+  "n_missed": 20,
+  "recall_at_threshold": 0.782608695652174,
   "samples": [
    {
     "name": "good",
     "file": "cable__good.png",
-    "score": 2.434,
+    "score": 2.433,
     "flagged": false,
     "defect": "good"
    },
    {
     "name": "bent_wire",
     "file": "cable__bent_wire.png",
-    "score": 4.235,
+    "score": 4.318,
     "flagged": true,
     "defect": "bent_wire"
    },
    {
     "name": "poke_insulation_MISSED",
     "file": "cable__poke_insulation_MISSED.png",
-    "score": 2.503,
+    "score": 2.544,
     "flagged": false,
     "defect": "poke_insulation"
    }
@@ -54,29 +61,29 @@
  },
  {
   "category": "capsule",
-  "threshold": 1.5990962982177734,
+  "threshold": 2.045536518096924,
   "n_defects": 109,
-  "n_missed": 13,
-  "recall_at_threshold": 0.8807339449541285,
+  "n_missed": 65,
+  "recall_at_threshold": 0.4036697247706422,
   "samples": [
    {
     "name": "good",
     "file": "capsule__good.png",
-    "score": 1.383,
+    "score": 1.346,
     "flagged": false,
     "defect": "good"
    },
    {
     "name": "crack",
     "file": "capsule__crack.png",
-    "score": 3.627,
+    "score": 3.626,
     "flagged": true,
     "defect": "crack"
    },
    {
     "name": "scratch_MISSED",
     "file": "capsule__scratch_MISSED.png",
-    "score": 1.401,
+    "score": 1.364,
     "flagged": false,
     "defect": "scratch"
    }
@@ -84,52 +91,59 @@
  },
  {
   "category": "carpet",
-  "threshold": 1.6204336881637573,
+  "threshold": 1.7884072065353394,
   "n_defects": 89,
-  "n_missed": 0,
-  "recall_at_threshold": 1.0,
+  "n_missed": 2,
+  "recall_at_threshold": 0.9775280898876404,
   "samples": [
    {
     "name": "good",
     "file": "carpet__good.png",
-    "score": 1.56,
+    "score": 1.522,
     "flagged": false,
     "defect": "good"
    },
    {
     "name": "thread",
     "file": "carpet__thread.png",
-    "score": 3.48,
+    "score": 3.448,
     "flagged": true,
     "defect": "thread"
+   },
+   {
+    "name": "metal_contamination_MISSED",
+    "file": "carpet__metal_contamination_MISSED.png",
+    "score": 1.66,
+    "flagged": false,
+    "defect": "metal_contamination"
    }
   ]
  },
  {
   "category": "grid",
-  "threshold": 1.9111309051513672,
+  "threshold": 2.138766050338745,
   "n_defects": 57,
-  "n_missed": 3,
-  "recall_at_threshold": 0.9473684210526316,
+  "n_missed": 15,
+  "recall_at_threshold": 0.736842105263158,
   "samples": [
    {
     "name": "good",
     "file": "grid__good.png",
-    "score": 1.768,
+    "score": 1.709,
     "flagged": false,
     "defect": "good"
    },
    {
     "name": "broken",
     "file": "grid__broken.png",
-    "score": 3.349,
+    "score": 3.237,
     "flagged": true,
     "defect": "broken"
    },
    {
     "name": "glue_MISSED",
     "file": "grid__glue_MISSED.png",
-    "score": 1.699,
+    "score": 1.619,
     "flagged": false,
     "defect": "glue"
    }
@@ -137,7 +151,7 @@
  },
  {
   "category": "hazelnut",
-  "threshold": 2.6543328762054443,
+  "threshold": 2.7955565452575684,
   "n_defects": 70,
   "n_missed": 1,
   "recall_at_threshold": 0.9857142857142858,
@@ -145,21 +159,21 @@
    {
     "name": "good",
     "file": "hazelnut__good.png",
-    "score": 2.346,
+    "score": 2.327,
     "flagged": false,
     "defect": "good"
    },
    {
     "name": "print",
     "file": "hazelnut__print.png",
-    "score": 4.56,
+    "score": 4.524,
     "flagged": true,
     "defect": "print"
    },
    {
     "name": "cut_MISSED",
     "file": "hazelnut__cut_MISSED.png",
-    "score": 2.639,
+    "score": 2.778,
     "flagged": false,
     "defect": "cut"
    }
@@ -167,7 +181,7 @@
  },
  {
   "category": "leather",
-  "threshold": 1.567564845085144,
+  "threshold": 1.661273717880249,
   "n_defects": 92,
   "n_missed": 0,
   "recall_at_threshold": 1.0,
@@ -175,7 +189,7 @@
    {
     "name": "good",
     "file": "leather__good.png",
-    "score": 1.496,
+    "score": 1.489,
     "flagged": false,
     "defect": "good"
    },
@@ -190,29 +204,29 @@
  },
  {
   "category": "metal_nut",
-  "threshold": 2.4074931144714355,
+  "threshold": 2.504944324493408,
   "n_defects": 93,
-  "n_missed": 1,
-  "recall_at_threshold": 0.989247311827957,
+  "n_missed": 6,
+  "recall_at_threshold": 0.935483870967742,
   "samples": [
    {
     "name": "good",
     "file": "metal_nut__good.png",
-    "score": 2.231,
+    "score": 2.24,
     "flagged": false,
     "defect": "good"
    },
    {
     "name": "flip",
     "file": "metal_nut__flip.png",
-    "score": 3.475,
+    "score": 3.538,
     "flagged": true,
     "defect": "flip"
    },
    {
     "name": "scratch_MISSED",
     "file": "metal_nut__scratch_MISSED.png",
-    "score": 2.369,
+    "score": 2.332,
     "flagged": false,
     "defect": "scratch"
    }
@@ -220,29 +234,29 @@
  },
  {
   "category": "pill",
-  "threshold": 2.1144204139709473,
+  "threshold": 2.3816354274749756,
   "n_defects": 141,
-  "n_missed": 26,
-  "recall_at_threshold": 0.8156028368794326,
+  "n_missed": 86,
+  "recall_at_threshold": 0.3900709219858156,
   "samples": [
    {
     "name": "good",
     "file": "pill__good.png",
-    "score": 1.903,
+    "score": 1.906,
     "flagged": false,
     "defect": "good"
    },
    {
     "name": "pill_type",
     "file": "pill__pill_type.png",
-    "score": 3.148,
+    "score": 3.111,
     "flagged": true,
     "defect": "pill_type"
    },
    {
     "name": "crack_MISSED",
     "file": "pill__crack_MISSED.png",
-    "score": 1.872,
+    "score": 1.843,
     "flagged": false,
     "defect": "crack"
    }
@@ -250,59 +264,59 @@
  },
  {
   "category": "screw",
-  "threshold": 1.9958784580230713,
+  "threshold": 2.0502490997314453,
   "n_defects": 119,
-  "n_missed": 55,
-  "recall_at_threshold": 0.5378151260504201,
+  "n_missed": 70,
+  "recall_at_threshold": 0.4117647058823529,
   "samples": [
    {
     "name": "good",
     "file": "screw__good.png",
-    "score": 1.777,
+    "score": 1.754,
     "flagged": false,
     "defect": "good"
    },
    {
     "name": "scratch_neck",
     "file": "screw__scratch_neck.png",
-    "score": 2.632,
+    "score": 2.761,
     "flagged": true,
     "defect": "scratch_neck"
    },
    {
-    "name": "thread_side_MISSED",
-    "file": "screw__thread_side_MISSED.png",
-    "score": 1.735,
+    "name": "manipulated_front_MISSED",
+    "file": "screw__manipulated_front_MISSED.png",
+    "score": 1.681,
     "flagged": false,
-    "defect": "thread_side"
+    "defect": "manipulated_front"
    }
   ]
  },
  {
   "category": "tile",
-  "threshold": 2.1190695762634277,
+  "threshold": 2.525296926498413,
   "n_defects": 84,
-  "n_missed": 2,
-  "recall_at_threshold": 0.9761904761904762,
+  "n_missed": 21,
+  "recall_at_threshold": 0.75,
   "samples": [
    {
     "name": "good",
     "file": "tile__good.png",
-    "score": 1.872,
+    "score": 1.875,
     "flagged": false,
     "defect": "good"
    },
    {
     "name": "crack",
     "file": "tile__crack.png",
-    "score": 4.001,
+    "score": 3.992,
     "flagged": true,
     "defect": "crack"
    },
    {
     "name": "gray_stroke_MISSED",
     "file": "tile__gray_stroke_MISSED.png",
-    "score": 1.862,
+    "score": 1.847,
     "flagged": false,
     "defect": "gray_stroke"
    }
@@ -310,75 +324,89 @@
  },
  {
   "category": "toothbrush",
-  "threshold": 1.9884508848190308,
+  "threshold": 2.2647032737731934,
   "n_defects": 30,
-  "n_missed": 0,
-  "recall_at_threshold": 1.0,
+  "n_missed": 7,
+  "recall_at_threshold": 0.7666666666666666,
   "samples": [
    {
     "name": "good",
     "file": "toothbrush__good.png",
-    "score": 1.947,
+    "score": 1.933,
     "flagged": false,
     "defect": "good"
    },
    {
     "name": "defective",
     "file": "toothbrush__defective.png",
-    "score": 3.835,
+    "score": 3.738,
     "flagged": true,
+    "defect": "defective"
+   },
+   {
+    "name": "defective_MISSED",
+    "file": "toothbrush__defective_MISSED.png",
+    "score": 2.099,
+    "flagged": false,
     "defect": "defective"
    }
   ]
  },
  {
   "category": "transistor",
-  "threshold": 2.1184635162353516,
+  "threshold": 2.453969955444336,
   "n_defects": 40,
-  "n_missed": 0,
-  "recall_at_threshold": 1.0,
+  "n_missed": 3,
+  "recall_at_threshold": 0.925,
   "samples": [
    {
     "name": "good",
     "file": "transistor__good.png",
-    "score": 2.038,
+    "score": 2.007,
     "flagged": false,
     "defect": "good"
    },
    {
     "name": "misplaced",
     "file": "transistor__misplaced.png",
-    "score": 3.903,
+    "score": 3.895,
     "flagged": true,
     "defect": "misplaced"
+   },
+   {
+    "name": "bent_lead_MISSED",
+    "file": "transistor__bent_lead_MISSED.png",
+    "score": 2.226,
+    "flagged": false,
+    "defect": "bent_lead"
    }
   ]
  },
  {
   "category": "wood",
-  "threshold": 2.2350990772247314,
+  "threshold": 2.331955909729004,
   "n_defects": 60,
-  "n_missed": 3,
-  "recall_at_threshold": 0.95,
+  "n_missed": 4,
+  "recall_at_threshold": 0.9333333333333333,
   "samples": [
    {
     "name": "good",
     "file": "wood__good.png",
-    "score": 1.903,
+    "score": 1.981,
     "flagged": false,
     "defect": "good"
    },
    {
     "name": "combined",
     "file": "wood__combined.png",
-    "score": 3.671,
+    "score": 3.616,
     "flagged": true,
     "defect": "combined"
    },
    {
     "name": "scratch_MISSED",
     "file": "wood__scratch_MISSED.png",
-    "score": 2.053,
+    "score": 1.968,
     "flagged": false,
     "defect": "scratch"
    }
@@ -386,29 +414,29 @@
  },
  {
   "category": "zipper",
-  "threshold": 1.5897823572158813,
+  "threshold": 1.7356244325637817,
   "n_defects": 119,
-  "n_missed": 2,
-  "recall_at_threshold": 0.9831932773109243,
+  "n_missed": 6,
+  "recall_at_threshold": 0.9495798319327731,
   "samples": [
    {
     "name": "good",
     "file": "zipper__good.png",
-    "score": 1.349,
+    "score": 1.348,
     "flagged": false,
     "defect": "good"
    },
    {
     "name": "combined",
     "file": "zipper__combined.png",
-    "score": 3.44,
+    "score": 3.408,
     "flagged": true,
     "defect": "combined"
    },
    {
     "name": "fabric_interior_MISSED",
     "file": "zipper__fabric_interior_MISSED.png",
-    "score": 1.454,
+    "score": 1.472,
     "flagged": false,
     "defect": "fabric_interior"
    }

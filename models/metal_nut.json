@@ -1,6 +1,6 @@
 {
  "category": "metal_nut",
- "threshold": 2.4074931144714355,
+ "threshold": 2.504944324493408,
  "target_fpr": 0.01,
  "size": 224,
  "crop": true,
@@ -8,14 +8,19 @@
   28,
   28
  ],
- "bank_size": 1552,
+ "bank_size": 1724,
  "bank_dim": 1536,
  "coreset_frac": 0.01,
  "n_train_total": 220,
- "n_bank_images": 198,
- "n_calib": 22,
- "calib_score_min": 2.1441731452941895,
- "calib_score_max": 2.412576675415039,
- "artefact_mb": 4.77,
- "bank_dtype": "float16"
+ "n_bank_images": 220,
+ "k_folds": 5,
+ "n_calib": 220,
+ "calib_score_min": 2.130586862564087,
+ "calib_score_max": 2.504944324493408,
+ "artefact_mb": 5.3,
+ "threshold_method": "tolerance_bound",
+ "tolerance_rank": null,
+ "tolerance_confidence": 0.95,
+ "n_required_for_guarantee": 299,
+ "guarantee_met": false
 }
