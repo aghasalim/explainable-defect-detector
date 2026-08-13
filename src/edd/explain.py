@@ -33,12 +33,10 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
-import torch
+from patchcore import fit_score
 from PIL import Image
 from scipy import ndimage
 from sklearn.metrics import roc_auc_score
-
-from patchcore import fit_score
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -86,7 +84,7 @@ def localisation_metrics(maps: np.ndarray, masks: np.ndarray, rng: np.random.Gen
     def suite(m: np.ndarray) -> dict:
         peak = []
         top1 = []
-        for mm, gt in zip(m, masks):
+        for mm, gt in zip(m, masks, strict=True):
             yx = np.unravel_index(np.argmax(mm), mm.shape)
             peak.append(bool(gt[yx] > 0))
             k = max(1, int(mm.size * 0.01))

@@ -1,0 +1,23 @@
+{
+ "category": "metal_nut",
+ "coreset_frac": 0.01,
+ "center_crop": true,
+ "n_test": 115,
+ "n_anomalous": 93,
+ "image_auroc": 0.9990224828934506,
+ "average_precision": 0.9997736276174306,
+ "accuracy_at_best_f1": 0.991304347826087,
+ "majority_class_accuracy": 0.808695652173913,
+ "paper_image_auroc": 0.998,
+ "paper_pixel_auroc": 0.984,
+ "seconds": 36.1,
+ "pixel_auroc": 0.9815441701104569,
+ "aupro": 0.8823556271782146,
+ "peak_in_mask": 0.946236559139785,
+ "top1pct_precision": 0.8756894812525485,
+ "control_pixel_auroc": 0.49993078319917517,
+ "control_aupro": 0.14226455515723424,
+ "control_peak_in_mask": 0.1827956989247312,
+ "control_top1pct_precision": 0.18899834739123902,
+ "defect_pixel_fraction": 0.1883968431122449
+}

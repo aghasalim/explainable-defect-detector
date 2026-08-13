@@ -25,18 +25,17 @@ import argparse
 import json
 from pathlib import Path
 
+import baseline
 import numpy as np
 import torch
 import torch.nn.functional as F
-from PIL import Image
-from torch.utils.data import DataLoader, Dataset
-from torchvision.models import ResNet18_Weights, resnet18
-from torchvision import transforms
-
-import baseline
 from dataset import IMAGENET_MEAN, IMAGENET_STD, MVTecCategory, build_transform
 from explain import localisation_metrics
 from patchcore import fit_score
+from PIL import Image
+from torch.utils.data import DataLoader, Dataset
+from torchvision import transforms
+from torchvision.models import ResNet18_Weights, resnet18
 
 ROOT = Path(__file__).resolve().parents[2]
 metrics_of = baseline.evaluate
@@ -56,7 +55,7 @@ def make_split(category: str, seed: int = 0) -> dict:
 
     rng = np.random.default_rng(seed)
     fit, held = [], []
-    for d, paths in sorted(by_type.items()):
+    for _defect, paths in sorted(by_type.items()):
         paths = sorted(paths)
         rng.shuffle(paths)
         half = len(paths) // 2

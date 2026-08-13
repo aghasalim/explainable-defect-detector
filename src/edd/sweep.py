@@ -15,9 +15,8 @@ import json
 import time
 from pathlib import Path
 
-import numpy as np
-
 import baseline
+import numpy as np
 from explain import localisation_metrics
 from patchcore import fit_score
 

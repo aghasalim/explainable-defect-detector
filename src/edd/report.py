@@ -48,8 +48,10 @@ def main() -> None:
         ia, pa, dia, dpa = [], [], [], []
         for c, d in sorted(full.items()):
             pi, pp = PAPER[c]
-            ia.append(d["image_auroc"]); pa.append(d["pixel_auroc"])
-            dia.append(d["image_auroc"] - pi); dpa.append(d["pixel_auroc"] - pp)
+            ia.append(d["image_auroc"])
+            pa.append(d["pixel_auroc"])
+            dia.append(d["image_auroc"] - pi)
+            dpa.append(d["pixel_auroc"] - pp)
             L.append(
                 f"| {c} | {d['image_auroc']:.4f} | {pi:.3f} | {d['image_auroc'] - pi:+.3f} "
                 f"| {d['pixel_auroc']:.4f} | {pp:.3f} | {d['pixel_auroc'] - pp:+.3f} "
@@ -64,7 +66,7 @@ def main() -> None:
             f"| {sum(d['seconds'] for d in full.values()):.0f} |")
 
         worst = sorted(full.values(), key=lambda d: d["image_auroc"])[:3]
-        L.append(f"\nWeakest categories by image AUROC: "
+        L.append("\nWeakest categories by image AUROC: "
                  + ", ".join(f"`{d['category']}` ({d['image_auroc']:.3f})" for d in worst) + ".\n")
 
         # --- localisation vs random control ---------------------------------

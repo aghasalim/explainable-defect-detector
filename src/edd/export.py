@@ -26,7 +26,6 @@ from pathlib import Path
 
 import numpy as np
 import torch
-
 from dataset import MVTecCategory
 from patchcore import PatchFeatures, coreset, device, extract, score, to_maps
 
@@ -62,7 +61,7 @@ def build(category: str, frac: float = 0.01, size: int = 224, crop: bool = True,
         "category": category, "bank": bank.cpu(), "threshold": threshold,
         "target_fpr": target_fpr, "size": size, "crop": crop, "grid": tuple(grid),
         "bank_size": int(bank.shape[0]), "bank_dim": int(bank.shape[1]),
-        "coreset_frac": frac, "n_train_total": int(n), "n_bank_images": int(len(bank_idx)),
+        "coreset_frac": frac, "n_train_total": int(n), "n_bank_images": len(bank_idx),
         "n_calib": int(n_cal), "calib_scores": cal.astype(np.float32),
     }
     torch.save(art, MODELS / f"{category}.pt")

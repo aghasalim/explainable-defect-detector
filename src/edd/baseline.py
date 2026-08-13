@@ -24,11 +24,14 @@ from pathlib import Path
 
 import numpy as np
 import torch
-from sklearn.metrics import average_precision_score, precision_recall_curve, roc_auc_score
+from dataset import MVTecCategory
+from sklearn.metrics import (
+    average_precision_score,
+    precision_recall_curve,
+    roc_auc_score,
+)
 from torch.utils.data import DataLoader
 from torchvision.models import ResNet18_Weights, resnet18
-
-from dataset import MVTecCategory
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -107,7 +110,7 @@ def run(category: str, k: int = 1, size: int = 224) -> dict:
     out.write_text(json.dumps(
         {"metrics": m, "scores": [
             {"path": str(Path(p).relative_to(ROOT)), "label": int(l), "score": float(s)}
-            for p, l, s in zip(paths, labels, scores)]}, indent=1))
+            for p, l, s in zip(paths, labels, scores, strict=True)]}, indent=1))
 
     w = max(len(x) for x in m)
     for key, v in m.items():
