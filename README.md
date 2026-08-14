@@ -9,6 +9,7 @@ Mean image AUROC **0.9874** over all 15 MVTec AD categories. The PatchCore paper
 reports 0.990.
 
 [![ci](https://github.com/aghasalim/explainable-defect-detector/actions/workflows/ci.yml/badge.svg)](https://github.com/aghasalim/explainable-defect-detector/actions/workflows/ci.yml)
+[![demo-link](https://github.com/aghasalim/explainable-defect-detector/actions/workflows/demo.yml/badge.svg)](https://github.com/aghasalim/explainable-defect-detector/actions/workflows/demo.yml)
 
 **[Try it live](https://explainable-defect-detector.streamlit.app/)** — pick one of the 15
 object types, try a sample or upload your own photo. Each category ships a defect the model
