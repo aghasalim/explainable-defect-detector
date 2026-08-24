@@ -15,7 +15,35 @@ reports 0.990.
 object types, try a sample or upload your own photo. Each category ships a defect the model
 catches and, where one exists, a defect it *misses*, labelled as such.
 
-## The idea
+
+---
+
+## Abstract
+
+Visual anomaly detection is usually reported as an image-level AUROC, which says
+nothing about whether the heatmap points at the defect or whether the deployment
+threshold delivers the false-positive rate it claims. This work reimplements
+PatchCore across all 15 MVTec-AD categories and reports three things the headline
+metric leaves out.
+
+Reproduction is checked against the published numbers per category rather than in
+aggregate. Localisation is scored against a control that has no spatial
+information, because a heatmap can look convincing and still be no better than
+chance at pointing anywhere useful — the measured peak-in-mask rate clears its
+control by a wide margin in every category, worst case `screw` at 0.50 against
+0.01. And the threshold is calibrated with a distribution-free tolerance bound
+rather than a percentile, which needs 299 normal calibration images for a
+95%-confidence 1% bound. MVTec's training splits are smaller than that for most
+categories, so the guarantee is reported as unmet rather than quietly assumed.
+
+**Contributions.** (i) Per-category reproduction against published values. (ii) A
+spatial control for localisation claims. (iii) A distribution-free threshold with
+its sample-size requirement stated and checked. (iv) A realised-FPR verification
+on held-out test data, separate from the calibration split.
+
+---
+
+## 1. The idea
 
 A factory has plenty of good parts and very few bad ones. So instead of training a
 classifier on defects, I model what a normal part looks like and flag anything that
@@ -25,7 +53,7 @@ MVTec AD is built for this. Its `train/` folder holds only good images and every
 defect is in `test/`. Training a normal classifier means taking defects out of the
 test set, which breaks the only clean evaluation split the dataset has.
 
-## How it works
+## 2. Method
 
 ```mermaid
 flowchart LR
@@ -44,7 +72,16 @@ There is no training loop. The backbone is frozen and the only thing stored is a
 bank of normal patches. Each category takes 6 to 108 seconds to fit and score on a
 laptop GPU.
 
-## Results
+## 3. Results
+
+![measured AUROC against the published numbers](reports/figures/reproduction.png)
+
+![localisation against a control with no spatial information](reports/figures/localisation-control.png)
+
+The control is the point of the second figure. A heatmap that looks plausible is
+not evidence of localisation; what counts is beating a score that has no spatial
+information on the same masks. It does, in every category — worst case `screw` at
+0.50 peak-in-mask against a control of 0.01.
 
 1% coreset, `Resize(256)+CenterCrop(224)`. Paper columns are Roth et al., CVPR 2022.
 
@@ -71,7 +108,7 @@ laptop GPU.
 falls inside the real defect. Full tables, including a random-heatmap control for
 every localisation number, are in [reports/results.md](reports/results.md).
 
-## What I found
+## 4. What I found
 
 **Detecting and locating are two different problems.** `toothbrush` scores a perfect
 1.0000 image AUROC, but its heatmap points at the actual defect only 57% of the time.
@@ -100,7 +137,18 @@ patch distances, so if the bank misses rare-but-normal patches, good images get 
 `screw` from 0.8737 to 0.9289 and cost 8x the compute. Just using the paper's centre
 crop got 0.9412 at 1%, because the crop zooms in and `screw` defects are tiny.
 
-## Picking a threshold
+## 5. Picking a threshold
+
+![realised false-positive rate against the target](reports/figures/threshold-check.png)
+
+![percentile threshold against the distribution-free bound](reports/figures/calibration-rules.png)
+
+![calibration images available against the number the guarantee needs](reports/figures/guarantee.png)
+
+The last figure is the one I would want to be asked about. A 95%-confidence 1%
+tolerance bound needs 299 normal calibration images. MVTec gives fewer than that
+for most categories, so the bound is computed and used, and the guarantee it would
+carry is reported as unmet.
 
 A benchmark reports AUROC, but a demo has to say OK or DEFECT. The threshold has to come
 from normal images only, since a deployed system has no labelled defects. My first attempt
@@ -176,7 +224,7 @@ the guarantee and the code falls back to it and records `guarantee_met: false` i
 artefact. If I were specifying this for real, "collect 300 good parts before you can promise
 a false alarm rate" would be the requirement to hand over.
 
-## Bugs worth mentioning
+## 6. Bugs worth mentioning
 
 - The official MVTec download is dead, so the data comes from a HuggingFace mirror.
   That mirror renames files, and an image and its own mask get different suffixes
@@ -187,7 +235,7 @@ a false alarm rate" would be the requirement to hand over.
 - My first crop measurement compared pixel counts at two different zoom levels and
   reported "129% of the defect retained", which is impossible.
 
-## Running it
+## 7. Running it
 
 ```bash
 uv sync
@@ -215,7 +263,7 @@ most 1.8e-4 and flips no verdict on 410 test images.
 
 Images are not committed. `fetch_mvtec.py` rebuilds them from the tracked index.
 
-## Deploying
+## 8. Deploying
 
 Live on Streamlit Community Cloud at
 [explainable-defect-detector.streamlit.app](https://explainable-defect-detector.streamlit.app/),
@@ -226,7 +274,7 @@ wheel is the 2 GB CUDA one and the free tier will not hold it.
 Hugging Face Spaces also works through `scripts/deploy_space.sh`, but HF now needs a
 PRO subscription for Docker Spaces, so the free tier rejects it with HTTP 402.
 
-## What I would do next
+## 9. What I would do next
 
 1. Add the score reweighting from the paper. It is the one part I left out and the
    likely reason `screw` is 4 points short.
@@ -237,7 +285,7 @@ PRO subscription for Docker Spaces, so the free tier rejects it with HTTP 402.
 4. Test it on parts I photograph myself, where the lighting is not controlled.
 5. Swap the brute-force nearest neighbour for an approximate index if the bank grows.
 
-## Notes on method
+## 10. Notes on method
 
 - Image score is a plain max over patch distances. The paper adds a reweighting step.
 - The coreset search runs in a 128-d random projection for speed. The bank keeps the
@@ -247,7 +295,7 @@ PRO subscription for Docker Spaces, so the free tier rejects it with HTTP 402.
 - Pixel AUROC cannot be compared between the crop and resize rows, since the crop
   changes which pixels are being scored.
 
-## Data and licence
+## 11. Data and licence
 
 Code is MIT. Data is [MVTec AD](https://www.mvtec.com/company/research/datasets/mvtec-ad),
 CC BY-NC-SA 4.0, research and non-commercial use.
