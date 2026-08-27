@@ -11,7 +11,7 @@ reports 0.990.
 [![ci](https://github.com/aghasalim/explainable-defect-detector/actions/workflows/ci.yml/badge.svg)](https://github.com/aghasalim/explainable-defect-detector/actions/workflows/ci.yml)
 [![demo-link](https://github.com/aghasalim/explainable-defect-detector/actions/workflows/demo.yml/badge.svg)](https://github.com/aghasalim/explainable-defect-detector/actions/workflows/demo.yml)
 
-**[Try it live](https://explainable-defect-detector.streamlit.app/)** — pick one of the 15
+**[Try it live](https://explainable-defect-detector.streamlit.app/)**: pick one of the 15
 object types, try a sample or upload your own photo. Each category ships a defect the model
 catches and, where one exists, a defect it *misses*, labelled as such.
 
@@ -29,8 +29,8 @@ metric leaves out.
 Reproduction is checked against the published numbers per category rather than in
 aggregate. Localisation is scored against a control that has no spatial
 information, because a heatmap can look convincing and still be no better than
-chance at pointing anywhere useful — the measured peak-in-mask rate clears its
-control by a wide margin in every category, worst case `screw` at 0.50 against
+chance at pointing anywhere useful, the measured peak-in-mask rate clears its
+control by a wide margin in every category, worst case`screw` at 0.50 against
 0.01. And the threshold is calibrated with a distribution-free tolerance bound
 rather than a percentile, which needs 299 normal calibration images for a
 95%-confidence 1% bound. MVTec's training splits are smaller than that for most
@@ -49,8 +49,8 @@ A factory has plenty of good parts and very few bad ones. So instead of training
 classifier on defects, I model what a normal part looks like and flag anything that
 sits far away from it.
 
-MVTec AD is built for this. Its `train/` folder holds only good images and every
-defect is in `test/`. Training a normal classifier means taking defects out of the
+MVTec AD is built for this. Its`train/` folder holds only good images and every
+defect is in`test/`. Training a normal classifier means taking defects out of the
 test set, which breaks the only clean evaluation split the dataset has.
 
 ## 2. Method
@@ -80,10 +80,10 @@ laptop GPU.
 
 The control is the point of the second figure. A heatmap that looks plausible is
 not evidence of localisation; what counts is beating a score that has no spatial
-information on the same masks. It does, in every category — worst case `screw` at
+information on the same masks. It does, in every category, worst case`screw` at
 0.50 peak-in-mask against a control of 0.01.
 
-1% coreset, `Resize(256)+CenterCrop(224)`. Paper columns are Roth et al., CVPR 2022.
+1% coreset,`Resize(256)+CenterCrop(224)`. Paper columns are Roth et al., CVPR 2022.
 
 | category | image AUROC | paper | pixel AUROC | paper | AUPRO | peak-in-mask |
 |---|---|---|---|---|---|---|
@@ -110,7 +110,7 @@ every localisation number, are in [reports/results.md](reports/results.md).
 
 ## 4. What I found
 
-**Detecting and locating are two different problems.** `toothbrush` scores a perfect
+**Detecting and locating are two different problems.**`toothbrush` scores a perfect
 1.0000 image AUROC, but its heatmap points at the actual defect only 57% of the time.
 `screw` detects at 0.941 and locates at 0.496. Reporting AUROC alone would hide this
 completely, which is why I measured localisation separately.
@@ -125,17 +125,17 @@ held-out half:
 | pill | 0.9526 | 0.9579 | 0.3562 | 0.6712 |
 | screw | 0.9586 | 0.9375 | 0.0000 | 0.4918 |
 
-On `screw` the classifier reaches 0.96 AUROC while its Grad-CAM never lands on the
+On`screw` the classifier reaches 0.96 AUROC while its Grad-CAM never lands on the
 defect and scores 0.58 pixel AUROC, which is close to random. It gets the answer right
 for reasons that have nothing to do with the defect.
 
-**Coreset sampling does most of the work.** With the same bank size on `screw`, random
+**Coreset sampling does most of the work.** With the same bank size on`screw`, random
 sampling scores 0.5518 and greedy k-center scores 0.8737. The image score is a max over
 patch distances, so if the bank misses rare-but-normal patches, good images get flagged.
 
 **Preprocessing beat every model knob.** Growing the memory bank from 1% to 10% took
 `screw` from 0.8737 to 0.9289 and cost 8x the compute. Just using the paper's centre
-crop got 0.9412 at 1%, because the crop zooms in and `screw` defects are tiny.
+crop got 0.9412 at 1%, because the crop zooms in and`screw` defects are tiny.
 
 ## 5. Picking a threshold
 
@@ -154,20 +154,20 @@ A benchmark reports AUROC, but a demo has to say OK or DEFECT. The threshold has
 from normal images only, since a deployed system has no labelled defects. My first attempt
 was bad enough to be worth writing down, because fixing it taught me the most.
 
-**Attempt 1 — hold out 10% of the training images, take their 99th percentile.** Only
-3 of 15 categories hit the 1% false alarm target. `carpet` flagged **43% of good parts**.
+**Attempt 1, hold out 10% of the training images, take their 99th percentile.** Only
+3 of 15 categories hit the 1% false alarm target.`carpet` flagged **43% of good parts**.
 
 The reason is not obvious at first. A 99th percentile from a small sample should be too
 *strict*, not too loose. But with n=28, the empirical 99th percentile is essentially the
-sample maximum, and the maximum of n draws estimates about the n/(n+1) quantile — the 96th
+sample maximum, and the maximum of n draws estimates about the n/(n+1) quantile, the 96th
 percentile at n=28, not the 99th. So the tail was consistently underestimated and the
 threshold came out too low.
 
-**Attempt 2 — k-fold cross-calibration.** Instead of scoring one 10% holdout, rotate 5
-folds so every training image gets a score from a bank that excludes it. That turns 21–39
-calibration scores into 209–391. Result: 10 of 15 within target.
+**Attempt 2, k-fold cross-calibration.** Instead of scoring one 10% holdout, rotate 5
+folds so every training image gets a score from a bank that excludes it. That turns 21 to 39
+calibration scores into 209 to 391. Result: 10 of 15 within target.
 
-**Attempt 3 — a tolerance bound instead of a quantile.** An empirical quantile is a point
+**Attempt 3, a tolerance bound instead of a quantile.** An empirical quantile is a point
 estimate: it lands below the true value roughly half the time, which is a coin flip on
 whether you hit your target. What a deployment actually wants is *"at least 99% of normal
 parts score below this, and I am 95% confident of that"*. That is a one-sided nonparametric
@@ -176,7 +176,7 @@ tolerance bound, and for the m-th smallest of n samples it follows from
 
 | calibration method | within 1% target | mean FPR | mean recall |
 |---|---|---|---|
-| 10% holdout + 99th percentile | 3 / 15 | 9.0% | — |
+| 10% holdout + 99th percentile | 3 / 15 | 9.0% |, |
 | 5-fold cross-calibration + 99th percentile | 10 / 15 | 3.4% | 87.4% |
 | **5-fold + tolerance bound (shipped)** | **13 / 15** | **1.9%** | 79.4% |
 
@@ -208,19 +208,19 @@ alarm rate" as a requirement means.
 
 **The two that still miss, and why I am not going to fix them.**
 
-- `zipper` flags 1 of 32 normal images. With 32 test normals the smallest non-zero rate
+-`zipper` flags 1 of 32 normal images. With 32 test normals the smallest non-zero rate
   measurable is 3.1%, so this is one image, not a trend.
-- `carpet` is genuinely unfixable from training data. The threshold needed for a 1% test
+-`carpet` is genuinely unfixable from training data. The threshold needed for a 1% test
   FPR is 1.933, and the *entire* calibration set of 280 images maxes out at 1.788. Its test
-  normals are drawn from a wider distribution than its training normals — real covariate
+  normals are drawn from a wider distribution than its training normals, real covariate
   shift. No amount of calibration on train data can cover it, and using test data to pick
   the threshold would be cheating. In production the answer is to recalibrate on images
   from the line you are actually running on.
 
 One more thing I found while doing this: a 99%/95% tolerance bound needs
-`1 - 0.99^n >= 0.95`, i.e. **at least 299 normal images**. Only `hazelnut` (391) and `screw`
+`1 - 0.99^n >= 0.95`, i.e. **at least 299 normal images**. Only`hazelnut` (391) and`screw`
 (320) clear that bar, so for the other 13 categories even the sample maximum cannot deliver
-the guarantee and the code falls back to it and records `guarantee_met: false` in the
+the guarantee and the code falls back to it and records`guarantee_met: false` in the
 artefact. If I were specifying this for real, "collect 300 good parts before you can promise
 a false alarm rate" would be the requirement to hand over.
 
@@ -228,10 +228,10 @@ a false alarm rate" would be the requirement to hand over.
 
 - The official MVTec download is dead, so the data comes from a HuggingFace mirror.
   That mirror renames files, and an image and its own mask get different suffixes
-  (`000-94.png` vs `000_mask-67.png`). Matching them by name gives zero masks and no
-  warning. `fetch_mvtec.py` now fails the download if any defect image lacks a mask.
+  (`000-94.png` vs`000_mask-67.png`). Matching them by name gives zero masks and no
+  warning.`fetch_mvtec.py` now fails the download if any defect image lacks a mask.
 - The heatmap blur used zero padding, which pushed scores down near the image border.
-  Switching to reflect padding moved `screw` pixel AUROC from 0.9544 to 0.9686.
+  Switching to reflect padding moved`screw` pixel AUROC from 0.9544 to 0.9686.
 - My first crop measurement compared pixel counts at two different zoom levels and
   reported "129% of the defect retained", which is impossible.
 
@@ -257,31 +257,31 @@ uv run python src/edd/verify_threshold.py  # the table above
 uv run streamlit run app.py
 ```
 
-All 15 categories are exported and committed under `models/` (79 MB total). The memory
+All 15 categories are exported and committed under`models/` (79 MB total). The memory
 banks are stored as float16, which halves them; I checked and it changes scores by at
 most 1.8e-4 and flips no verdict on 410 test images.
 
-Images are not committed. `fetch_mvtec.py` rebuilds them from the tracked index.
+Images are not committed.`fetch_mvtec.py` rebuilds them from the tracked index.
 
 ## 8. Deploying
 
 Live on Streamlit Community Cloud at
 [explainable-defect-detector.streamlit.app](https://explainable-defect-detector.streamlit.app/),
-deployed from this repo, branch `main`, main file `app.py`, Python 3.12. It redeploys on
-every push. `requirements.txt` pins the CPU build of PyTorch, since the default Linux
+deployed from this repo, branch`main`, main file`app.py`, Python 3.12. It redeploys on
+every push.`requirements.txt` pins the CPU build of PyTorch, since the default Linux
 wheel is the 2 GB CUDA one and the free tier will not hold it.
 
-Hugging Face Spaces also works through `scripts/deploy_space.sh`, but HF now needs a
+Hugging Face Spaces also works through`scripts/deploy_space.sh`, but HF now needs a
 PRO subscription for Docker Spaces, so the free tier rejects it with HTTP 402.
 
 ## 9. What I would do next
 
 1. Add the score reweighting from the paper. It is the one part I left out and the
-   likely reason `screw` is 4 points short.
+   likely reason`screw` is 4 points short.
 2. Calibrate the threshold on more images, or fit the tail instead of taking a raw
    percentile.
-3. Improve localisation on `screw`, `toothbrush`, `grid` and `capsule`. Higher input
-   resolution and adding `layer1` features are the obvious things to try.
+3. Improve localisation on`screw`,`toothbrush`,`grid` and`capsule`. Higher input
+   resolution and adding`layer1` features are the obvious things to try.
 4. Test it on parts I photograph myself, where the lighting is not controlled.
 5. Swap the brute-force nearest neighbour for an approximate index if the bank grows.
 
