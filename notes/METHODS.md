@@ -38,7 +38,7 @@ information on the same masks. It does, in every category, worst case `screw` at
 
 `peak-in-mask` is the share of defect images where the hottest pixel of the heatmap
 falls inside the real defect. Full tables, including a random-heatmap control for
-every localisation number, are in [reports/results.md](reports/results.md).
+every localisation number, are in [reports/results.md](../reports/results.md).
 
 
 ## 4. What I found
