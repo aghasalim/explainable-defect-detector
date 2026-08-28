@@ -31,7 +31,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
 
-from style import PALETTE, titled
+from style import PALETTE
 
 # Fixed meanings, so the same idea keeps the same colour across every figure.
 NEUTRAL = PALETTE[5]   # good, or nothing wrong
