@@ -38,6 +38,13 @@ from PIL import Image
 from scipy import ndimage
 from sklearn.metrics import roc_auc_score
 
+from style import PALETTE, titled
+
+# Fixed meanings, so the same idea keeps the same colour across every figure.
+NEUTRAL = PALETTE[5]   # good, or nothing wrong
+DEFECT = PALETTE[1]    # defective
+MASK = PALETTE[2]      # the ground truth outline
+
 ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -123,19 +130,19 @@ def figure(paths, maps, masks, labels, scores, out: Path, n: int = 6) -> None:
         ax[r, 0].imshow(img)
         ax[r, 0].set_ylabel(
             ("WORST\n" if worst else "") + Path(paths[i]).parent.name, fontsize=8,
-            color="#c0392b" if worst else "black")
+            color=DEFECT if worst else "black")
         ax[r, 1].imshow(masks[i], cmap="gray")
         ax[r, 2].imshow(maps[i], cmap="inferno")
         ax[r, 3].imshow(img)
         ax[r, 3].imshow(maps[i], cmap="inferno", alpha=0.5)
-        ax[r, 3].contour(masks[i] > 0, levels=[0.5], colors="lime", linewidths=1.2)
+        ax[r, 3].contour(masks[i] > 0, levels=[0.5], colors=[MASK], linewidths=1.2)
         for c in range(4):
             ax[r, c].set_xticks([])
             ax[r, c].set_yticks([])
     for c, t in enumerate(["input", "ground truth", "anomaly map", "overlay (GT = green)"]):
         ax[0, c].set_title(t, fontsize=10)
     fig.tight_layout()
-    fig.savefig(out, dpi=110)
+    fig.savefig(out)
     plt.close(fig)
 
 

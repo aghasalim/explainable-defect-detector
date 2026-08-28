@@ -11,3 +11,6 @@ reports/*.npy
 .claude/
 .env
 .env.local
+
+# editable install artefact, rebuilt by uv sync
+*.egg-info/
