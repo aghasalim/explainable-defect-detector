@@ -87,6 +87,11 @@ Full detail in [notes/METHODS.md](notes/METHODS.md#4-what-i-found).
 The last figure is the one I would want to be asked about.
 
 ![realised false-positive rate against the target](reports/figures/threshold-check.png)
+
+![the decision threshold swept across one category's scores](reports/figures/threshold-sweep.gif)
+
+*The 160 committed`screw` test scores with the decision threshold sliding across them: the model and the scores stay fixed, only the cut moves, and every change in false alarms and catches comes from that alone.*
+
 ![percentile threshold against the distribution-free bound](reports/figures/calibration-rules.png)
 ![calibration images available against the number the guarantee needs](reports/figures/guarantee.png)
 
