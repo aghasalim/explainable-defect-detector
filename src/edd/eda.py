@@ -31,6 +31,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
 
+from style import PALETTE, titled
+
+# Fixed meanings, so the same idea keeps the same colour across every figure.
+NEUTRAL = PALETTE[5]   # good, or nothing wrong
+DEFECT = PALETTE[1]    # defective
+MASK = PALETTE[2]      # the ground truth outline
+
 ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -152,19 +159,18 @@ def report(cat: str, rows: list[dict]) -> str:
 
 def figure(cat: str, rows: list[dict], path: Path) -> None:
     fig, ax = plt.subplots(2, 3, figsize=(15, 8))
-    fig.suptitle(f"MVTec AD - {cat}", fontsize=14)
 
     c = Counter(f"{r['split']}/{r['defect']}" for r in rows)
     k = sorted(c)
-    ax[0, 0].barh(k, [c[i] for i in k], color=["#888" if "good" in i else "#c0392b" for i in k])
+    ax[0, 0].barh(k, [c[i] for i in k], color=[NEUTRAL if "good" in i else DEFECT for i in k])
     ax[0, 0].set_title("class balance")
 
     fr = np.array([r["defect_frac"] for r in rows if r["defect_frac"] is not None])
-    ax[0, 1].hist(fr * 100, bins=30, color="#c0392b")
+    ax[0, 1].hist(fr * 100, bins=30, color=DEFECT)
     ax[0, 1].set_title("defect area (% of pixels)")
     ax[0, 1].set_xlabel("%")
 
-    for lbl, col, nm in ((0, "#888", "good"), (1, "#c0392b", "defective")):
+    for lbl, col, nm in ((0, NEUTRAL, "good"), (1, DEFECT, "defective")):
         ax[0, 2].hist([r["mean"] for r in rows if r["label"] == lbl], bins=25,
                       alpha=0.6, color=col, label=nm)
     ax[0, 2].legend()
@@ -178,14 +184,14 @@ def figure(cat: str, rows: list[dict], path: Path) -> None:
         m = r["path"].parents[2] / "ground_truth" / d / f"{r['path'].stem}_mask.png"
         if m.exists():
             ax[1, i].contour(np.asarray(Image.open(m).convert("L")) > 0,
-                             levels=[0.5], colors="lime", linewidths=1.5)
+                             levels=[0.5], colors=[MASK], linewidths=1.5)
         ax[1, i].set_title(f"{d}  ({r['defect_frac']:.2%})")
         ax[1, i].axis("off")
     for j in range(len(types[:3]), 3):
         ax[1, j].axis("off")
 
     fig.tight_layout()
-    fig.savefig(path, dpi=110)
+    fig.savefig(path)
 
 
 def main() -> None:

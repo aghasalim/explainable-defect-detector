@@ -96,9 +96,9 @@ def overlay(img: Image.Image, amap: np.ndarray, vmax: float, alpha: float = 0.5)
     return Image.fromarray((base * (1 - alpha) + heat * alpha).astype(np.uint8))
 
 
-st.title("🔍 Explainable Visual Defect Detector")
+st.title("Explainable Visual Defect Detector")
 st.caption(
-    "Trained on normal examples only — no defect was ever labelled for training. "
+    "Trained on normal examples only, no defect was ever labelled for training. "
     "The heatmap shows which regions look unlike anything in the normal set."
 )
 
@@ -129,7 +129,7 @@ with st.sidebar:
     else:
         st.caption(
             f"Set at the {1 - art['target_fpr']:.0%} quantile of {art['n_calib']} "
-            f"**normal** images — never on test data."
+            f"**normal** images, never on test data."
         )
     st.caption(
         f"Calibrated on {art['n_calib']} normal training images"
@@ -165,8 +165,8 @@ if choice.endswith("_MISSED"):
     )
     st.warning(
         f"**This is a known miss.** At the calibrated threshold this defect scores *below* "
-        f"the line, so the detector reports OK — a false negative. {detail}"
-        f"Drag the **Decision threshold** slider down and watch it flip to DEFECT — and "
+        f"the line, so the detector reports OK, a false negative. {detail}"
+        f"Drag the **Decision threshold** slider down and watch it flip to DEFECT, and "
         f"watch normal parts start tripping too. That trade-off is the actual engineering "
         f"problem, and it is not visible in an AUROC score."
     )
@@ -223,6 +223,6 @@ is the largest patch distance; the heatmap is the per-patch distance, upsampled 
 - The bank encodes one object type under one lighting setup. Photograph a different
   object, or the same object under very different light, and everything looks anomalous.
 - The threshold targets a 1% false-alarm rate on normal parts. Lowering it catches more
-  defects and cries wolf more often — the slider is there so that trade-off is yours.
+  defects and cries wolf more often, so the slider is there and the trade-off is yours.
 """
     )

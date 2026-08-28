@@ -1,8 +1,11 @@
 """Build the README montage: one worked example per category.
 
-Shows input / anomaly map / overlay-with-ground-truth side by side, so a reader
-can judge the explanations without running anything. Categories are chosen to
-span the range honestly - strong localisation and weak localisation both appear.
+Shows input, anomaly map and overlay for five categories, so a reader can judge
+the explanations without running anything. The categories span the range
+honestly: strong localisation and weak localisation both appear, and the image
+picked for each is the median-scoring defect, not the best one.
+
+    python src/edd/hero.py [category ...]
 """
 
 from __future__ import annotations
@@ -10,55 +13,80 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-import matplotlib
+import matplotlib as mpl
 
-matplotlib.use("Agg")
+mpl.use("Agg")
+
 import matplotlib.pyplot as plt
 import numpy as np
-from PIL import Image
-
 from patchcore import fit_score
+from PIL import Image
+from style import PALETTE, titled
 
 ROOT = Path(__file__).resolve().parents[2]
 
+# Same reading as everywhere else in the repo: green is the measured thing
+# agreeing with the ground truth, red is it disagreeing.
+HIT, MISS = PALETTE[2], PALETTE[1]
+ROWS = ["input", "anomaly map", "overlay"]
 
-def main(categories: list[str]) -> None:
-    fig, ax = plt.subplots(len(categories), 3, figsize=(8.2, 2.75 * len(categories)))
-    for r, cat in enumerate(categories):
-        res = fit_score(cat, 0.01, 224, "coreset", True)
-        maps = res["maps"].numpy()[:, 0]
-        masks = res["masks"].numpy()[:, 0]
-        lab, paths, sc = res["labels"], res["paths"], res["img_scores"]
+
+def _tile(ax) -> None:
+    """An image panel: no ticks, no grid, a light box so white images have edges."""
+    ax.set_xticks([])
+    ax.set_yticks([])
+    ax.grid(False)
+    for spine in ax.spines.values():
+        spine.set_visible(True)
+
+
+def main(categories: list[str]) -> Path:
+    figure, ax = plt.subplots(3, len(categories), figsize=(2.55 * len(categories), 8.3),
+                              squeeze=False)
+    for column, category in enumerate(categories):
+        result = fit_score(category, 0.01, 224, "coreset", True)
+        maps = result["maps"].numpy()[:, 0]
+        masks = result["masks"].numpy()[:, 0]
+        labels, paths, scores = result["labels"], result["paths"], result["img_scores"]
 
         # median-scoring anomalous image: not the best case, not the worst
-        anom = [i for i in range(len(lab)) if lab[i] == 1]
-        i = sorted(anom, key=lambda j: sc[j])[len(anom) // 2]
+        anomalous = [i for i in range(len(labels)) if labels[i] == 1]
+        i = sorted(anomalous, key=lambda j: scores[j])[len(anomalous) // 2]
 
-        img = Image.open(paths[i]).convert("RGB").resize((224, 224))
+        image = Image.open(paths[i]).convert("RGB").resize((224, 224))
         peak = np.unravel_index(np.argmax(maps[i]), maps[i].shape)
         hit = masks[i][peak] > 0
 
-        ax[r, 0].imshow(img)
-        ax[r, 0].set_ylabel(f"{cat}\n{Path(paths[i]).parent.name}", fontsize=8)
-        ax[r, 1].imshow(maps[i], cmap="inferno")
-        ax[r, 2].imshow(img)
-        ax[r, 2].imshow(maps[i], cmap="inferno", alpha=0.5)
-        ax[r, 2].contour(masks[i] > 0, levels=[0.5], colors="lime", linewidths=1.2)
-        ax[r, 2].plot(peak[1], peak[0], "o", ms=7, mfc="none", mew=1.8,
-                      mec="lime" if hit else "red")
-        for c in range(3):
-            ax[r, c].set_xticks([])
-            ax[r, c].set_yticks([])
-        print(f"{cat:11} median-scoring defect, peak {'inside' if hit else 'OUTSIDE'} mask",
-              flush=True)
+        ax[0, column].imshow(image)
+        ax[1, column].imshow(maps[i], cmap="inferno")
+        ax[2, column].imshow(image)
+        ax[2, column].imshow(maps[i], cmap="inferno", alpha=0.5)
+        ax[2, column].contour(masks[i] > 0, levels=[0.5], colors="white", linewidths=1.6)
+        # clip_on: a peak on the border still gets a whole circle drawn
+        ax[2, column].plot(peak[1], peak[0], "o", ms=11, mfc="none", mew=2.4,
+                           mec=HIT if hit else MISS, clip_on=False)
+        for row in range(3):
+            _tile(ax[row, column])
+        titled(ax[0, column], category, Path(paths[i]).parent.name.replace("_", " "))
+        print(f"{category:11} median-scoring defect, "
+              f"peak {'inside' if hit else 'OUTSIDE'} the mask", flush=True)
 
-    for c, t in enumerate(["input", "anomaly map", "overlay — GT green, peak ○"]):
-        ax[0, c].set_title(t, fontsize=10)
-    fig.suptitle("PatchCore anomaly maps — median-difficulty defect per category", fontsize=11)
-    fig.tight_layout()
+    for row, label in enumerate(ROWS):
+        ax[row, 0].set_ylabel(label)
+
+    figure.text(0.008, 0.988, "Where the model says the defect is",
+                fontsize=12.5, fontweight="semibold", ha="left", va="top")
+    figure.text(0.008, 0.962,
+                "the median-difficulty defect of each category, white outline is the "
+                "labelled defect, the circle is the hottest pixel and is red when it "
+                "falls outside",
+                fontsize=9.3, color="#5a5a5a", ha="left", va="top")
+    figure.tight_layout(rect=(0, 0, 1, 0.945))
     out = ROOT / "reports" / "hero.png"
-    fig.savefig(out, dpi=115)
-    print(f"wrote {out}")
+    figure.savefig(out)
+    plt.close(figure)
+    print(f"wrote {out} ({out.stat().st_size // 1024} KB)")
+    return out
 
 
 if __name__ == "__main__":
