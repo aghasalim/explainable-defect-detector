@@ -75,18 +75,19 @@ def reproduction(out: Path) -> Path:
     rows = sorted(benches(), key=lambda r: r["image_auroc"] - r["paper_image_auroc"])
     categories = [r["category"] for r in rows]
     positions = np.arange(len(rows))
-    worst = rows[0]
-    image_gaps = [r["image_auroc"] - r["paper_image_auroc"] for r in rows[1:]]
+    short = [r for r in rows if r["image_auroc"] < r["paper_image_auroc"]]
+    gaps = [r["paper_image_auroc"] - r["image_auroc"] for r in short]
+    pixel_short = sum(1 for r in rows if r["pixel_auroc"] < r["paper_pixel_auroc"])
 
     figure, (left, right) = plt.subplots(1, 2, figsize=(13, 5.6), sharey=True)
     panels = (
         (left, "image_auroc", "paper_image_auroc", 0.93,
-         f"Only {worst['category']} misses the published AUROC",
-         f"every other category is within {max(abs(g) for g in image_gaps):.3f} of the paper, "
-         f"{worst['category']} is {abs(worst['image_auroc'] - worst['paper_image_auroc']):.3f} short",
+         f"{len(short)} of {len(rows)} categories fall short of the published AUROC",
+         f"{short[0]['category']} is {gaps[0]:.3f} short, the other {len(short) - 1} "
+         f"are within {max(gaps[1:], default=0.0):.3f}",
          "image-level AUROC (1.0 = perfect ranking)"),
         (right, "pixel_auroc", "paper_pixel_auroc", 0.90,
-         "Pixel AUROC is short in all 15",
+         f"Pixel AUROC is short in {pixel_short} of {len(rows)}",
          "the score reweighting step of the paper is not implemented here",
          "pixel-level AUROC (1.0 = perfect ranking)"),
     )
