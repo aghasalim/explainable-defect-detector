@@ -6,9 +6,9 @@ Long form detail moved out of the README.
 ## 3. Results
 
 
-![measured AUROC against the published numbers](reports/figures/reproduction.png)
+![measured AUROC against the published numbers](../reports/figures/reproduction.png)
 
-![localisation against a control with no spatial information](reports/figures/localisation-control.png)
+![localisation against a control with no spatial information](../reports/figures/localisation-control.png)
 
 The control is the point of the second figure. A heatmap that looks plausible is
 not evidence of localisation; what counts is beating a score that has no spatial
@@ -75,11 +75,11 @@ crop got 0.9412 at 1%, because the crop zooms in and`screw` defects are tiny.
 ## 5. Picking a threshold
 
 
-![realised false-positive rate against the target](reports/figures/threshold-check.png)
+![realised false-positive rate against the target](../reports/figures/threshold-check.png)
 
-![percentile threshold against the distribution-free bound](reports/figures/calibration-rules.png)
+![percentile threshold against the distribution-free bound](../reports/figures/calibration-rules.png)
 
-![calibration images available against the number the guarantee needs](reports/figures/guarantee.png)
+![calibration images available against the number the guarantee needs](../reports/figures/guarantee.png)
 
 The last figure is the one I would want to be asked about. A 95%-confidence 1%
 tolerance bound needs 299 normal calibration images. MVTec gives fewer than that
