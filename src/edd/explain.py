@@ -38,7 +38,7 @@ from PIL import Image
 from scipy import ndimage
 from sklearn.metrics import roc_auc_score
 
-from style import PALETTE, titled
+from style import PALETTE
 
 # Fixed meanings, so the same idea keeps the same colour across every figure.
 NEUTRAL = PALETTE[5]   # good, or nothing wrong
