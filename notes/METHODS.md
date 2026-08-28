@@ -12,10 +12,10 @@ Long form detail moved out of the README.
 
 The control is the point of the second figure. A heatmap that looks plausible is
 not evidence of localisation; what counts is beating a score that has no spatial
-information on the same masks. It does, in every category, worst case`screw` at
+information on the same masks. It does, in every category, worst case `screw` at
 0.50 peak-in-mask against a control of 0.01.
 
-1% coreset,`Resize(256)+CenterCrop(224)`. Paper columns are Roth et al., CVPR 2022.
+1% coreset, `Resize(256)+CenterCrop(224)`. Paper columns are Roth et al., CVPR 2022.
 
 | category | image AUROC | paper | pixel AUROC | paper | AUPRO | peak-in-mask |
 |---|---|---|---|---|---|---|
@@ -59,17 +59,17 @@ held-out half:
 | pill | 0.9526 | 0.9579 | 0.3562 | 0.6712 |
 | screw | 0.9586 | 0.9375 | 0.0000 | 0.4918 |
 
-On`screw` the classifier reaches 0.96 AUROC while its Grad-CAM never lands on the
+On `screw` the classifier reaches 0.96 AUROC while its Grad-CAM never lands on the
 defect and scores 0.58 pixel AUROC, which is close to random. It gets the answer right
 for reasons that have nothing to do with the defect.
 
-**Coreset sampling does most of the work.** With the same bank size on`screw`, random
+**Coreset sampling does most of the work.** With the same bank size on `screw`, random
 sampling scores 0.5518 and greedy k-center scores 0.8737. The image score is a max over
 patch distances, so if the bank misses rare-but-normal patches, good images get flagged.
 
 **Preprocessing beat every model knob.** Growing the memory bank from 1% to 10% took
 `screw` from 0.8737 to 0.9289 and cost 8x the compute. Just using the paper's centre
-crop got 0.9412 at 1%, because the crop zooms in and`screw` defects are tiny.
+crop got 0.9412 at 1%, because the crop zooms in and `screw` defects are tiny.
 
 
 ## 5. Picking a threshold
@@ -91,7 +91,7 @@ from normal images only, since a deployed system has no labelled defects. My fir
 was bad enough to be worth writing down, because fixing it taught me the most.
 
 **Attempt 1, hold out 10% of the training images, take their 99th percentile.** Only
-3 of 15 categories hit the 1% false alarm target.`carpet` flagged **43% of good parts**.
+3 of 15 categories hit the 1% false alarm target. `carpet` flagged **43% of good parts**.
 
 The reason is not obvious at first. A 99th percentile from a small sample should be too
 *strict*, not too loose. But with n=28, the empirical 99th percentile is essentially the
@@ -154,9 +154,9 @@ alarm rate" as a requirement means.
   from the line you are actually running on.
 
 One more thing I found while doing this: a 99%/95% tolerance bound needs
-`1 - 0.99^n >= 0.95`, i.e. **at least 299 normal images**. Only`hazelnut` (391) and`screw`
+`1 - 0.99^n >= 0.95`, i.e. **at least 299 normal images**. Only `hazelnut` (391) and `screw`
 (320) clear that bar, so for the other 13 categories even the sample maximum cannot deliver
-the guarantee and the code falls back to it and records`guarantee_met: false` in the
+the guarantee and the code falls back to it and records `guarantee_met: false` in the
 artefact. If I were specifying this for real, "collect 300 good parts before you can promise
 a false alarm rate" would be the requirement to hand over.
 
@@ -166,9 +166,9 @@ a false alarm rate" would be the requirement to hand over.
 
 - The official MVTec download is dead, so the data comes from a HuggingFace mirror.
   That mirror renames files, and an image and its own mask get different suffixes
-  (`000-94.png` vs`000_mask-67.png`). Matching them by name gives zero masks and no
-  warning.`fetch_mvtec.py` now fails the download if any defect image lacks a mask.
+  (`000-94.png` vs `000_mask-67.png`). Matching them by name gives zero masks and no
+  warning. `fetch_mvtec.py` now fails the download if any defect image lacks a mask.
 - The heatmap blur used zero padding, which pushed scores down near the image border.
-  Switching to reflect padding moved`screw` pixel AUROC from 0.9544 to 0.9686.
+  Switching to reflect padding moved `screw` pixel AUROC from 0.9544 to 0.9686.
 - My first crop measurement compared pixel counts at two different zoom levels and
   reported "129% of the defect retained", which is impossible.

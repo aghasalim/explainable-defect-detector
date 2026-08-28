@@ -30,7 +30,7 @@ Reproduction is checked against the published numbers per category rather than i
 aggregate. Localisation is scored against a control that has no spatial
 information, because a heatmap can look convincing and still be no better than
 chance at pointing anywhere useful, the measured peak-in-mask rate clears its
-control by a wide margin in every category, worst case`screw` at 0.50 against
+control by a wide margin in every category, worst case `screw` at 0.50 against
 0.01. And the threshold is calibrated with a distribution-free tolerance bound
 rather than a percentile, which needs 299 normal calibration images for a
 95%-confidence 1% bound. MVTec's training splits are smaller than that for most
@@ -49,8 +49,8 @@ A factory has plenty of good parts and very few bad ones. So instead of training
 classifier on defects, I model what a normal part looks like and flag anything that
 sits far away from it.
 
-MVTec AD is built for this. Its`train/` folder holds only good images and every
-defect is in`test/`. Training a normal classifier means taking defects out of the
+MVTec AD is built for this. Its `train/` folder holds only good images and every
+defect is in `test/`. Training a normal classifier means taking defects out of the
 test set, which breaks the only clean evaluation split the dataset has.
 
 ## 2. Method
@@ -122,31 +122,31 @@ uv run python src/edd/verify_threshold.py  # the table above
 uv run streamlit run app.py
 ```
 
-All 15 categories are exported and committed under`models/` (79 MB total). The memory
+All 15 categories are exported and committed under `models/` (79 MB total). The memory
 banks are stored as float16, which halves them; I checked and it changes scores by at
 most 1.8e-4 and flips no verdict on 410 test images.
 
-Images are not committed.`fetch_mvtec.py` rebuilds them from the tracked index.
+Images are not committed. `fetch_mvtec.py` rebuilds them from the tracked index.
 
 ## 8. Deploying
 
 Live on Streamlit Community Cloud at
 [explainable-defect-detector.streamlit.app](https://explainable-defect-detector.streamlit.app/),
-deployed from this repo, branch`main`, main file`app.py`, Python 3.12. It redeploys on
-every push.`requirements.txt` pins the CPU build of PyTorch, since the default Linux
+deployed from this repo, branch `main`, main file `app.py`, Python 3.12. It redeploys on
+every push. `requirements.txt` pins the CPU build of PyTorch, since the default Linux
 wheel is the 2 GB CUDA one and the free tier will not hold it.
 
-Hugging Face Spaces also works through`scripts/deploy_space.sh`, but HF now needs a
+Hugging Face Spaces also works through `scripts/deploy_space.sh`, but HF now needs a
 PRO subscription for Docker Spaces, so the free tier rejects it with HTTP 402.
 
 ## 9. What I would do next
 
 1. Add the score reweighting from the paper. It is the one part I left out and the
-   likely reason`screw` is 4 points short.
+   likely reason `screw` is 4 points short.
 2. Calibrate the threshold on more images, or fit the tail instead of taking a raw
    percentile.
-3. Improve localisation on`screw`,`toothbrush`,`grid` and`capsule`. Higher input
-   resolution and adding`layer1` features are the obvious things to try.
+3. Improve localisation on `screw`, `toothbrush`, `grid` and `capsule`. Higher input
+   resolution and adding `layer1` features are the obvious things to try.
 4. Test it on parts I photograph myself, where the lighting is not controlled.
 5. Swap the brute-force nearest neighbour for an approximate index if the bank grows.
 
