@@ -80,7 +80,7 @@ The control is the point of the second figure.
 
 Full detail in [notes/METHODS.md](notes/METHODS.md#3-results).
 ## 4. What I found
-**Detecting and locating are two different problems.**`toothbrush` scores a perfect 1.0000 image AUROC, but its heatmap points at the actual defect only 57% of the time.
+**Detecting and locating are two different problems.** `toothbrush` scores a perfect 1.0000 image AUROC, but its heatmap points at the actual defect only 57% of the time.
 
 Full detail in [notes/METHODS.md](notes/METHODS.md#4-what-i-found).
 ## 5. Picking a threshold

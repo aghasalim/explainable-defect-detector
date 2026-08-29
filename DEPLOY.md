@@ -19,9 +19,9 @@ requires your GitHub login.
 1. Go to **https://share.streamlit.io** and sign in with GitHub.
 2. Click **Create app** → **Deploy a public app from GitHub**.
 3. Fill in:
-   - **Repository:**`aghasalim/explainable-defect-detector`
-   - **Branch:**`main`
-   - **Main file path:**`app.py`
+   - **Repository:** `aghasalim/explainable-defect-detector`
+   - **Branch:** `main`
+   - **Main file path:** `app.py`
 4. Open **Advanced settings** and set **Python version: 3.12**.
 5. Click **Deploy**.
 

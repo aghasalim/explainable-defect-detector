@@ -44,7 +44,7 @@ every localisation number, are in [reports/results.md](../reports/results.md).
 ## 4. What I found
 
 
-**Detecting and locating are two different problems.**`toothbrush` scores a perfect
+**Detecting and locating are two different problems.** `toothbrush` scores a perfect
 1.0000 image AUROC, but its heatmap points at the actual defect only 57% of the time.
 `screw` detects at 0.941 and locates at 0.496. Reporting AUROC alone would hide this
 completely, which is why I measured localisation separately.
@@ -144,9 +144,9 @@ alarm rate" as a requirement means.
 
 **The two that still miss, and why I am not going to fix them.**
 
--`zipper` flags 1 of 32 normal images. With 32 test normals the smallest non-zero rate
+- `zipper` flags 1 of 32 normal images. With 32 test normals the smallest non-zero rate
   measurable is 3.1%, so this is one image, not a trend.
--`carpet` is genuinely unfixable from training data. The threshold needed for a 1% test
+- `carpet` is genuinely unfixable from training data. The threshold needed for a 1% test
   FPR is 1.933, and the *entire* calibration set of 280 images maxes out at 1.788. Its test
   normals are drawn from a wider distribution than its training normals, real covariate
   shift. No amount of calibration on train data can cover it, and using test data to pick
