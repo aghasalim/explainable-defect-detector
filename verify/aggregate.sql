@@ -87,7 +87,7 @@ FROM bench ORDER BY peak_in_mask LIMIT 1;
 INSERT INTO want SELECT 'README.md', 'toothbrush split',
        '`toothbrush` scores a perfect ' || printf('%.4f', image_auroc)
        || ' image AUROC, but its heatmap points at the actual defect only '
-       || printf('%.0f%%', 100 * peak_in_mask) || ' of the time.'
+       || CAST(round(100 * peak_in_mask) AS INT) || '% of the time.'
 FROM bench WHERE category = 'toothbrush';
 INSERT INTO want SELECT 'notes/METHODS.md', 'screw split',
        '`screw` detects at ' || printf('%.3f', image_auroc) || ' and locates at '
@@ -125,10 +125,15 @@ INSERT INTO want SELECT 'notes/METHODS.md', 'crop ablation',
        || printf('%.4f', (SELECT image_auroc FROM ablation WHERE run = 'patchcore-224crop'))
        || ' at 1%';
 
+-- A failing line is printed in full, since the disagreement is usually in the
+-- part a truncated line would hide.
 SELECT CASE WHEN instr((SELECT flat FROM docs WHERE name = want.doc), line) > 0
-            THEN 'ok   ' ELSE 'FAIL ' END
-       || printf('%-18s', doc) || printf('%-20s', label) || substr(line, 1, 60)
+            THEN 'ok   ' || printf('%-18s', doc) || printf('%-20s', label)
+                 || substr(line, 1, 60)
+            ELSE 'FAIL ' || printf('%-18s', doc) || printf('%-20s', label) || line END
 FROM want;
 
 SELECT 'rebuilt ' || count(*) || ' published lines from 15 bench files and 4 screw runs'
-FROM want;
+       || ' (sqlite ' || sqlite_version() || ', '
+       || (SELECT group_concat(name || ' ' || length(flat) || ' chars', ', ') FROM docs)
+       || ')' FROM want;
