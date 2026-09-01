@@ -42,7 +42,10 @@ jobs:
         run: |
           command -v Rscript || sudo apt-get install -y --no-install-recommends r-base-core
 
+      # bash without pipefail would let `verify.sh | tee` report tee's exit code,
+      # which is always 0. That masked a real failure the first time this ran.
       - name: recompute everything
+        shell: bash
         run: |
           ./verify/verify.sh | tee /tmp/verify.log
           grep -q ', 0 skipped' /tmp/verify.log \
@@ -51,6 +54,7 @@ jobs:
       # A harness that cannot fail is decoration. Break one published number and
       # require the harness to notice, then put it back and require a pass.
       - name: the harness must reject a corrupted results file
+        shell: bash
         run: |
           python3 - <<'EOF'
           import json

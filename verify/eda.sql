@@ -126,9 +126,13 @@ FROM (SELECT
         (SELECT avg(grey) FROM img WHERE label = 1) AS bm,
         (SELECT sqrt(avg(grey * grey) - avg(grey) * avg(grey)) FROM img WHERE label = 1) AS bs);
 
-SELECT CASE WHEN instr((SELECT doc FROM md), line) > 0 THEN 'ok   ' ELSE 'FAIL ' END
-       || printf('%-22s', label) || substr(line, 1, 78)
+-- A failing line is printed in full, since the disagreement is usually in the
+-- part a truncated line would hide.
+SELECT CASE WHEN instr((SELECT doc FROM md), line) > 0
+            THEN 'ok   ' || printf('%-22s', label) || substr(line, 1, 78)
+            ELSE 'FAIL ' || printf('%-22s', label) || line END
 FROM want;
 
 SELECT 'rebuilt ' || count(*) || ' lines of reports/eda_bottle.md from '
-       || (SELECT count(*) FROM img) || ' per image rows' FROM want;
+       || (SELECT count(*) FROM img) || ' per image rows'
+       || ' (sqlite ' || sqlite_version() || ')' FROM want;
