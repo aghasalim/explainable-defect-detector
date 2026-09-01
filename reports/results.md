@@ -68,12 +68,24 @@ The supervised model is competitive at *detecting* and far worse at *explaining*
 
 ## Deployment threshold: calibrated vs. realised
 
-The demo threshold is the 99th percentile of anomaly scores on held-out **normal** training images - a 1% false-alarm target, chosen without touching test data. How it actually behaves on the real test split:
+The demo threshold comes from 5-fold cross-calibration scores on the **normal** training images, read off as a one-sided distribution-free tolerance bound at 99% coverage and 95% confidence, and falling back to the largest calibration score where there are too few images for that guarantee. It never touches test data. How it behaves on the real test split:
 
 | category | threshold | target FPR | realised FPR | recall |
 |---|---|---|---|---|
-| bottle | 2.018 | 1% | 0.0% | 100.0% |
-| pill | 2.114 | 1% | 7.7% | 81.6% |
-| screw | 1.996 | 1% | 0.0% | 53.8% |
+| bottle | 2.265 | 1% | 0.0% | 96.8% |
+| cable | 2.816 | 1% | 0.0% | 78.3% |
+| capsule | 2.046 | 1% | 0.0% | 40.4% |
+| carpet | 1.788 | 1% | 25.0% | 97.8% |
+| grid | 2.139 | 1% | 0.0% | 73.7% |
+| hazelnut | 2.796 | 1% | 0.0% | 98.6% |
+| leather | 1.661 | 1% | 0.0% | 100.0% |
+| metal_nut | 2.505 | 1% | 0.0% | 93.5% |
+| pill | 2.382 | 1% | 0.0% | 39.0% |
+| screw | 2.050 | 1% | 0.0% | 41.2% |
+| tile | 2.525 | 1% | 0.0% | 75.0% |
+| toothbrush | 2.265 | 1% | 0.0% | 76.7% |
+| transistor | 2.454 | 1% | 0.0% | 92.5% |
+| wood | 2.332 | 1% | 0.0% | 93.3% |
+| zipper | 1.736 | 1% | 3.1% | 95.0% |
 
-Calibration is noisy at this sample size: a 99th percentile estimated from ~20-40 images is essentially the maximum, so `pill` overshoots its false-alarm target sevenfold while `screw` is so conservative it misses half the defects. More calibration images, or a lower quantile with an explicit safety margin, is the fix - listed under future work rather than silently tuned away.
+13 of the 15 categories land at or below the 1% false-alarm target. The ones that do not are `carpet` at 25.0%, 7 of 28 normal test images, `zipper` at 3.1%, 1 of 32 normal test images. What that buys is paid for in recall, which averages 79.4% here. Both numbers are measured on the test split; neither was used to pick the threshold.

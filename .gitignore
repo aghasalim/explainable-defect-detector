@@ -14,3 +14,7 @@ reports/*.npy
 
 # editable install artefact, rebuilt by uv sync
 *.egg-info/
+
+# build products of the cross-language checks in verify/
+verify/*/target/
+verify/*.class

@@ -31,7 +31,7 @@ aggregate. Localisation is scored against a control that has no spatial
 information, because a heatmap can look convincing and still be no better than
 chance at pointing anywhere useful, the measured peak-in-mask rate clears its
 control by a wide margin in every category, worst case `screw` at 0.50 against
-0.01. And the threshold is calibrated with a distribution-free tolerance bound
+0.00. And the threshold is calibrated with a distribution-free tolerance bound
 rather than a percentile, which needs 299 normal calibration images for a
 95%-confidence 1% bound. MVTec's training splits are smaller than that for most
 categories, so the guarantee is reported as unmet rather than quietly assumed.
@@ -100,7 +100,50 @@ Full detail in [notes/METHODS.md](notes/METHODS.md#5-picking-a-threshold).
 - The official MVTec download is dead, so the data comes from a HuggingFace mirror.
 
 Full detail in [notes/METHODS.md](notes/METHODS.md#6-bugs-worth-mentioning).
-## 7. Running it
+## 7. Everything here is computed twice
+
+Every number in this README came out of one Python process. The metrics in
+`reports/*.json` were computed by the script that wrote them, the tables in
+`reports/*.md` were formatted by the script that wrote those, and the sentences
+here were typed out of both. Nothing ever read any of it back, so nothing could
+tell me when a number went stale. Two had: the README claimed 79 MB of exported
+models when the committed files are 87 MB, and it credited `screw` with a
+localisation control of 0.01 when its run file says 0.00.
+
+`verify/` recomputes what is published from the rawest file that still exists,
+in a language that is not the one that produced it. A mistake now has to be made
+identically twice to survive. `verify/verify.sh` runs all of them and exits
+non-zero if any two disagree; CI runs it, then corrupts a results file and
+requires the harness to reject it.
+
+| language | recomputes | from | measured agreement |
+|---|---|---|---|
+| SQL | the headline mean, the notes table, the `screw` ablations | 15 `bench_*.json` and 4 run files | 26 of 26 published lines rebuilt exactly |
+| SQL | every table and sentence of the EDA report | `eda_bottle.json`, 292 per image rows | 23 of 23 lines rebuilt exactly |
+| C | AUROC, average precision, best F1 and its threshold, accuracy | the per image score lists in 12 run files | 120 published fields, worst gap 1.6e-15 |
+| Go | image counts, model card arithmetic, file structure | `data/_mvtec_index.json`, 56 committed JSON files | 15426 checks, all agree |
+| R | the 299 image requirement, intervals on peak-in-mask, exact tests on the realised false-alarm rate | `models/*.json`, `bench_*.json`, `threshold_check.json` | 299 found by search, 15 of 15 controls cleared, sign test p = 3.05e-05 |
+| Rust | AUROC by comparing every positive with every negative, and the coverage of the calibration rule by simulation | the same 12 score lists, 1e7 trials per size | worst gap 1.1e-16, simulated coverage 1.31 standard errors from the closed form |
+| JavaScript | every row of `reports/benchmark.md` and `reports/results.md` | `bench_*.json`, `compare_*.json`, `threshold_check.json` | 93 table lines and 3 sentences, character for character |
+| Java | the calibration tables, and the shipped threshold across the three files that record it | `calibration_compare.json`, `models/*.json`, `threshold_check.json` | 15 of 15 thresholds identical, summary rows inside their last digit |
+| Ruby | the held-out half, and the PatchCore numbers reported on it | `split_*.json`, `patchcore-224crop_*.json` | AUROC exact on 3 categories, average precision worst gap 3.3e-16 |
+
+A check that cannot fail proves nothing, so each was tested by corrupting the
+file it reads. Twelve corruptions, twelve rejections: a changed peak-in-mask is
+caught by SQL, R and JavaScript, a changed image score by C and Rust, a wrong
+test count by Go, a wrong sample size requirement by R and Rust, a flipped demo
+verdict by Go, a shifted calibration recall by Java, and a contaminated split by
+Ruby.
+
+What is not covered: the pixel level metrics, since the anomaly maps and the
+masks they are scored against are not committed. Those are checked for
+structure and for agreement with the tables that publish them, not recomputed.
+
+```bash
+./verify/verify.sh                         # 9 passed, 0 failed, 0 skipped
+```
+
+## 8. Running it
 
 ```bash
 uv sync
@@ -122,13 +165,13 @@ uv run python src/edd/verify_threshold.py  # the table above
 uv run streamlit run app.py
 ```
 
-All 15 categories are exported and committed under `models/` (79 MB total). The memory
+All 15 categories are exported and committed under `models/` (87 MB total). The memory
 banks are stored as float16, which halves them; I checked and it changes scores by at
 most 1.8e-4 and flips no verdict on 410 test images.
 
 Images are not committed. `fetch_mvtec.py` rebuilds them from the tracked index.
 
-## 8. Deploying
+## 9. Deploying
 
 Live on Streamlit Community Cloud at
 [explainable-defect-detector.streamlit.app](https://explainable-defect-detector.streamlit.app/),
@@ -139,7 +182,7 @@ wheel is the 2 GB CUDA one and the free tier will not hold it.
 Hugging Face Spaces also works through `scripts/deploy_space.sh`, but HF now needs a
 PRO subscription for Docker Spaces, so the free tier rejects it with HTTP 402.
 
-## 9. What I would do next
+## 10. What I would do next
 
 1. Add the score reweighting from the paper. It is the one part I left out and the
    likely reason `screw` is 4 points short.
@@ -150,7 +193,7 @@ PRO subscription for Docker Spaces, so the free tier rejects it with HTTP 402.
 4. Test it on parts I photograph myself, where the lighting is not controlled.
 5. Swap the brute-force nearest neighbour for an approximate index if the bank grows.
 
-## 10. Notes on method
+## 11. Notes on method
 
 - Image score is a plain max over patch distances. The paper adds a reweighting step.
 - The coreset search runs in a 128-d random projection for speed. The bank keeps the
@@ -160,7 +203,7 @@ PRO subscription for Docker Spaces, so the free tier rejects it with HTTP 402.
 - Pixel AUROC cannot be compared between the crop and resize rows, since the crop
   changes which pixels are being scored.
 
-## 11. Data and licence
+## 12. Data and licence
 
 Code is MIT. Data is [MVTec AD](https://www.mvtec.com/company/research/datasets/mvtec-ad),
 CC BY-NC-SA 4.0, research and non-commercial use.
