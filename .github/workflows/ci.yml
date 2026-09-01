@@ -29,3 +29,41 @@ jobs:
 
       - name: lint
         run: uv run ruff check src app.py
+
+  # Every number this repository publishes is recomputed from the rawer file it
+  # came from, by an implementation in another language. See verify/verify.sh.
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # sqlite3, gcc, go, cargo, node, java and ruby are on the runner already.
+      - name: R, if the runner does not have it
+        run: |
+          command -v Rscript || sudo apt-get install -y --no-install-recommends r-base-core
+
+      - name: recompute everything
+        run: |
+          ./verify/verify.sh | tee /tmp/verify.log
+          grep -q ', 0 skipped' /tmp/verify.log \
+            || { echo "a toolchain was missing, so this proved less than it looks"; exit 1; }
+
+      # A harness that cannot fail is decoration. Break one published number and
+      # require the harness to notice, then put it back and require a pass.
+      - name: the harness must reject a corrupted results file
+        run: |
+          python3 - <<'EOF'
+          import json
+          p = "reports/bench_screw.json"
+          d = json.load(open(p))
+          d["peak_in_mask"] = 0.6
+          json.dump(d, open(p, "w"), indent=1)
+          EOF
+          if ./verify/verify.sh > /tmp/corrupt.log 2>&1; then
+            echo "the harness passed on a file it should have rejected"
+            tail -30 /tmp/corrupt.log
+            exit 1
+          fi
+          grep -- '--- .*FAILED' /tmp/corrupt.log
+          git checkout -- reports/bench_screw.json
+          ./verify/verify.sh

@@ -13,7 +13,7 @@ Long form detail moved out of the README.
 The control is the point of the second figure. A heatmap that looks plausible is
 not evidence of localisation; what counts is beating a score that has no spatial
 information on the same masks. It does, in every category, worst case `screw` at
-0.50 peak-in-mask against a control of 0.01.
+0.50 peak-in-mask against a control of 0.00.
 
 1% coreset, `Resize(256)+CenterCrop(224)`. Paper columns are Roth et al., CVPR 2022.
 
@@ -112,7 +112,7 @@ tolerance bound, and for the m-th smallest of n samples it follows from
 
 | calibration method | within 1% target | mean FPR | mean recall |
 |---|---|---|---|
-| 10% holdout + 99th percentile | 3 / 15 | 9.0% |, |
+| 10% holdout + 99th percentile | 3 / 15 | 9.0% | |
 | 5-fold cross-calibration + 99th percentile | 10 / 15 | 3.4% | 87.4% |
 | **5-fold + tolerance bound (shipped)** | **13 / 15** | **1.9%** | 79.4% |
 

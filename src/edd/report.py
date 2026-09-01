@@ -112,21 +112,30 @@ def main() -> None:
     # --- deployment threshold ----------------------------------------------
     tc = REP / "threshold_check.json"
     if tc.exists():
+        rows = json.loads(tc.read_text())
         L += ["\n## Deployment threshold: calibrated vs. realised\n",
-              "The demo threshold is the 99th percentile of anomaly scores on held-out "
-              "**normal** training images - a 1% false-alarm target, chosen without touching "
-              "test data. How it actually behaves on the real test split:\n",
+              "The demo threshold comes from 5-fold cross-calibration scores on the "
+              "**normal** training images, read off as a one-sided distribution-free "
+              "tolerance bound at 99% coverage and 95% confidence, and falling back to the "
+              "largest calibration score where there are too few images for that guarantee. "
+              "It never touches test data. How it behaves on the real test split:\n",
               "| category | threshold | target FPR | realised FPR | recall |",
               "|" + "---|" * 5]
-        for r in json.loads(tc.read_text()):
+        for r in rows:
             L.append(f"| {r['category']} | {r['threshold']:.3f} | {r['target_fpr']:.0%} "
                      f"| {r['realised_fpr_on_test']:.1%} | {r['recall_on_test']:.1%} |")
+        over = sorted((r for r in rows if r["realised_fpr_on_test"] > r["target_fpr"]),
+                      key=lambda r: -r["realised_fpr_on_test"])
         L.append(
-            "\nCalibration is noisy at this sample size: a 99th percentile estimated from "
-            "~20-40 images is essentially the maximum, so `pill` overshoots its false-alarm "
-            "target sevenfold while `screw` is so conservative it misses half the defects. "
-            "More calibration images, or a lower quantile with an explicit safety margin, "
-            "is the fix - listed under future work rather than silently tuned away.\n")
+            f"\n{len(rows) - len(over)} of the {len(rows)} categories land at or below the "
+            f"1% false-alarm target. The ones that do not are "
+            + ", ".join(
+                f"`{r['category']}` at {r['realised_fpr_on_test']:.1%}, "
+                f"{round(r['realised_fpr_on_test'] * r['n_normal'])} of {r['n_normal']} "
+                f"normal test images" for r in over)
+            + ". What that buys is paid for in recall, which averages "
+              f"{np.mean([r['recall_on_test'] for r in rows]):.1%} here. Both numbers are "
+              f"measured on the test split; neither was used to pick the threshold.\n")
 
     p = REP / "results.md"
     p.write_text("\n".join(L))
