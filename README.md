@@ -169,8 +169,9 @@ CC BY-NC-SA 4.0, research and non-commercial use.
 
 ## References
 
-The papers and sources this implementation follows. Each one is here because
-the code uses the method, the dataset or the metric it describes.
+PatchCore and PaDiM are the detectors reimplemented here, MVTec AD is the data
+they run on, and the last two describe the frozen backbone the patches come out
+of. Nothing below is background reading.
 
 - **Roth, Pemula, Zepeda, Schölkopf, Brox, Gehler. Towards Total Recall in Industrial Anomaly Detection. CVPR 2022.** [arXiv:2106.08265](https://arxiv.org/abs/2106.08265) PatchCore, the main detector.
 - **Defard, Setkov, Loesch, Audigier. PaDiM: a Patch Distribution Modeling Framework. ICPR 2021.** [arXiv:2011.08785](https://arxiv.org/abs/2011.08785) the PaDiM baseline.
