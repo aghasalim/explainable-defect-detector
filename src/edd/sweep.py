@@ -1,4 +1,4 @@
-"""Milestone 6 - run the headline config across all 15 MVTec categories.
+"""Run the headline config across all 15 MVTec categories.
 
 Three categories is a demo; fifteen is a result. Reporting the full benchmark
 is also the only way the weak categories stay visible - it removes the option

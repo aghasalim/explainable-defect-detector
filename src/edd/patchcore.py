@@ -1,4 +1,4 @@
-"""Milestone 3 - PatchCore (Roth et al., CVPR 2022), implemented directly.
+"""PatchCore (Roth et al., CVPR 2022), implemented directly.
 
 The baseline collapsed each image to one vector, so small defects were averaged
 away and nothing could be localised. PatchCore keeps the spatial grid:

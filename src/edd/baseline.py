@@ -1,4 +1,4 @@
-"""Milestone 2 - end-to-end anomaly-detection baseline.
+"""End-to-end anomaly-detection baseline.
 
 Deliberately the simplest thing that is still a real anomaly detector:
 
@@ -13,7 +13,7 @@ and it establishes the number every later model has to beat.
 
 Its known weakness is that global average pooling collapses the whole image
 to one vector, so a small defect is averaged away and cannot be localised.
-That weakness is what motivates the patch-level model in Milestone 3.
+That weakness is what motivates the patch-level model in patchcore.py.
 """
 
 from __future__ import annotations
