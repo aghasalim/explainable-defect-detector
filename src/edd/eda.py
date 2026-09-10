@@ -1,4 +1,4 @@
-"""Milestone 1 EDA for one MVTec AD category.
+"""EDA for one MVTec AD category.
 
 Answers the questions that actually change later modelling decisions, rather
 than printing pretty pictures:

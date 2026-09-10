@@ -1,4 +1,4 @@
-"""Milestone 4b - the supervised comparison, run honestly, plus Grad-CAM.
+"""The supervised comparison, run honestly, plus Grad-CAM.
 
 The brief asks for Grad-CAM. Grad-CAM needs a classifier to backpropagate
 through, and PatchCore has none - so the comparison is built properly rather

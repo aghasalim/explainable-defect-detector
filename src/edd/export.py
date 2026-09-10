@@ -1,4 +1,4 @@
-"""Milestone 5a - export a deployable artefact for one category.
+"""Export a deployable artefact for one category.
 
 Writes models/<category>.pt: the coreset memory bank, the decision threshold,
 and the preprocessing config. There are no trained weights to ship, because

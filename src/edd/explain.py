@@ -1,4 +1,4 @@
-"""Milestone 4 - verify the explanations instead of admiring them.
+"""Verify the explanations instead of admiring them.
 
 A heatmap that lights up in the wrong place is worse than no heatmap, because
 it looks like evidence. MVTec ships pixel-level ground truth, so "does the

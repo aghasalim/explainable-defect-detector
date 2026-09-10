@@ -1,4 +1,4 @@
-"""Milestone 6 - the full 15-category MVTec AD run.
+"""The full 15-category MVTec AD run.
 
 Three categories is a demo; the whole benchmark is a result. Reporting all 15
 also removes the option of quietly leading with the easy ones.
