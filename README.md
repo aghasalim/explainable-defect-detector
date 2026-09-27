@@ -47,8 +47,7 @@ on held-out test data, separate from the calibration split.
 
 ## 1. The idea
 
-A factory has plenty of good parts and very few bad ones. So instead of training a
-classifier on defects, I model what a normal part looks like and flag anything that
+A factory has plenty of good parts and very few bad ones. So I model what a normal part looks like and flag anything that
 sits far away from it.
 
 MVTec AD is built for this. Its `train/` folder holds only good images and every
@@ -145,8 +144,7 @@ PRO subscription for Docker Spaces, so the free tier rejects it with HTTP 402.
 
 1. Add the score reweighting from the paper. It is the one part I left out and the
    likely reason `screw` is 4 points short.
-2. Calibrate the threshold on more images, or fit the tail instead of taking a raw
-   percentile.
+2. Calibrate the threshold on more images, or fit a model to the tail.
 3. Improve localisation on `screw`, `toothbrush`, `grid` and `capsule`. Higher input
    resolution and adding `layer1` features are the obvious things to try.
 4. Test it on parts I photograph myself, where the lighting is not controlled.
@@ -158,7 +156,7 @@ PRO subscription for Docker Spaces, so the free tier rejects it with HTTP 402.
 - The coreset search runs in a 128-d random projection for speed. The bank keeps the
   full 1536-d vectors.
 - MVTec has no validation split, so the headline settings are fixed to the paper's and
-  everything else is reported as an ablation rather than picked as a best result.
+  everything else is reported as an ablation, and none of it was used to pick a best result.
 - Pixel AUROC cannot be compared between the crop and resize rows, since the crop
   changes which pixels are being scored.
 
