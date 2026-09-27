@@ -34,7 +34,7 @@ control by a wide margin in every category, worst case `screw` at 0.50 against
 0.00. And the threshold is calibrated with a distribution-free tolerance bound
 instead of a percentile, which needs 299 normal calibration images for a
 95%-confidence 1% bound. MVTec's training splits are smaller than that for most
-categories, so the guarantee is reported as unmet, not quietly assumed.
+categories, so the guarantee is reported as unmet.
 Every number reported here is recomputed from the raw result files by
 independent implementations in `verify/`, and CI fails if any of them disagree.
 
