@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: If you use this work, please cite it as below.
+title: "Explainable Visual Defect Detector"
+abstract: "Anomaly detection for visual defect inspection: trained on normal images only, with localisation. PyTorch + MVTec AD."
+type: software
+authors:
+  - family-names: Mustafazada
+    given-names: Aghasalim
+    orcid: "https://orcid.org/0009-0001-8746-4582"
+    affiliation: "Howest University of Applied Sciences"
+repository-code: "https://github.com/aghasalim/explainable-defect-detector"
+url: "https://aghasalim.github.io/"
+license: MIT
+keywords:
+  - anomaly detection
+  - computer vision
+  - explainable ai
+  - industrial inspection
+  - machine learning
+  - mvtec ad
+  - patchcore
+  - pytorch
