@@ -26,19 +26,19 @@ threshold delivers the false-positive rate it claims. This work reimplements
 PatchCore across all 15 MVTec-AD categories and reports three things the headline
 metric leaves out.
 
-Reproduction is checked against the published numbers per category rather than in
+Reproduction is checked against the published numbers per category, not in
 aggregate. Localisation is scored against a control that has no spatial
 information, because a heatmap can look convincing and still be no better than
 chance at pointing anywhere useful, the measured peak-in-mask rate clears its
 control by a wide margin in every category, worst case `screw` at 0.50 against
 0.00. And the threshold is calibrated with a distribution-free tolerance bound
-rather than a percentile, which needs 299 normal calibration images for a
+instead of a percentile, which needs 299 normal calibration images for a
 95%-confidence 1% bound. MVTec's training splits are smaller than that for most
-categories, so the guarantee is reported as unmet rather than quietly assumed.
+categories, so the guarantee is reported as unmet, not quietly assumed.
 Every number reported here is recomputed from the raw result files by
 independent implementations in `verify/`, and CI fails if any of them disagree.
 
-**Contributions.** (i) Per-category reproduction against published values. (ii) A
+Contributions. (i) Per-category reproduction against published values. (ii) A
 spatial control for localisation claims. (iii) A distribution-free threshold with
 its sample-size requirement stated and checked. (iv) A realised-FPR verification
 on held-out test data, separate from the calibration split.
@@ -82,7 +82,7 @@ The control is the point of the second figure.
 
 Full detail in [notes/METHODS.md](notes/METHODS.md#3-results).
 ## 4. What I found
-**Detecting and locating are two different problems.** `toothbrush` scores a perfect 1.0000 image AUROC, but its heatmap points at the actual defect only 57% of the time.
+Detecting and locating are two different problems. `toothbrush` scores a perfect 1.0000 image AUROC, but its heatmap points at the actual defect only 57% of the time.
 
 Full detail in [notes/METHODS.md](notes/METHODS.md#4-what-i-found).
 ## 5. Picking a threshold
