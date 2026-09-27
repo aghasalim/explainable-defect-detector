@@ -10,6 +10,7 @@ reports 0.990.
 
 [![ci](https://github.com/aghasalim/explainable-defect-detector/actions/workflows/ci.yml/badge.svg)](https://github.com/aghasalim/explainable-defect-detector/actions/workflows/ci.yml)
 [![demo-link](https://github.com/aghasalim/explainable-defect-detector/actions/workflows/demo.yml/badge.svg)](https://github.com/aghasalim/explainable-defect-detector/actions/workflows/demo.yml)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23003629.svg)](https://doi.org/10.5281/zenodo.23003629)
 
 **[Try it live](https://explainable-defect-detector.streamlit.app/)**: pick one of the 15
 object types, try a sample or upload your own photo. Each category ships a defect the model
