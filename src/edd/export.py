@@ -176,7 +176,8 @@ def load(category: str, dev: torch.device | None = None) -> dict:
 
 
 @torch.no_grad()
-def predict(art: dict, x: torch.Tensor, model: PatchFeatures, dev: torch.device):
+def predict(art: dict, x: torch.Tensor, model: PatchFeatures,
+            dev: torch.device) -> tuple[float, bool, np.ndarray]:
     """Score one preprocessed image. -> (image score, flagged, HxW anomaly map)."""
     if x.dim() == 3:
         x = x.unsqueeze(0)
