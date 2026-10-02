@@ -13,7 +13,8 @@ jobs:
       - uses: astral-sh/setup-uv@v5
         with:
           enable-cache: true
-      - run: uv sync --frozen
+      - name: install from the lockfile
+        run: uv sync --frozen
 
       # The self-checks are the real tests: each asserts that a metric fails
       # loudly on a deliberately wrong input. They need no dataset, so CI stays
