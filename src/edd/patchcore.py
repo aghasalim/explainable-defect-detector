@@ -112,7 +112,7 @@ def coreset(x: torch.Tensor, frac: float, dev: torch.device, seed: int = 0) -> t
 
 
 @torch.no_grad()
-def score(bank: torch.Tensor, test: torch.Tensor, dev: torch.device, chunk: int = 16):
+def score(bank: torch.Tensor, test: torch.Tensor, dev: torch.device, chunk: int = 16) -> torch.Tensor:
     """Per-patch distance to the nearest normal patch. -> (N, P)"""
     bank = bank.to(dev)
     out = []
