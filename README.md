@@ -100,6 +100,8 @@ The last figure is the one I would want to be asked about.
 Full detail in [notes/METHODS.md](notes/METHODS.md#5-picking-a-threshold).
 ## 6. Bugs worth mentioning
 - The official MVTec download is dead, so the data comes from a HuggingFace mirror.
+- Pixel AUROC and AUPRO used to skip the normal test images. With the standard
+  protocol, mean AUPRO is 0.9025, up from 0.8457.
 
 Full detail in [notes/METHODS.md](notes/METHODS.md#6-bugs-worth-mentioning).
 ## 7. Running it
