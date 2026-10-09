@@ -1,0 +1,57 @@
+{
+ "anomalib_version": "2.7.0",
+ "torch_version": "2.14.1+cu130",
+ "device": "cuda (NVIDIA RTX A5000)",
+ "runs": [
+  {
+   "category": "cable",
+   "coreset_ratio": 0.01,
+   "seed": 0,
+   "image_auroc": 0.985007496251874,
+   "pixel_auroc": 0.9784514987264348,
+   "aupro": 0.8993992414958663,
+   "bank_size": 1756,
+   "seconds": 141.3
+  },
+  {
+   "category": "cable",
+   "coreset_ratio": 0.01,
+   "seed": 1,
+   "image_auroc": 0.9850074962518741,
+   "pixel_auroc": 0.9769010838227933,
+   "aupro": 0.8996970707645926,
+   "bank_size": 1756,
+   "seconds": 68.9
+  },
+  {
+   "category": "cable",
+   "coreset_ratio": 0.01,
+   "seed": 2,
+   "image_auroc": 0.9876311844077961,
+   "pixel_auroc": 0.9784984667094001,
+   "aupro": 0.8993030336740434,
+   "bank_size": 1756,
+   "seconds": 62.9
+  },
+  {
+   "category": "cable",
+   "coreset_ratio": 0.01,
+   "seed": 3,
+   "image_auroc": 0.9889430284857572,
+   "pixel_auroc": 0.9791465530975021,
+   "aupro": 0.9031298813152521,
+   "bank_size": 1756,
+   "seconds": 81.5
+  },
+  {
+   "category": "cable",
+   "coreset_ratio": 0.01,
+   "seed": 4,
+   "image_auroc": 0.9891304347826086,
+   "pixel_auroc": 0.9768556340797921,
+   "aupro": 0.8905571479967355,
+   "bank_size": 1756,
+   "seconds": 89.2
+  }
+ ]
+}

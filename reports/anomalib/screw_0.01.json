@@ -1,0 +1,57 @@
+{
+ "anomalib_version": "2.7.0",
+ "torch_version": "2.14.1+cu130",
+ "device": "cuda (NVIDIA RTX A5000)",
+ "runs": [
+  {
+   "category": "screw",
+   "coreset_ratio": 0.01,
+   "seed": 0,
+   "image_auroc": 0.9555236728837877,
+   "pixel_auroc": 0.9780165836122241,
+   "aupro": 0.9047189756000747,
+   "bank_size": 2508,
+   "seconds": 63.8
+  },
+  {
+   "category": "screw",
+   "coreset_ratio": 0.01,
+   "seed": 1,
+   "image_auroc": 0.9706907153105144,
+   "pixel_auroc": 0.9818208831879291,
+   "aupro": 0.9143686916911331,
+   "bank_size": 2508,
+   "seconds": 62.9
+  },
+  {
+   "category": "screw",
+   "coreset_ratio": 0.01,
+   "seed": 2,
+   "image_auroc": 0.9715105554416889,
+   "pixel_auroc": 0.9770232675794627,
+   "aupro": 0.9058265137635326,
+   "bank_size": 2508,
+   "seconds": 64.4
+  },
+  {
+   "category": "screw",
+   "coreset_ratio": 0.01,
+   "seed": 3,
+   "image_auroc": 0.9797089567534331,
+   "pixel_auroc": 0.9816579137476639,
+   "aupro": 0.9144847822030052,
+   "bank_size": 2508,
+   "seconds": 65.3
+  },
+  {
+   "category": "screw",
+   "coreset_ratio": 0.01,
+   "seed": 4,
+   "image_auroc": 0.98237343717975,
+   "pixel_auroc": 0.9795655967644132,
+   "aupro": 0.9130325993090374,
+   "bank_size": 2508,
+   "seconds": 138.3
+  }
+ ]
+}

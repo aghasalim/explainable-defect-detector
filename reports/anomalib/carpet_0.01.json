@@ -1,0 +1,57 @@
+{
+ "anomalib_version": "2.7.0",
+ "torch_version": "2.14.1+cu130",
+ "device": "cuda (NVIDIA RTX A5000)",
+ "runs": [
+  {
+   "category": "carpet",
+   "coreset_ratio": 0.01,
+   "seed": 0,
+   "image_auroc": 0.9867576243980738,
+   "pixel_auroc": 0.9879626969146691,
+   "aupro": 0.9333211123467722,
+   "bank_size": 2195,
+   "seconds": 104.2
+  },
+  {
+   "category": "carpet",
+   "coreset_ratio": 0.01,
+   "seed": 1,
+   "image_auroc": 0.9827447833065811,
+   "pixel_auroc": 0.9876835202580085,
+   "aupro": 0.929239432634334,
+   "bank_size": 2195,
+   "seconds": 66.1
+  },
+  {
+   "category": "carpet",
+   "coreset_ratio": 0.01,
+   "seed": 2,
+   "image_auroc": 0.9867576243980739,
+   "pixel_auroc": 0.9876175936466793,
+   "aupro": 0.9279298052692461,
+   "bank_size": 2195,
+   "seconds": 66.4
+  },
+  {
+   "category": "carpet",
+   "coreset_ratio": 0.01,
+   "seed": 3,
+   "image_auroc": 0.9863563402889245,
+   "pixel_auroc": 0.9875661670698976,
+   "aupro": 0.9268947066900076,
+   "bank_size": 2195,
+   "seconds": 59.4
+  },
+  {
+   "category": "carpet",
+   "coreset_ratio": 0.01,
+   "seed": 4,
+   "image_auroc": 0.9847512038523274,
+   "pixel_auroc": 0.9878422337737324,
+   "aupro": 0.927840994535666,
+   "bank_size": 2195,
+   "seconds": 90.5
+  }
+ ]
+}

@@ -1,0 +1,57 @@
+{
+ "anomalib_version": "2.7.0",
+ "torch_version": "2.14.1+cu130",
+ "device": "cuda (NVIDIA RTX A5000)",
+ "runs": [
+  {
+   "category": "transistor",
+   "coreset_ratio": 0.01,
+   "seed": 0,
+   "image_auroc": 1.0,
+   "pixel_auroc": 0.9669505606925798,
+   "aupro": 0.9432798072985601,
+   "bank_size": 1669,
+   "seconds": 56.5
+  },
+  {
+   "category": "transistor",
+   "coreset_ratio": 0.01,
+   "seed": 1,
+   "image_auroc": 0.9979166666666666,
+   "pixel_auroc": 0.9615637954512757,
+   "aupro": 0.938429990662582,
+   "bank_size": 1669,
+   "seconds": 96.0
+  },
+  {
+   "category": "transistor",
+   "coreset_ratio": 0.01,
+   "seed": 2,
+   "image_auroc": 1.0,
+   "pixel_auroc": 0.9643545956670652,
+   "aupro": 0.9405646284721858,
+   "bank_size": 1669,
+   "seconds": 52.0
+  },
+  {
+   "category": "transistor",
+   "coreset_ratio": 0.01,
+   "seed": 3,
+   "image_auroc": 0.9995833333333333,
+   "pixel_auroc": 0.9690315181052692,
+   "aupro": 0.9438476083067242,
+   "bank_size": 1669,
+   "seconds": 54.7
+  },
+  {
+   "category": "transistor",
+   "coreset_ratio": 0.01,
+   "seed": 4,
+   "image_auroc": 0.9995833333333333,
+   "pixel_auroc": 0.9647323322499365,
+   "aupro": 0.9385828481321894,
+   "bank_size": 1669,
+   "seconds": 53.2
+  }
+ ]
+}
