@@ -43,7 +43,14 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def device() -> torch.device:
+    if torch.cuda.is_available():
+        return torch.device("cuda")
     return torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+
+
+def device_name(dev: torch.device) -> str:
+    """'cuda (NVIDIA RTX A5000)', 'mps' or 'cpu', for the run's JSON."""
+    return f"cuda ({torch.cuda.get_device_name(dev)})" if dev.type == "cuda" else dev.type
 
 
 class PatchFeatures(torch.nn.Module):

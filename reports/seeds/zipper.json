@@ -1,0 +1,92 @@
+{
+ "category": "zipper",
+ "device": "cuda (NVIDIA RTX A5000)",
+ "coreset_frac": 0.01,
+ "input_size": 224,
+ "center_crop": true,
+ "n_train": 240,
+ "n_test": 151,
+ "seeds": [
+  {
+   "seed": 0,
+   "image_auroc": 0.9968487394957983,
+   "pixel_auroc": 0.9826887727287026,
+   "aupro": 0.9291979733083374,
+   "threshold": 1.7349621057510376,
+   "guarantee_met": false,
+   "false_alarms": 1,
+   "n_normal": 32,
+   "far": 0.03125,
+   "far_wilson95": [
+    0.00553786010270331,
+    0.15744263967668448
+   ],
+   "recall": 0.9495798319327731
+  },
+  {
+   "seed": 1,
+   "image_auroc": 0.9957983193277311,
+   "pixel_auroc": 0.9826991603241662,
+   "aupro": 0.9286043196021456,
+   "threshold": 1.7071356773376465,
+   "guarantee_met": false,
+   "false_alarms": 1,
+   "n_normal": 32,
+   "far": 0.03125,
+   "far_wilson95": [
+    0.00553786010270331,
+    0.15744263967668448
+   ],
+   "recall": 0.9411764705882353
+  },
+  {
+   "seed": 2,
+   "image_auroc": 0.9965861344537815,
+   "pixel_auroc": 0.9825400877865325,
+   "aupro": 0.9285781484778338,
+   "threshold": 1.7741756439208984,
+   "guarantee_met": false,
+   "false_alarms": 0,
+   "n_normal": 32,
+   "far": 0.0,
+   "far_wilson95": [
+    0.0,
+    0.10717919976468034
+   ],
+   "recall": 0.9159663865546218
+  },
+  {
+   "seed": 3,
+   "image_auroc": 0.9950105042016807,
+   "pixel_auroc": 0.9825762936385825,
+   "aupro": 0.9277919169189718,
+   "threshold": 1.7467283010482788,
+   "guarantee_met": false,
+   "false_alarms": 1,
+   "n_normal": 32,
+   "far": 0.03125,
+   "far_wilson95": [
+    0.00553786010270331,
+    0.15744263967668448
+   ],
+   "recall": 0.9327731092436975
+  },
+  {
+   "seed": 4,
+   "image_auroc": 0.9955357142857143,
+   "pixel_auroc": 0.9825669518010698,
+   "aupro": 0.9269069664984483,
+   "threshold": 1.7349621057510376,
+   "guarantee_met": false,
+   "false_alarms": 1,
+   "n_normal": 32,
+   "far": 0.03125,
+   "far_wilson95": [
+    0.00553786010270331,
+    0.15744263967668448
+   ],
+   "recall": 0.9411764705882353
+  }
+ ],
+ "seconds": 307.2
+}

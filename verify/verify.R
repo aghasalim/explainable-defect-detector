@@ -143,6 +143,36 @@ for (r in tc) {
                sprintf("threshold_check %s recall %.10f is not a whole number of images", r$category, n(r, "recall_on_test")))
 }
 
+# ------------------------------------------- 4. false-alarm intervals over seeds
+# reports/seeds.md gives each category's seed-0 false-alarm count on the test
+# normals with a Wilson 95% interval, and the range over all seeds. Rebuild
+# every row from the counts in reports/seeds/*.json, with R's own Wilson
+# interval (prop.test without continuity correction).
+seeds_md <- readLines(file.path(root, "reports", "seeds.md"), warn = FALSE)
+pct <- function(x) sprintf("%.1f%%", 100 * x)
+tot_fa <- 0
+tot_n <- 0
+for (c in cats) {
+  f <- file.path("reports", "seeds", paste0(c, ".json"))
+  if (!file.exists(file.path(root, f))) next
+  rec <- read_object(f)
+  fa <- n(rec, "false_alarms")
+  nn <- n(rec, "n_normal")
+  fars <- as.numeric(unlist(rec[names(rec) == "far"]))
+  ci <- suppressWarnings(prop.test(fa, nn, correct = FALSE))$conf.int
+  row <- sprintf("| %s | %d | %d | %s | [%s, %s] | %s to %s |", c, nn, fa, pct(fa / nn),
+                 pct(ci[1]), pct(ci[2]), pct(min(fars)), pct(max(fars)))
+  require_that(row %in% seeds_md, sprintf("reports/seeds.md has no row %s", row))
+  tot_fa <- tot_fa + fa
+  tot_n <- tot_n + nn
+}
+ci <- suppressWarnings(prop.test(tot_fa, tot_n, correct = FALSE))$conf.int
+row <- sprintf("| all | %d | %d | %s | [%s, %s] | |", tot_n, tot_fa, pct(tot_fa / tot_n),
+               pct(ci[1]), pct(ci[2]))
+require_that(row %in% seeds_md, sprintf("reports/seeds.md has no row %s", row))
+cat(sprintf("  seed-0 false alarms: %d of %d test normals, Wilson 95%% [%.4f, %.4f]\n",
+            tot_fa, tot_n, ci[1], ci[2]))
+
 if (length(fails)) {
   cat("\n", length(fails), " failed:\n", sep = "")
   for (f in fails) cat("  ", f, "\n", sep = "")

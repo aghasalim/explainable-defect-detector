@@ -1,0 +1,92 @@
+{
+ "category": "metal_nut",
+ "device": "cuda (NVIDIA RTX A5000)",
+ "coreset_frac": 0.01,
+ "input_size": 224,
+ "center_crop": true,
+ "n_train": 220,
+ "n_test": 115,
+ "seeds": [
+  {
+   "seed": 0,
+   "image_auroc": 0.9980449657869013,
+   "pixel_auroc": 0.9851081979957452,
+   "aupro": 0.9165792421606536,
+   "threshold": 2.5274879932403564,
+   "guarantee_met": false,
+   "false_alarms": 0,
+   "n_normal": 22,
+   "far": 0.0,
+   "far_wilson95": [
+    0.0,
+    0.1486548766051456
+   ],
+   "recall": 0.946236559139785
+  },
+  {
+   "seed": 1,
+   "image_auroc": 0.9995112414467253,
+   "pixel_auroc": 0.9850503341872633,
+   "aupro": 0.9155680972949369,
+   "threshold": 2.510045289993286,
+   "guarantee_met": false,
+   "false_alarms": 0,
+   "n_normal": 22,
+   "far": 0.0,
+   "far_wilson95": [
+    0.0,
+    0.1486548766051456
+   ],
+   "recall": 0.956989247311828
+  },
+  {
+   "seed": 2,
+   "image_auroc": 0.9975562072336266,
+   "pixel_auroc": 0.9843910402442317,
+   "aupro": 0.9155631046548603,
+   "threshold": 2.5154683589935303,
+   "guarantee_met": false,
+   "false_alarms": 0,
+   "n_normal": 22,
+   "far": 0.0,
+   "far_wilson95": [
+    0.0,
+    0.1486548766051456
+   ],
+   "recall": 0.9354838709677419
+  },
+  {
+   "seed": 3,
+   "image_auroc": 1.0,
+   "pixel_auroc": 0.9838226208626242,
+   "aupro": 0.9123414048969242,
+   "threshold": 2.5208003520965576,
+   "guarantee_met": false,
+   "false_alarms": 0,
+   "n_normal": 22,
+   "far": 0.0,
+   "far_wilson95": [
+    0.0,
+    0.1486548766051456
+   ],
+   "recall": 0.956989247311828
+  },
+  {
+   "seed": 4,
+   "image_auroc": 0.9990224828934506,
+   "pixel_auroc": 0.9838645973262571,
+   "aupro": 0.9185681685676863,
+   "threshold": 2.4995434284210205,
+   "guarantee_met": false,
+   "false_alarms": 0,
+   "n_normal": 22,
+   "far": 0.0,
+   "far_wilson95": [
+    0.0,
+    0.1486548766051456
+   ],
+   "recall": 0.967741935483871
+  }
+ ],
+ "seconds": 272.8
+}
