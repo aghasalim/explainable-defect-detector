@@ -10,7 +10,7 @@ Four measurements, each answering something the others cannot:
                 so it stays high even when the map is bad - reported, but never
                 alone.
   AUPRO         per-REGION overlap up to 30% FPR, the standard MVTec
-                localisation metric. Weights every defect region equally, so a
+                localisation metric, computed as the MVTec AD code does. Weights every defect region equally, so a
                 small defect counts as much as a large one; pixel AUROC lets
                 one big region carry the score.
   peak-in-mask  does the single hottest pixel land inside the defect? This is
@@ -48,57 +48,85 @@ MASK = PALETTE[2]      # the ground truth outline
 ROOT = Path(__file__).resolve().parents[2]
 
 
-def aupro(maps: np.ndarray, masks: np.ndarray, fpr_limit: float = 0.3, n_thr: int = 64) -> float:
-    """Area under the per-region-overlap curve, normalised over [0, fpr_limit].
+def aupro(maps: np.ndarray, masks: np.ndarray, fpr_limit: float = 0.3) -> float:
+    """Area under the per-region-overlap curve up to `fpr_limit`, divided by it.
 
-    Regions are connected components of the ground truth. Each region
-    contributes equally regardless of size, which is the whole point: a
-    detector that finds one large defect and misses ten small ones should not
-    look good.
+    This follows the MVTec AD evaluation code (Bergmann et al., IJCV 2021) and
+    gives the same numbers as anomalib's AUPRO:
+
+      - regions are 8-connected components of each ground-truth mask, and each
+        region carries the same weight whatever its size
+      - FPR counts every defect-free pixel of every image passed in, so normal
+        test images belong in `maps` and `masks` as well
+      - the curve is exact: one point per distinct score, no threshold grid
+      - it is integrated with the trapezoid rule up to fpr_limit, with the last
+        point linearly interpolated at fpr_limit, then divided by fpr_limit
+
+    A detector that finds one large defect and misses ten small ones should not
+    look good, and this metric makes sure it does not.
     """
-    regions = []  # (image index, boolean region mask)
+    maps = np.asarray(maps, dtype=np.float64)
+    fp = np.zeros(maps.shape)
+    pro = np.zeros(maps.shape)
+    n_regions = 0
     for i, m in enumerate(masks):
-        lab, n = ndimage.label(m > 0)
+        lab, n = ndimage.label(m > 0, structure=np.ones((3, 3), dtype=int))
+        fp[i][lab == 0] = 1.0
         for r in range(1, n + 1):
-            regions.append((i, lab == r))
-    if not regions:
+            region = lab == r
+            pro[i][region] = 1.0 / region.sum()
+        n_regions += n
+    if n_regions == 0:
         return float("nan")
+    fp /= fp.sum()
+    pro /= n_regions
 
-    neg = masks == 0
-    n_neg = neg.sum()
-    # span the full value range: low thresholds give the high-FPR end, high
-    # thresholds the low-FPR end we actually integrate over
-    thr = np.unique(np.quantile(maps, np.linspace(0.0, 1.0, n_thr)))
-
-    pros, fprs = [], []
-    for t in thr:
-        pred = maps >= t
-        pros.append(np.mean([pred[i][r].mean() for i, r in regions]))
-        fprs.append((pred & neg).sum() / n_neg)
-    fprs, pros = np.array(fprs), np.array(pros)
-
-    # Step-function integral: at a given FPR budget the achievable overlap is
-    # the best of any threshold that stays within it. Integrating the raw
-    # (fpr, pro) points with trapezoid collapses to zero whenever several
-    # thresholds land on the same FPR, which is exactly what a perfect map does.
-    grid = np.linspace(0.0, fpr_limit, 256)
-    pro_at = np.array([pros[fprs <= g].max() if (fprs <= g).any() else 0.0 for g in grid])
-    return float(np.trapezoid(pro_at, grid) / fpr_limit)
+    order = np.argsort(maps.ravel(), kind="stable")[::-1]
+    s = maps.ravel()[order]
+    fprs = np.cumsum(fp.ravel()[order])
+    pros = np.cumsum(pro.ravel()[order])
+    # tied scores cross the threshold together, so keep the last of each run
+    keep = np.append(np.diff(s) != 0, True)
+    fprs = np.concatenate([[0.0], np.clip(fprs[keep], 0, 1)])
+    pros = np.concatenate([[0.0], np.clip(pros[keep], 0, 1)])
+    return float(_trapezoid_to(fprs, pros, fpr_limit) / fpr_limit)
 
 
-def localisation_metrics(maps: np.ndarray, masks: np.ndarray, rng: np.random.Generator) -> dict:
-    """All four measurements, plus the random-map control for each."""
+def _trapezoid_to(x: np.ndarray, y: np.ndarray, x_max: float) -> float:
+    """Trapezoid area under y(x) on [0, x_max]; x is sorted ascending."""
+    j = np.searchsorted(x, x_max, side="right")
+    if j == len(x):
+        return float(np.trapezoid(y, x))
+    # linear interpolation for the point at x_max
+    x0, x1, y0, y1 = x[j - 1], x[j], y[j - 1], y[j]
+    y_end = y0 + (y1 - y0) * (x_max - x0) / (x1 - x0)
+    return float(np.trapezoid(np.append(y[:j], y_end), np.append(x[:j], x_max)))
+
+
+def localisation_metrics(maps: np.ndarray, masks: np.ndarray, rng: np.random.Generator,
+                         defective: np.ndarray | None = None) -> dict:
+    """All four measurements, plus the random-map control for each.
+
+    Pass the whole test split and `defective = labels == 1`. Pixel AUROC and
+    AUPRO are computed over every pixel of every image, normal images included,
+    as in the MVTec AD protocol. Peak-in-mask and top-1% precision only mean
+    something on a defective image, so they use those alone. A defective image
+    whose defect the centre crop removed still counts there, as a miss.
+    Without `defective`, every image passed in is taken to be defective.
+    """
+    has_defect = np.ones(len(maps), bool) if defective is None else np.asarray(defective, bool)
+
     def suite(m: np.ndarray) -> dict:
         peak = []
         top1 = []
-        for mm, gt in zip(m, masks, strict=True):
+        for mm, gt in zip(m[has_defect], masks[has_defect], strict=True):
             yx = np.unravel_index(np.argmax(mm), mm.shape)
             peak.append(bool(gt[yx] > 0))
             k = max(1, int(mm.size * 0.01))
             idx = np.argpartition(mm.ravel(), -k)[-k:]
             top1.append(float((gt.ravel()[idx] > 0).mean()))
         return {
-            "pixel_auroc": float(roc_auc_score(masks.ravel().astype(int) > 0, m.ravel())),
+            "pixel_auroc": float(roc_auc_score(masks.ravel() > 0, m.ravel())),
             "aupro": aupro(m, masks),
             "peak_in_mask": float(np.mean(peak)),
             "top1pct_precision": float(np.mean(top1)),
@@ -109,7 +137,7 @@ def localisation_metrics(maps: np.ndarray, masks: np.ndarray, rng: np.random.Gen
     return {
         "model": real,
         "random_control": control,
-        "defect_pixel_fraction": float((masks > 0).mean()),
+        "defect_pixel_fraction": float((masks[has_defect] > 0).mean()),
     }
 
 
@@ -152,10 +180,9 @@ def run(category: str, crop: bool = True, frac: float = 0.01) -> dict:
     masks = r["masks"].numpy()[:, 0]
     labels, paths, scores = r["labels"], r["paths"], r["img_scores"]
 
-    a = labels == 1  # localisation is only defined where a defect exists
-    met = localisation_metrics(maps[a], masks[a], np.random.default_rng(0))
+    met = localisation_metrics(maps, masks, np.random.default_rng(0), labels == 1)
     met["category"] = category
-    met["n_anomalous"] = int(a.sum())
+    met["n_anomalous"] = int((labels == 1).sum())
 
     figure(paths, maps, masks, labels, scores, ROOT / "reports" / f"explain_{category}.png")
     (ROOT / "reports" / f"explain_{category}.json").write_text(json.dumps(met, indent=1))
