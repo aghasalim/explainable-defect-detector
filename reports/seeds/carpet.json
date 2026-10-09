@@ -1,0 +1,92 @@
+{
+ "category": "carpet",
+ "device": "cuda (NVIDIA RTX A5000)",
+ "coreset_frac": 0.01,
+ "input_size": 224,
+ "center_crop": true,
+ "n_train": 280,
+ "n_test": 117,
+ "seeds": [
+  {
+   "seed": 0,
+   "image_auroc": 0.9879614767255217,
+   "pixel_auroc": 0.9877508099899713,
+   "aupro": 0.9306570789769653,
+   "threshold": 1.824042558670044,
+   "guarantee_met": false,
+   "false_alarms": 5,
+   "n_normal": 28,
+   "far": 0.17857142857142858,
+   "far_wilson95": [
+    0.07878501895759982,
+    0.3559142494677742
+   ],
+   "recall": 0.9662921348314607
+  },
+  {
+   "seed": 1,
+   "image_auroc": 0.987158908507223,
+   "pixel_auroc": 0.9878868301755173,
+   "aupro": 0.9290871117322912,
+   "threshold": 1.8286221027374268,
+   "guarantee_met": false,
+   "false_alarms": 5,
+   "n_normal": 28,
+   "far": 0.17857142857142858,
+   "far_wilson95": [
+    0.07878501895759982,
+    0.3559142494677742
+   ],
+   "recall": 0.9662921348314607
+  },
+  {
+   "seed": 2,
+   "image_auroc": 0.9887640449438201,
+   "pixel_auroc": 0.9878588868984102,
+   "aupro": 0.9329842326778581,
+   "threshold": 1.831166386604309,
+   "guarantee_met": false,
+   "false_alarms": 5,
+   "n_normal": 28,
+   "far": 0.17857142857142858,
+   "far_wilson95": [
+    0.07878501895759982,
+    0.3559142494677742
+   ],
+   "recall": 0.9775280898876404
+  },
+  {
+   "seed": 3,
+   "image_auroc": 0.9911717495987159,
+   "pixel_auroc": 0.9877435078552054,
+   "aupro": 0.9334297980944011,
+   "threshold": 1.8291492462158203,
+   "guarantee_met": false,
+   "false_alarms": 5,
+   "n_normal": 28,
+   "far": 0.17857142857142858,
+   "far_wilson95": [
+    0.07878501895759982,
+    0.3559142494677742
+   ],
+   "recall": 0.9775280898876404
+  },
+  {
+   "seed": 4,
+   "image_auroc": 0.9883627608346709,
+   "pixel_auroc": 0.9876446318185076,
+   "aupro": 0.9301291946653786,
+   "threshold": 1.7833855152130127,
+   "guarantee_met": false,
+   "false_alarms": 6,
+   "n_normal": 28,
+   "far": 0.21428571428571427,
+   "far_wilson95": [
+    0.10212460273388577,
+    0.3953858580886689
+   ],
+   "recall": 0.9775280898876404
+  }
+ ],
+ "seconds": 271.9
+}

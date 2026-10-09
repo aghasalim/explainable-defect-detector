@@ -15,7 +15,8 @@ not evidence of localisation; what counts is beating a score that has no spatial
 information on the same masks. It does, in every category, worst case `screw` at
 0.50 peak-in-mask against a control of 0.00.
 
-1% coreset, `Resize(256)+CenterCrop(224)`. Paper columns are Roth et al., CVPR 2022.
+1% coreset, `Resize(256)+CenterCrop(224)`, one seed, run on an Apple M4 laptop GPU (MPS).
+Paper columns are Roth et al., CVPR 2022.
 Pixel AUROC and AUPRO are computed the MVTec AD way: over every pixel of the whole
 test split, normal images included, with AUPRO integrated up to FPR 0.3 and divided
 by 0.3. The AUPRO code matches anomalib's to five decimals on synthetic masks.
@@ -42,6 +43,11 @@ by 0.3. The AUPRO code matches anomalib's to five decimals on synthetic masks.
 `peak-in-mask` is the share of defect images where the hottest pixel of the heatmap
 falls inside the real defect. Full tables, including a random-heatmap control for
 every localisation number, are in [reports/results.md](../reports/results.md).
+
+Five seeds on CUDA are in [reports/seeds.md](../reports/seeds.md), run on one NVIDIA RTX
+A5000. They are kept in their own table and not merged into the one above, because the
+device changes the numbers a little. An earlier run of the same script with seed 0 on
+MPS flagged 7 of 28 `carpet` normals at the shipped threshold. On CUDA it flags 5.
 
 
 ## 4. What I found

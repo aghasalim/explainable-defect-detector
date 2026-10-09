@@ -18,6 +18,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src" / "edd"))
 import baseline           # noqa: E402
 import explain            # noqa: E402
 import patchcore          # noqa: E402
+import seeds              # noqa: E402
 
 
 def test_baseline_selfcheck():
@@ -30,6 +31,10 @@ def test_patchcore_selfcheck():
 
 def test_explain_selfcheck():
     explain.demo()
+
+
+def test_wilson_interval_matches_r():
+    seeds.demo()
 
 
 def test_metrics_reject_a_constant_predictor():
