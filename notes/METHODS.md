@@ -49,6 +49,10 @@ A5000. They are kept in their own table and not merged into the one above, becau
 device changes the numbers a little. An earlier run of the same script with seed 0 on
 MPS flagged 7 of 28 `carpet` normals at the shipped threshold. On CUDA it flags 5.
 
+The same five seeds through anomalib 2.7.0's PatchCore, scored by this repo's metric code
+on the same GPU, are in [reports/anomalib.md](../reports/anomalib.md). Mean image AUROC
+0.9882 ± 0.0013 there against 0.9873 ± 0.0016 here.
+
 
 ## 4. What I found
 

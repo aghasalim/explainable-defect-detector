@@ -1,0 +1,57 @@
+{
+ "anomalib_version": "2.7.0",
+ "torch_version": "2.14.1+cu130",
+ "device": "cuda (NVIDIA RTX A5000)",
+ "runs": [
+  {
+   "category": "toothbrush",
+   "coreset_ratio": 0.01,
+   "seed": 0,
+   "image_auroc": 0.9777777777777776,
+   "pixel_auroc": 0.9850962756730228,
+   "aupro": 0.8357598041923313,
+   "bank_size": 470,
+   "seconds": 32.3
+  },
+  {
+   "category": "toothbrush",
+   "coreset_ratio": 0.01,
+   "seed": 1,
+   "image_auroc": 0.9916666666666667,
+   "pixel_auroc": 0.9846654872678683,
+   "aupro": 0.8395902151133274,
+   "bank_size": 470,
+   "seconds": 20.3
+  },
+  {
+   "category": "toothbrush",
+   "coreset_ratio": 0.01,
+   "seed": 2,
+   "image_auroc": 1.0,
+   "pixel_auroc": 0.9854860108220937,
+   "aupro": 0.8380571597064154,
+   "bank_size": 470,
+   "seconds": 17.3
+  },
+  {
+   "category": "toothbrush",
+   "coreset_ratio": 0.01,
+   "seed": 3,
+   "image_auroc": 1.0,
+   "pixel_auroc": 0.9851685640620578,
+   "aupro": 0.8480087963992763,
+   "bank_size": 470,
+   "seconds": 18.8
+  },
+  {
+   "category": "toothbrush",
+   "coreset_ratio": 0.01,
+   "seed": 4,
+   "image_auroc": 0.9972222222222222,
+   "pixel_auroc": 0.9854458847876807,
+   "aupro": 0.8421006409747974,
+   "bank_size": 470,
+   "seconds": 18.3
+  }
+ ]
+}

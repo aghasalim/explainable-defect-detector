@@ -1,0 +1,57 @@
+{
+ "anomalib_version": "2.7.0",
+ "torch_version": "2.14.1+cu130",
+ "device": "cuda (NVIDIA RTX A5000)",
+ "runs": [
+  {
+   "category": "wood",
+   "coreset_ratio": 0.01,
+   "seed": 0,
+   "image_auroc": 0.9903508771929824,
+   "pixel_auroc": 0.9275077132893647,
+   "aupro": 0.8440576789732357,
+   "bank_size": 1936,
+   "seconds": 104.8
+  },
+  {
+   "category": "wood",
+   "coreset_ratio": 0.01,
+   "seed": 1,
+   "image_auroc": 0.986842105263158,
+   "pixel_auroc": 0.9307988129475901,
+   "aupro": 0.8401777608982791,
+   "bank_size": 1936,
+   "seconds": 52.2
+  },
+  {
+   "category": "wood",
+   "coreset_ratio": 0.01,
+   "seed": 2,
+   "image_auroc": 0.9912280701754386,
+   "pixel_auroc": 0.9312556609024585,
+   "aupro": 0.8455397812496462,
+   "bank_size": 1936,
+   "seconds": 50.3
+  },
+  {
+   "category": "wood",
+   "coreset_ratio": 0.01,
+   "seed": 3,
+   "image_auroc": 0.9921052631578948,
+   "pixel_auroc": 0.9290299781199743,
+   "aupro": 0.8378862990801816,
+   "bank_size": 1936,
+   "seconds": 50.6
+  },
+  {
+   "category": "wood",
+   "coreset_ratio": 0.01,
+   "seed": 4,
+   "image_auroc": 0.9921052631578948,
+   "pixel_auroc": 0.9304406891559209,
+   "aupro": 0.843947191944755,
+   "bank_size": 1936,
+   "seconds": 51.0
+  }
+ ]
+}
