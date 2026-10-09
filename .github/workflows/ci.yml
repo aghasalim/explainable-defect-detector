@@ -2,7 +2,6 @@ name: ci
 
 on:
   push:
-    branches: [main]
   pull_request:
 
 jobs:
@@ -16,14 +15,11 @@ jobs:
       - name: install from the lockfile
         run: uv sync --frozen
 
-      # The self-checks are the real tests: each asserts that a metric fails
-      # loudly on a deliberately wrong input. They need no dataset, so CI stays
-      # fast and does not depend on a 5 GB download.
-      - name: metric self-checks
-        run: |
-          uv run python src/edd/baseline.py --self-check
-          uv run python src/edd/patchcore.py --self-check
-          uv run python src/edd/explain.py --self-check
+      # Every test is synthetic: no dataset, no model weights, no network. The
+      # self-checks of each module run inside pytest, next to the metric tests
+      # on synthetic masks and scores. About 20 seconds on a laptop.
+      - name: pytest
+        run: uv run pytest tests -q
 
       - name: app imports cleanly
         run: uv run python -c "import ast,sys; ast.parse(open('app.py').read())"
