@@ -23,27 +23,27 @@ PatchCore, 1% coreset, paper preprocessing, frozen WideResNet50-2. `paper` colum
 | zipper | **0.9968** | 0.985 | +0.0118 | 0.9991 | 0.9868 | 0.7881 |
 | **mean** | **0.9874** | 0.990 | -0.0026 | | | |
 
-## Localisation (pixel level, anomalous images only)
+## Localisation (pixel level)
 
-Every column is paired with a random-map control on the same images. Without it, a high pixel AUROC is unfalsifiable.
+Pixel AUROC and AUPRO use every pixel of the whole test split, normal images included, as in the MVTec AD protocol; AUPRO is integrated up to FPR 0.3. Peak-in-mask and top-1% precision use the defective images only. Every column is paired with a random-map control on the same images. Without it, a high pixel AUROC is unfalsifiable.
 
 | category | pixel AUROC | ctrl | AUPRO | ctrl | peak-in-mask | ctrl | top-1% prec | ctrl | defect px |
 |---|---|---|---|---|---|---|---|---|---|
-| bottle | 0.9770 | 0.499 | **0.8828** | 0.138 | **0.9841** | 0.095 | 0.9398 | 0.096 | 0.0991 |
-| cable | 0.9750 | 0.500 | **0.8698** | 0.146 | **0.9239** | 0.076 | 0.8321 | 0.062 | 0.0611 |
-| capsule | 0.9836 | 0.501 | **0.8783** | 0.138 | **0.6881** | 0.028 | 0.4258 | 0.014 | 0.0145 |
-| carpet | 0.9845 | 0.500 | **0.8819** | 0.139 | **0.8090** | 0.034 | 0.6892 | 0.026 | 0.0269 |
-| grid | 0.9620 | 0.498 | **0.8380** | 0.137 | **0.6316** | 0.000 | 0.4235 | 0.010 | 0.0114 |
-| hazelnut | 0.9758 | 0.499 | **0.8132** | 0.127 | **0.8571** | 0.043 | 0.7267 | 0.044 | 0.0437 |
-| leather | 0.9874 | 0.500 | **0.9164** | 0.141 | **0.8913** | 0.011 | 0.5161 | 0.011 | 0.0111 |
-| metal_nut | 0.9815 | 0.500 | **0.8824** | 0.142 | **0.9462** | 0.183 | 0.8757 | 0.189 | 0.1884 |
-| pill | 0.9722 | 0.500 | **0.8939** | 0.142 | **0.6950** | 0.028 | 0.5690 | 0.053 | 0.0519 |
-| screw | 0.9686 | 0.503 | **0.8231** | 0.133 | **0.4958** | 0.000 | 0.2653 | 0.004 | 0.0043 |
-| tile | 0.9372 | 0.500 | **0.7214** | 0.140 | **0.9048** | 0.107 | 0.8350 | 0.116 | 0.1153 |
-| toothbrush | 0.9784 | 0.501 | **0.7543** | 0.141 | **0.5667** | 0.000 | 0.4955 | 0.026 | 0.0272 |
-| transistor | 0.9407 | 0.500 | **0.8613** | 0.141 | **0.9500** | 0.225 | 0.7173 | 0.154 | 0.1552 |
-| wood | 0.9230 | 0.500 | **0.7722** | 0.145 | **0.9000** | 0.033 | 0.7218 | 0.058 | 0.0600 |
-| zipper | 0.9784 | 0.501 | **0.8967** | 0.142 | **0.9664** | 0.042 | 0.8679 | 0.033 | 0.0328 |
-| **mean** | 0.9684 | | **0.8457** | | **0.8140** | | 0.6601 | | |
+| bottle | 0.9830 | 0.499 | **0.9295** | 0.149 | **0.9841** | 0.095 | 0.9398 | 0.096 | 0.0991 |
+| cable | 0.9841 | 0.500 | **0.9255** | 0.148 | **0.9239** | 0.109 | 0.8321 | 0.063 | 0.0611 |
+| capsule | 0.9863 | 0.501 | **0.9172** | 0.159 | **0.6881** | 0.018 | 0.4258 | 0.014 | 0.0145 |
+| carpet | 0.9880 | 0.499 | **0.9333** | 0.150 | **0.8090** | 0.011 | 0.6892 | 0.026 | 0.0269 |
+| grid | 0.9689 | 0.499 | **0.8830** | 0.151 | **0.6316** | 0.018 | 0.4235 | 0.011 | 0.0114 |
+| hazelnut | 0.9841 | 0.499 | **0.9355** | 0.148 | **0.8571** | 0.057 | 0.7267 | 0.043 | 0.0437 |
+| leather | 0.9907 | 0.500 | **0.9582** | 0.148 | **0.8913** | 0.011 | 0.5161 | 0.011 | 0.0111 |
+| metal_nut | 0.9853 | 0.500 | **0.9194** | 0.152 | **0.9462** | 0.194 | 0.8757 | 0.189 | 0.1884 |
+| pill | 0.9741 | 0.501 | **0.9267** | 0.154 | **0.6950** | 0.035 | 0.5690 | 0.053 | 0.0519 |
+| screw | 0.9716 | 0.499 | **0.8911** | 0.150 | **0.4958** | 0.000 | 0.2653 | 0.004 | 0.0043 |
+| tile | 0.9554 | 0.500 | **0.7937** | 0.153 | **0.9048** | 0.143 | 0.8350 | 0.115 | 0.1153 |
+| toothbrush | 0.9842 | 0.501 | **0.8187** | 0.147 | **0.5667** | 0.000 | 0.4955 | 0.026 | 0.0272 |
+| transistor | 0.9710 | 0.500 | **0.9458** | 0.149 | **0.9500** | 0.150 | 0.7173 | 0.158 | 0.1552 |
+| wood | 0.9393 | 0.499 | **0.8307** | 0.151 | **0.9000** | 0.100 | 0.7218 | 0.057 | 0.0600 |
+| zipper | 0.9829 | 0.501 | **0.9298** | 0.150 | **0.9664** | 0.042 | 0.8679 | 0.034 | 0.0328 |
+| **mean** | 0.9766 | | **0.9025** | | **0.8140** | | 0.6601 | | |
 
-**Localisation is not uniform.** Peak-in-mask ranges from 50% (`screw`, defects cover 0.43% of the image) to 98% (`bottle`). Pixel AUROC hides this: `screw` still scores 0.9686 there, because the metric is dominated by easy background. A single headline number for 'explainability' would be misleading.
+**Localisation is not uniform.** Peak-in-mask ranges from 50% (`screw`, defects cover 0.43% of the image) to 98% (`bottle`). Pixel AUROC hides this: `screw` still scores 0.9716 there, because the metric is dominated by easy background. A single headline number for 'explainability' would be misleading.
