@@ -32,7 +32,7 @@ def one(category: str, frac: float, crop: bool) -> dict:
 
     det = evaluate(labels, r["img_scores"])
     a = labels == 1
-    loc = localisation_metrics(maps[a], masks[a], np.random.default_rng(0))
+    loc = localisation_metrics(maps, masks, np.random.default_rng(0), a)
 
     pi, pp = PAPER[category]
     out = {
@@ -68,9 +68,12 @@ def table(rows: list[dict]) -> str:
     mp = np.mean([r["paper_image_auroc"] for r in rows])
     o.append(f"| **mean** | **{mi:.4f}** | {mp:.3f} | {mi - mp:+.4f} | | | |")
 
-    o += ["\n## Localisation (pixel level, anomalous images only)\n",
-          ("Every column is paired with a random-map control on the same images. Without "
-           "it, a high pixel AUROC is unfalsifiable.\n"),
+    o += ["\n## Localisation (pixel level)\n",
+          ("Pixel AUROC and AUPRO use every pixel of the whole test split, normal images "
+           "included, as in the MVTec AD protocol; AUPRO is integrated up to FPR 0.3. "
+           "Peak-in-mask and top-1% precision use the defective images only. Every column "
+           "is paired with a random-map control on the same images. Without it, a high "
+           "pixel AUROC is unfalsifiable.\n"),
           ("| category | pixel AUROC | ctrl | AUPRO | ctrl | peak-in-mask | ctrl "
            "| top-1% prec | ctrl | defect px |"),
           "|" + "---|" * 10]

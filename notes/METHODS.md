@@ -16,25 +16,28 @@ information on the same masks. It does, in every category, worst case `screw` at
 0.50 peak-in-mask against a control of 0.00.
 
 1% coreset, `Resize(256)+CenterCrop(224)`. Paper columns are Roth et al., CVPR 2022.
+Pixel AUROC and AUPRO are computed the MVTec AD way: over every pixel of the whole
+test split, normal images included, with AUPRO integrated up to FPR 0.3 and divided
+by 0.3. The AUPRO code matches anomalib's to five decimals on synthetic masks.
 
 | category | image AUROC | paper | pixel AUROC | paper | AUPRO | peak-in-mask |
 |---|---|---|---|---|---|---|
-| bottle | 1.0000 | 1.000 | 0.9770 | 0.986 | 0.8828 | 0.9841 |
-| cable | 0.9983 | 0.993 | 0.9750 | 0.984 | 0.8698 | 0.9239 |
-| capsule | 0.9773 | 0.980 | 0.9836 | 0.988 | 0.8783 | 0.6881 |
-| carpet | 0.9904 | 0.987 | 0.9845 | 0.990 | 0.8819 | 0.8090 |
-| grid | 0.9699 | 0.981 | 0.9620 | 0.987 | 0.8380 | 0.6316 |
-| hazelnut | 1.0000 | 1.000 | 0.9758 | 0.987 | 0.8132 | 0.8571 |
-| leather | 1.0000 | 1.000 | 0.9874 | 0.993 | 0.9164 | 0.8913 |
-| metal_nut | 0.9990 | 0.998 | 0.9815 | 0.984 | 0.8824 | 0.9462 |
-| pill | 0.9569 | 0.966 | 0.9722 | 0.976 | 0.8939 | 0.6950 |
-| screw | 0.9412 | 0.981 | 0.9686 | 0.994 | 0.8231 | 0.4958 |
-| tile | 0.9917 | 0.987 | 0.9372 | 0.959 | 0.7214 | 0.9048 |
-| toothbrush | 1.0000 | 1.000 | 0.9784 | 0.987 | 0.7543 | 0.5667 |
-| transistor | 1.0000 | 1.000 | 0.9407 | 0.964 | 0.8613 | 0.9500 |
-| wood | 0.9895 | 0.992 | 0.9230 | 0.951 | 0.7722 | 0.9000 |
-| zipper | 0.9968 | 0.985 | 0.9784 | 0.989 | 0.8967 | 0.9664 |
-| **mean** | **0.9874** | 0.990 | **0.9684** | 0.981 | **0.8457** | **0.8140** |
+| bottle | 1.0000 | 1.000 | 0.9830 | 0.986 | 0.9295 | 0.9841 |
+| cable | 0.9983 | 0.993 | 0.9841 | 0.984 | 0.9255 | 0.9239 |
+| capsule | 0.9773 | 0.980 | 0.9863 | 0.988 | 0.9172 | 0.6881 |
+| carpet | 0.9904 | 0.987 | 0.9880 | 0.990 | 0.9333 | 0.8090 |
+| grid | 0.9699 | 0.981 | 0.9689 | 0.987 | 0.8830 | 0.6316 |
+| hazelnut | 1.0000 | 1.000 | 0.9841 | 0.987 | 0.9355 | 0.8571 |
+| leather | 1.0000 | 1.000 | 0.9907 | 0.993 | 0.9582 | 0.8913 |
+| metal_nut | 0.9990 | 0.998 | 0.9853 | 0.984 | 0.9194 | 0.9462 |
+| pill | 0.9569 | 0.966 | 0.9741 | 0.976 | 0.9267 | 0.6950 |
+| screw | 0.9412 | 0.981 | 0.9716 | 0.994 | 0.8911 | 0.4958 |
+| tile | 0.9917 | 0.987 | 0.9554 | 0.959 | 0.7937 | 0.9048 |
+| toothbrush | 1.0000 | 1.000 | 0.9842 | 0.987 | 0.8187 | 0.5667 |
+| transistor | 1.0000 | 1.000 | 0.9710 | 0.964 | 0.9458 | 0.9500 |
+| wood | 0.9895 | 0.992 | 0.9393 | 0.951 | 0.8307 | 0.9000 |
+| zipper | 0.9968 | 0.985 | 0.9829 | 0.989 | 0.9298 | 0.9664 |
+| **mean** | **0.9874** | 0.990 | **0.9766** | 0.981 | **0.9025** | **0.8140** |
 
 `peak-in-mask` is the share of defect images where the hottest pixel of the heatmap
 falls inside the real defect. Full tables, including a random-heatmap control for
@@ -172,3 +175,7 @@ a false alarm rate" would be the requirement to hand over.
   Switching to reflect padding moved `screw` pixel AUROC from 0.9544 to 0.9686.
 - My first crop measurement compared pixel counts at two different zoom levels and
   reported "129% of the defect retained", which is impossible.
+- Pixel AUROC and AUPRO were computed on the defective test images only, and AUPRO
+  used a 64-step threshold grid. The MVTec AD protocol scores the whole test split
+  and uses the exact curve. Fixing both moved mean pixel AUROC from 0.9684 to 0.9766
+  and mean AUPRO from 0.8457 to 0.9025. Image AUROC and peak-in-mask did not change.

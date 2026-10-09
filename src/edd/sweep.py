@@ -34,7 +34,7 @@ def one(category: str, frac: float, crop: bool) -> dict:
     a = labels == 1
 
     det = baseline.evaluate(labels, r["img_scores"])
-    loc = localisation_metrics(maps[a], masks[a], np.random.default_rng(0))
+    loc = localisation_metrics(maps, masks, np.random.default_rng(0), a)
 
     out = {
         "category": category, "coreset_frac": frac, "center_crop": crop,
