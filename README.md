@@ -80,7 +80,34 @@ The control is the point of the second figure.
 ![measured AUROC against the published numbers](reports/figures/reproduction.png)
 ![localisation against a control with no spatial information](reports/figures/localisation-control.png)
 
-Full detail in [notes/METHODS.md](notes/METHODS.md#3-results).
+Full detail in [notes/METHODS.md](notes/METHODS.md#3-results). That table is one seed,
+run on an Apple M4 laptop GPU (MPS).
+
+Over five seeds. The same configuration, run with seeds 0 to 4 on one NVIDIA RTX A5000
+with CUDA. The seed changes the coreset and the calibration folds. The backbone and the
+test images stay fixed. Mean and sample standard deviation over seeds:
+
+| category | image AUROC | pixel AUROC | AUPRO |
+|---|---|---|---|
+| bottle | 1.0000 ± 0.0000 | 0.9831 ± 0.0001 | 0.9291 ± 0.0018 |
+| cable | 0.9968 ± 0.0021 | 0.9841 ± 0.0003 | 0.9244 ± 0.0019 |
+| capsule | 0.9777 ± 0.0072 | 0.9867 ± 0.0003 | 0.9075 ± 0.0059 |
+| carpet | 0.9887 ± 0.0015 | 0.9878 ± 0.0001 | 0.9313 ± 0.0019 |
+| grid | 0.9781 ± 0.0078 | 0.9700 ± 0.0021 | 0.8780 ± 0.0077 |
+| hazelnut | 1.0000 ± 0.0000 | 0.9844 ± 0.0003 | 0.9365 ± 0.0037 |
+| leather | 1.0000 ± 0.0000 | 0.9906 ± 0.0001 | 0.9584 ± 0.0007 |
+| metal_nut | 0.9988 ± 0.0010 | 0.9844 ± 0.0006 | 0.9157 ± 0.0023 |
+| pill | 0.9541 ± 0.0032 | 0.9766 ± 0.0017 | 0.9284 ± 0.0015 |
+| screw | 0.9438 ± 0.0175 | 0.9786 ± 0.0028 | 0.9060 ± 0.0098 |
+| tile | 0.9879 ± 0.0017 | 0.9552 ± 0.0007 | 0.7953 ± 0.0032 |
+| toothbrush | 0.9967 ± 0.0050 | 0.9856 ± 0.0008 | 0.8423 ± 0.0149 |
+| transistor | 0.9997 ± 0.0007 | 0.9732 ± 0.0030 | 0.9463 ± 0.0016 |
+| wood | 0.9912 ± 0.0018 | 0.9398 ± 0.0014 | 0.8344 ± 0.0012 |
+| zipper | 0.9960 ± 0.0008 | 0.9826 ± 0.0001 | 0.9282 ± 0.0009 |
+| mean | 0.9873 ± 0.0016 | 0.9775 ± 0.0003 | 0.9041 ± 0.0005 |
+
+`screw` moves the most, 0.9438 ± 0.0175 image AUROC. Raw runs are in `reports/seeds/`
+and the table is in [reports/seeds.md](reports/seeds.md).
 ## 4. What I found
 Detecting and locating are two different problems. `toothbrush` scores a perfect 1.0000 image AUROC, but its heatmap points at the actual defect only 57% of the time.
 
@@ -96,6 +123,13 @@ The last figure is the one I would want to be asked about.
 
 ![percentile threshold against the distribution-free bound](reports/figures/calibration-rules.png)
 ![calibration images available against the number the guarantee needs](reports/figures/guarantee.png)
+
+On the five CUDA runs, seed 0 flags 7 of 467 normal test images over all 15 categories,
+1.5%, with a Wilson 95% interval of 0.7% to 3.1%. `carpet` flags 5 of 28, 17.9%
+(7.9% to 35.6%), and 17.9% to 21.4% across the five seeds. No other category goes
+above 4.8% on any seed (`grid`, 1 of 21). The intervals are wide because a category has only 12
+to 60 normal test images. The per-category table is in [reports/seeds.md](reports/seeds.md),
+and `verify/verify.R` rebuilds every row of it with R's own `prop.test`.
 
 Full detail in [notes/METHODS.md](notes/METHODS.md#5-picking-a-threshold).
 ## 6. Bugs worth mentioning
@@ -114,6 +148,7 @@ uv run python src/edd/patchcore.py bottle --crop
 uv run python src/edd/explain.py bottle    # localisation vs random control
 uv run python src/edd/classifier.py bottle # supervised + Grad-CAM comparison
 uv run python src/edd/sweep.py             # all 15 categories, ~11 min
+uv run python src/edd/seeds.py             # 15 categories x 5 seeds
 uv run python src/edd/report.py            # writes reports/results.md
 ```
 
