@@ -108,6 +108,23 @@ test images stay fixed. Mean and sample standard deviation over seeds:
 
 `screw` moves the most, 0.9438 ± 0.0175 image AUROC. Raw runs are in `reports/seeds/`
 and the table is in [reports/seeds.md](reports/seeds.md).
+
+Against anomalib. The same 15 categories and seeds 0 to 4, run through anomalib 2.7.0's
+`PatchcoreModel` on the same RTX A5000. Only the model is anomalib's. The images,
+preprocessing, masks and every metric come from this repo's code. anomalib brings its own
+timm WideResNet50-2, its own coreset, the paper's score reweighting and a Gaussian blur on
+the map. Mean over categories, then mean and standard deviation over seeds:
+
+| model | image AUROC | pixel AUROC | AUPRO |
+|---|---|---|---|
+| this repo | 0.9873 ± 0.0016 | 0.9775 ± 0.0003 | 0.9041 ± 0.0005 |
+| anomalib | 0.9882 ± 0.0013 | 0.9750 ± 0.0003 | 0.9035 ± 0.0009 |
+
+The means are within 0.003 of each other. The biggest gap is `screw` image AUROC, 0.9438
+here against 0.9720 for anomalib. That fits the missing reweighting, but anomalib differs
+in more than that, so it does not prove it. Per category, anomalib leads on `grid` AUPRO by
+0.0209 and this repo leads on `cable` AUPRO by 0.0260. Full table in
+[reports/anomalib.md](reports/anomalib.md).
 ## 4. What I found
 Detecting and locating are two different problems. `toothbrush` scores a perfect 1.0000 image AUROC, but its heatmap points at the actual defect only 57% of the time.
 
@@ -149,6 +166,7 @@ uv run python src/edd/explain.py bottle    # localisation vs random control
 uv run python src/edd/classifier.py bottle # supervised + Grad-CAM comparison
 uv run python src/edd/sweep.py             # all 15 categories, ~11 min
 uv run python src/edd/seeds.py             # 15 categories x 5 seeds
+uv run python src/edd/vs_anomalib.py --table-only  # needs anomalib runs, see the file
 uv run python src/edd/report.py            # writes reports/results.md
 ```
 
@@ -181,7 +199,8 @@ PRO subscription for Docker Spaces, so the free tier rejects it with HTTP 402.
 ## 9. What I would do next
 
 1. Add the score reweighting from the paper. It is the one part I left out and the
-   likely reason `screw` is 4 points short.
+   likely reason `screw` is 4 points short. anomalib, which has it, scores `screw` at
+   0.9720 over five seeds, against 0.9438 here.
 2. Calibrate the threshold on more images, or fit a model to the tail.
 3. Improve localisation on `screw`, `toothbrush`, `grid` and `capsule`. Higher input
    resolution and adding `layer1` features are the obvious things to try.

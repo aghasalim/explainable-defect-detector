@@ -1,0 +1,57 @@
+{
+ "anomalib_version": "2.7.0",
+ "torch_version": "2.14.1+cu130",
+ "device": "cuda (NVIDIA RTX A5000)",
+ "runs": [
+  {
+   "category": "bottle",
+   "coreset_ratio": 0.01,
+   "seed": 0,
+   "image_auroc": 1.0,
+   "pixel_auroc": 0.9805258581625635,
+   "aupro": 0.9223171131545707,
+   "bank_size": 1638,
+   "seconds": 80.5
+  },
+  {
+   "category": "bottle",
+   "coreset_ratio": 0.01,
+   "seed": 1,
+   "image_auroc": 1.0,
+   "pixel_auroc": 0.9803958319615151,
+   "aupro": 0.9227228519496505,
+   "bank_size": 1638,
+   "seconds": 41.0
+  },
+  {
+   "category": "bottle",
+   "coreset_ratio": 0.01,
+   "seed": 2,
+   "image_auroc": 1.0,
+   "pixel_auroc": 0.9806727766974874,
+   "aupro": 0.9225301419672107,
+   "bank_size": 1638,
+   "seconds": 40.8
+  },
+  {
+   "category": "bottle",
+   "coreset_ratio": 0.01,
+   "seed": 3,
+   "image_auroc": 1.0,
+   "pixel_auroc": 0.9807557673510896,
+   "aupro": 0.9253284001268385,
+   "bank_size": 1638,
+   "seconds": 40.8
+  },
+  {
+   "category": "bottle",
+   "coreset_ratio": 0.01,
+   "seed": 4,
+   "image_auroc": 1.0,
+   "pixel_auroc": 0.9806255198314533,
+   "aupro": 0.9230850784714828,
+   "bank_size": 1638,
+   "seconds": 42.2
+  }
+ ]
+}

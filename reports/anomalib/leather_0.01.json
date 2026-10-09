@@ -1,0 +1,57 @@
+{
+ "anomalib_version": "2.7.0",
+ "torch_version": "2.14.1+cu130",
+ "device": "cuda (NVIDIA RTX A5000)",
+ "runs": [
+  {
+   "category": "leather",
+   "coreset_ratio": 0.01,
+   "seed": 0,
+   "image_auroc": 1.0,
+   "pixel_auroc": 0.9895775774005758,
+   "aupro": 0.9655003607966047,
+   "bank_size": 1920,
+   "seconds": 60.3
+  },
+  {
+   "category": "leather",
+   "coreset_ratio": 0.01,
+   "seed": 1,
+   "image_auroc": 1.0,
+   "pixel_auroc": 0.9895516220518238,
+   "aupro": 0.9653846255001247,
+   "bank_size": 1920,
+   "seconds": 109.6
+  },
+  {
+   "category": "leather",
+   "coreset_ratio": 0.01,
+   "seed": 2,
+   "image_auroc": 1.0,
+   "pixel_auroc": 0.9895639217109276,
+   "aupro": 0.9656191854965834,
+   "bank_size": 1920,
+   "seconds": 57.9
+  },
+  {
+   "category": "leather",
+   "coreset_ratio": 0.01,
+   "seed": 3,
+   "image_auroc": 1.0,
+   "pixel_auroc": 0.9895095118556883,
+   "aupro": 0.965310527984684,
+   "bank_size": 1920,
+   "seconds": 57.9
+  },
+  {
+   "category": "leather",
+   "coreset_ratio": 0.01,
+   "seed": 4,
+   "image_auroc": 1.0,
+   "pixel_auroc": 0.9895411014214419,
+   "aupro": 0.9649572426480206,
+   "bank_size": 1920,
+   "seconds": 61.3
+  }
+ ]
+}

@@ -1,0 +1,57 @@
+{
+ "anomalib_version": "2.7.0",
+ "torch_version": "2.14.1+cu130",
+ "device": "cuda (NVIDIA RTX A5000)",
+ "runs": [
+  {
+   "category": "zipper",
+   "coreset_ratio": 0.01,
+   "seed": 0,
+   "image_auroc": 0.9923844537815126,
+   "pixel_auroc": 0.9786832908848101,
+   "aupro": 0.9164772415912136,
+   "bank_size": 1881,
+   "seconds": 43.9
+  },
+  {
+   "category": "zipper",
+   "coreset_ratio": 0.01,
+   "seed": 1,
+   "image_auroc": 0.991859243697479,
+   "pixel_auroc": 0.9784763130704848,
+   "aupro": 0.9176398006855097,
+   "bank_size": 1881,
+   "seconds": 43.5
+  },
+  {
+   "category": "zipper",
+   "coreset_ratio": 0.01,
+   "seed": 2,
+   "image_auroc": 0.990546218487395,
+   "pixel_auroc": 0.9785008554878295,
+   "aupro": 0.9165751183435689,
+   "bank_size": 1881,
+   "seconds": 46.0
+  },
+  {
+   "category": "zipper",
+   "coreset_ratio": 0.01,
+   "seed": 3,
+   "image_auroc": 0.991859243697479,
+   "pixel_auroc": 0.9785041518181223,
+   "aupro": 0.9168617822908728,
+   "bank_size": 1881,
+   "seconds": 42.9
+  },
+  {
+   "category": "zipper",
+   "coreset_ratio": 0.01,
+   "seed": 4,
+   "image_auroc": 0.9936974789915967,
+   "pixel_auroc": 0.9791114123290001,
+   "aupro": 0.9178318143901536,
+   "bank_size": 1881,
+   "seconds": 43.7
+  }
+ ]
+}
