@@ -1,0 +1,57 @@
+{
+ "anomalib_version": "2.7.0",
+ "torch_version": "2.14.1+cu130",
+ "device": "cuda (NVIDIA RTX A5000)",
+ "runs": [
+  {
+   "category": "hazelnut",
+   "coreset_ratio": 0.01,
+   "seed": 0,
+   "image_auroc": 1.0,
+   "pixel_auroc": 0.9834098132771815,
+   "aupro": 0.9336099456484553,
+   "bank_size": 3065,
+   "seconds": 76.7
+  },
+  {
+   "category": "hazelnut",
+   "coreset_ratio": 0.01,
+   "seed": 1,
+   "image_auroc": 1.0,
+   "pixel_auroc": 0.9834654180478343,
+   "aupro": 0.9375941507265791,
+   "bank_size": 3065,
+   "seconds": 76.3
+  },
+  {
+   "category": "hazelnut",
+   "coreset_ratio": 0.01,
+   "seed": 2,
+   "image_auroc": 1.0,
+   "pixel_auroc": 0.9831867800931887,
+   "aupro": 0.9311831247476976,
+   "bank_size": 3065,
+   "seconds": 105.9
+  },
+  {
+   "category": "hazelnut",
+   "coreset_ratio": 0.01,
+   "seed": 3,
+   "image_auroc": 1.0,
+   "pixel_auroc": 0.9835457361392224,
+   "aupro": 0.9339901634744612,
+   "bank_size": 3065,
+   "seconds": 80.0
+  },
+  {
+   "category": "hazelnut",
+   "coreset_ratio": 0.01,
+   "seed": 4,
+   "image_auroc": 1.0,
+   "pixel_auroc": 0.9836269158185436,
+   "aupro": 0.932820492911095,
+   "bank_size": 3065,
+   "seconds": 82.4
+  }
+ ]
+}
