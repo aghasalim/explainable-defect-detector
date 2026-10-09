@@ -102,6 +102,24 @@ sample maximum, and the maximum of n draws estimates about the n/(n+1) quantile,
 percentile at n=28, not the 99th. So the tail was consistently underestimated and the
 threshold came out too low.
 
+**Reproducing it.** `src/edd/threshold_bug.py` runs the old rule as it was before
+commit 0dfdb13, next to the two fixes, on the same features and seed. Results are in
+`reports/threshold_bug.json`. On the test normals:
+
+| rule | within 1% target | mean FAR | mean recall |
+|---|---|---|---|
+| 10% holdout, 99th percentile (old) | 3 / 15 | 9.0% | 93.3% |
+| 5-fold, 99th percentile | 10 / 15 | 3.4% | 87.4% |
+| 5-fold, tolerance bound (shipped) | 13 / 15 | 1.9% | 79.4% |
+
+`carpet` under the old rule: 12 of 28 normals flagged, 42.9%. The same script with
+`--synthetic` draws calibration scores from N(0, 1), where the true false-alarm rate of
+a threshold is exact. Over 20000 runs the old rule (n=28) gives a mean FAR of 4.0% and
+misses the 1% target in 84% of runs. The 5-fold 99th percentile (n=280) gives 1.3% and
+misses in 65%. The shipped bound gives 0.36% and misses in 6.3%, close to the 0.99^280 =
+6.0% that falling back to the sample maximum predicts. `tests/test_threshold_bug.py`
+checks these on a smaller run.
+
 **Attempt 2, k-fold cross-calibration.** Instead of scoring one 10% holdout, rotate 5
 folds so every training image gets a score from a bank that excludes it. That turns 21 to 39
 calibration scores into 209 to 391. Result: 10 of 15 within target.
