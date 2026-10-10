@@ -72,7 +72,7 @@ def calibration_scores(feats: torch.Tensor, frac: float, dev: torch.device,
     for i, fold in enumerate(folds):
         rest = np.concatenate([f for j, f in enumerate(folds) if j != i])
         flat = feats[rest].reshape(-1, feats.shape[-1])
-        bank = flat[coreset(flat, frac, dev)]
+        bank = flat[coreset(flat, frac, dev, seed)]
         out[fold] = score(bank, feats[fold], dev).max(dim=1).values.numpy()
     return out
 
@@ -138,7 +138,7 @@ def build(category: str, frac: float = 0.01, size: int = 224, crop: bool = True,
     # The shipped bank uses ALL the normal training images - more normal data
     # can only make the bank a better description of "normal".
     flat = feats.reshape(-1, feats.shape[-1])
-    bank = flat[coreset(flat, frac, dev)]
+    bank = flat[coreset(flat, frac, dev, seed)]
     bank_idx = range(n)
     n_cal = n
 

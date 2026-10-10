@@ -49,6 +49,12 @@ A5000. They are kept in their own table and not merged into the one above, becau
 device changes the numbers a little. An earlier run of the same script with seed 0 on
 MPS flagged 7 of 28 `carpet` normals at the shipped threshold. On CUDA it flags 5.
 
+A note from 2026-10-11: until then `calibration_scores` built every fold's coreset with seed 0
+whatever seed it was given, so in that run the seed only moved the calibration folds, not the
+calibration banks. The AUROC and AUPRO columns are unaffected, since the scoring bank did use the
+seed. The "FAR range over seeds" column in seeds.md is probably a little too narrow and needs a
+rerun on the A5000. Seed 0, and so every shipped threshold, is unchanged.
+
 The same five seeds through anomalib 2.7.0's PatchCore, scored by this repo's metric code
 on the same GPU, are in [reports/anomalib.md](../reports/anomalib.md). Mean image AUROC
 0.9882 ± 0.0013 there against 0.9873 ± 0.0016 here.
