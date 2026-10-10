@@ -22,3 +22,9 @@ def test_calibration_coreset_uses_the_seed(monkeypatch):
     feats = torch.randn(10, 4, 8)
     export.calibration_scores(feats, 0.5, torch.device("cpu"), k_folds=5, seed=3)
     assert seen == [3] * 5
+
+
+def test_tolerance_rank_needs_299_samples_for_99_at_95():
+    # 1 - 0.99**n >= 0.95 first holds at n = 299, and then only the maximum works
+    assert export.tolerance_rank(298) is None
+    assert export.tolerance_rank(299) == 299
