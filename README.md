@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/banner.jpg" alt="Line drawing of machined parts on an inspection line, with a camera highlighting a scratch on one of them" width="100%"></p>
+
 # Explainable Visual Defect Detector
 
 This finds defects in product photos and shows where they are. I train it only on
@@ -19,6 +21,25 @@ that way.
 
 
 ---
+
+<details>
+<summary>Contents</summary>
+
+- [Abstract](#abstract)
+- [1. The idea](#1-the-idea)
+- [2. Method](#2-method)
+- [3. Results](#3-results)
+- [4. What I found](#4-what-i-found)
+- [5. Picking a threshold](#5-picking-a-threshold)
+- [6. Bugs worth mentioning](#6-bugs-worth-mentioning)
+- [7. Running it](#7-running-it)
+- [8. Deploying](#8-deploying)
+- [9. What I would do next](#9-what-i-would-do-next)
+- [10. Notes on method](#10-notes-on-method)
+- [11. Data and licence](#11-data-and-licence)
+- [References](#references)
+
+</details>
 
 ## Abstract
 
