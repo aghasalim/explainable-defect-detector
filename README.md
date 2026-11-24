@@ -1,5 +1,3 @@
-<p align="center"><img src="assets/banner.jpg" alt="Line drawing of machined parts on an inspection line, with a camera highlighting a scratch on one of them" width="100%"></p>
-
 # Explainable Visual Defect Detector
 
 This finds defects in product photos and shows where they are. I train it only on
